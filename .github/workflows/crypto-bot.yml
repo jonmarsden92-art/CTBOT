@@ -2,8 +2,7 @@ name: Crypto Bot
 
 on:
   schedule:
-    # Runs every 10 minutes, 24/7 - crypto never sleeps
-    - cron: '0,10,20,30,40,50 * * * *'
+    - cron: '* * * * *'  # every minute — GitHub fires this, bot loops internally
   workflow_dispatch:
 
 permissions:
@@ -12,6 +11,7 @@ permissions:
 jobs:
   trade:
     runs-on: ubuntu-latest
+    timeout-minutes: 58  # just under GitHub's 60 min limit
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,21 +39,51 @@ jobs:
       - name: Restore Bot State
         uses: actions/cache@v4
         with:
-          path: logs/crypto_state.json
+          path: |
+            logs/crypto_state.json
+            logs/crypto_agent.json
           key: crypto-state-${{ github.run_id }}
           restore-keys: crypto-state-
 
-      - name: Run Crypto Bot
+      - name: Run Crypto Bot Loop
         env:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
-        run: python src/crypto_bot.py
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          git config user.name  "CryptoBot"
+          git config user.email "bot@cryptotrader"
+          
+          # Loop for 55 minutes, running every 2 minutes
+          END=$((SECONDS + 3300))
+          RUN=0
+          while [ $SECONDS -lt $END ]; do
+            RUN=$((RUN + 1))
+            echo "========================================="
+            echo ">>> LOOP RUN $RUN at $(date -u '+%H:%M:%S UTC')"
+            echo "========================================="
+            
+            python src/crypto_bot.py
+            
+            # Commit report after every run
+            git pull --rebase origin main || true
+            git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json || true
+            git diff --staged --quiet || git commit -m "🪙 Crypto $RUN $(date -u '+%H:%M')" && git push || true
+            
+            # Wait 2 minutes before next run
+            echo ">>> Sleeping 2 minutes..."
+            sleep 120
+          done
+          echo ">>> 55 minute session complete"
 
       - name: Save Bot State
         uses: actions/cache@v4
         with:
-          path: logs/crypto_state.json
+          path: |
+            logs/crypto_state.json
+            logs/crypto_agent.json
           key: crypto-state-${{ github.run_id }}
 
       - name: Upload Logs
@@ -63,11 +93,3 @@ jobs:
           name: crypto-logs-${{ github.run_id }}
           path: logs/
           retention-days: 7
-
-      - name: Commit Report
-        run: |
-          git config user.name  "CryptoBot"
-          git config user.email "bot@cryptotrader"
-          git add logs/crypto_report.json logs/crypto_state.json || true
-          git diff --staged --quiet || git commit -m "🪙 Crypto report $(date -u '+%Y-%m-%d %H:%M')"
-          git push || true
