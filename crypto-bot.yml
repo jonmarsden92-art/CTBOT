@@ -1,0 +1,73 @@
+name: Crypto Bot
+
+on:
+  schedule:
+    # Runs every 10 minutes, 24/7 - crypto never sleeps
+    - cron: '0,10,20,30,40,50 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-crypto-${{ hashFiles('requirements.txt') }}
+          restore-keys: pip-crypto-
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create logs dir
+        run: mkdir -p logs
+
+      - name: Restore Bot State
+        uses: actions/cache@v4
+        with:
+          path: logs/crypto_state.json
+          key: crypto-state-${{ github.run_id }}
+          restore-keys: crypto-state-
+
+      - name: Run Crypto Bot
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
+        run: python src/crypto_bot.py
+
+      - name: Save Bot State
+        uses: actions/cache@v4
+        with:
+          path: logs/crypto_state.json
+          key: crypto-state-${{ github.run_id }}
+
+      - name: Upload Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crypto-logs-${{ github.run_id }}
+          path: logs/
+          retention-days: 7
+
+      - name: Commit Report
+        run: |
+          git config user.name  "CryptoBot"
+          git config user.email "bot@cryptotrader"
+          git add logs/crypto_report.json logs/crypto_state.json || true
+          git diff --staged --quiet || git commit -m "🪙 Crypto report $(date -u '+%Y-%m-%d %H:%M')"
+          git push || true

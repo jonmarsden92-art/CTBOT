@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CryptoTrader</title>
+<style>
+  :root {
+    --bg:      #0a0e1a;
+    --panel:   #111827;
+    --border:  #1f2937;
+    --accent:  #f59e0b;
+    --green:   #10b981;
+    --red:     #ef4444;
+    --blue:    #3b82f6;
+    --purple:  #8b5cf6;
+    --text:    #f1f5f9;
+    --muted:   #6b7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, #0a0e1a 0%, #0f172a 100%);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .logo-text h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-text p  { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .last-run { font-size: 0.75rem; color: var(--muted); }
+
+  .pill {
+    padding: 5px 12px; border-radius: 20px; font-size: 0.72rem;
+    font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pill-live   { background: rgba(16,185,129,.15); color: var(--green); border: 1px solid rgba(16,185,129,.3); }
+  .pill-24h    { background: rgba(245,158,11,.15);  color: var(--accent); border: 1px solid rgba(245,158,11,.3); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .run-btn {
+    padding: 8px 18px; border-radius: 8px; border: 1px solid var(--accent);
+    background: rgba(245,158,11,.1); color: var(--accent);
+    font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .run-btn:hover { background: rgba(245,158,11,.2); }
+
+  main { padding: 24px 28px; max-width: 1400px; margin: 0 auto; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  @media(max-width:900px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 22px;
+  }
+  .card label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+  .card .val   { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.5px; }
+  .card .sub   { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+  .green { color: var(--green); }
+  .red   { color: var(--red);   }
+  .amber { color: var(--accent);}
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:900px){ .grid2{ grid-template-columns:1fr; } }
+
+  .section-title { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { text-align: left; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 0 10px 10px; font-weight: 500; }
+  td { padding: 9px 10px; border-top: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 6px;
+    font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+  }
+  .badge-buy    { background: rgba(16,185,129,.15); color: var(--green); }
+  .badge-sell   { background: rgba(239,68,68,.15);  color: var(--red); }
+  .badge-hold   { background: rgba(107,114,128,.15);color: var(--muted); }
+  .badge-bull   { background: rgba(59,130,246,.15); color: var(--blue); }
+  .badge-bear   { background: rgba(239,68,68,.12);  color: var(--red); }
+
+  .coin-icon { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 8px; vertical-align: middle; background: rgba(245,158,11,.15); }
+
+  .empty { text-align: center; color: var(--muted); padding: 32px; font-size: 0.85rem; }
+
+  .pnl-bar { height: 4px; border-radius: 2px; margin-top: 4px; }
+
+  .modal-bg {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    z-index: 100; align-items: center; justify-content: center;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; width: 400px; max-width: 95vw;
+  }
+  .modal h2 { font-size: 1.1rem; margin-bottom: 8px; }
+  .modal p  { font-size: 0.82rem; color: var(--muted); margin-bottom: 18px; }
+  .modal input {
+    width: 100%; padding: 10px 14px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    font-size: 0.85rem; margin-bottom: 10px;
+  }
+  .modal input:focus { outline: none; border-color: var(--accent); }
+  .modal label { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+  .modal-btns { display: flex; gap: 10px; }
+  .btn-primary { flex: 1; padding: 10px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+  .btn-cancel  { padding: 10px 18px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+
+  .refresh-spin { animation: spin 1s linear infinite; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🪙</div>
+    <div class="logo-text">
+      <h1>CryptoTrader</h1>
+      <p>24/7 Auto Trading · Alpaca · BTC ETH SOL +more</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last-run" id="lastRun">Loading...</span>
+    <span class="pill pill-24h"><span class="dot"></span>24/7 LIVE</span>
+    <span class="pill pill-live" id="statusPill"><span class="dot"></span>CONNECTING</span>
+    <button class="run-btn" onclick="triggerBot()">▶ Run Now</button>
+  </div>
+</header>
+
+<main>
+  <div class="stats" id="stats">
+    <div class="card"><label>Portfolio Value</label><div class="val" id="portVal">—</div><div class="sub" id="portReturn">Loading...</div></div>
+    <div class="card"><label>Available Cash</label><div class="val" id="cashVal">—</div><div class="sub" id="buyPower">buying power</div></div>
+    <div class="card"><label>Open Positions</label><div class="val" id="posCount">—</div><div class="sub" id="posPlpc">unrealised P&amp;L</div></div>
+    <div class="card"><label>Total Trades</label><div class="val" id="tradeCount">—</div><div class="sub" id="winRate">win rate</div></div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="section-title">Open Positions</div>
+      <div id="positionsBody"><div class="empty">No open positions</div></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Live Signals</div>
+      <div id="signalsBody"><div class="empty">Waiting for scan...</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Recent Trades</div>
+    <div id="tradesBody"><div class="empty">No trades yet</div></div>
+  </div>
+</main>
+
+<!-- Token Modal -->
+<div class="modal-bg" id="tokenModal">
+  <div class="modal">
+    <h2>GitHub Token Required</h2>
+    <p>Enter a Personal Access Token with <strong>workflow</strong> scope to trigger runs manually.<br>Create one at github.com/settings/tokens</p>
+    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx"/>
+    <label><input type="checkbox" id="rememberToken"/> Remember token in this browser</label>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="submitToken()">Trigger Run</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const REPO        = "jonmarsden92-art/CryptoTrader";
+const REPORT_URL  = "/CryptoTrader/logs/crypto_report.json";
+const START_VALUE = 63.0;
+
+const COIN_EMOJI = {
+  BTC:"₿", ETH:"Ξ", SOL:"◎", DOGE:"Ð", AVAX:"🔺",
+  LINK:"⬡", XRP:"✕", LTC:"Ł", BCH:"₿", DOT:"●",
+  UNI:"🦄", AAVE:"👻", SHIB:"🐕", PEPE:"🐸",
+};
+
+function coinEmoji(sym) {
+  const base = sym.replace("USD","").replace("/","");
+  return COIN_EMOJI[base] || "🪙";
+}
+
+function fmt(n, d=2)  { return n == null ? "—" : "$" + Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function pct(n)       { return n == null ? "—" : (n >= 0 ? "+" : "") + Number(n).toFixed(2) + "%"; }
+function shortSym(s)  { return s.replace("/USD","").replace("USD",""); }
+
+async function loadReport() {
+  try {
+    const r    = await fetch(REPORT_URL + "?t=" + Date.now());
+    if (!r.ok) throw new Error("no report");
+    const data = await r.json();
+    render(data);
+  } catch(e) {
+    document.getElementById("lastRun").textContent = "No report yet — run bot first";
+  }
+}
+
+function render(d) {
+  const acc  = d.account || {};
+  const perf = d.performance || {};
+
+  // Header
+  const lr = d.last_run ? new Date(d.last_run).toLocaleString("en-GB",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "—";
+  document.getElementById("lastRun").textContent = "Last run: " + lr;
+  document.getElementById("statusPill").innerHTML = `<span class="dot"></span>${acc.status === "ACTIVE" ? "LIVE TRADING" : "INACTIVE"}`;
+
+  // Stats
+  const pv  = acc.portfolio_value || 0;
+  const ret = ((pv - START_VALUE) / START_VALUE * 100).toFixed(2);
+  document.getElementById("portVal").textContent    = fmt(pv);
+  document.getElementById("portReturn").innerHTML   = `<span class="${ret>=0?'green':'red'}">${ret>=0?'+':''}${ret}% total return</span>`;
+  document.getElementById("cashVal").textContent    = fmt(acc.cash);
+  document.getElementById("buyPower").textContent   = fmt(acc.buying_power) + " buying power";
+
+  const positions = d.positions || [];
+  const totalPlpc = positions.reduce((s,p) => s + (p.unrealized_plpc||0), 0);
+  document.getElementById("posCount").textContent   = `${positions.length} /6`;
+  document.getElementById("posPlpc").innerHTML      = `<span class="${totalPlpc>=0?'green':'red'}">${pct(totalPlpc*100)} unrealised P&L</span>`;
+
+  const wins    = perf.wins || 0;
+  const losses  = perf.losses || 0;
+  const total   = wins + losses;
+  const wr      = total > 0 ? (wins/total*100).toFixed(0) : "—";
+  document.getElementById("tradeCount").textContent = perf.total_trades || 0;
+  document.getElementById("winRate").textContent    = `${wins}W · ${losses}L · ${wr}% win rate`;
+
+  // Positions
+  const posEl = document.getElementById("positionsBody");
+  if (!positions.length) {
+    posEl.innerHTML = '<div class="empty">No open crypto positions</div>';
+  } else {
+    posEl.innerHTML = `<table>
+      <tr><th>Coin</th><th>Qty</th><th>Entry</th><th>Price</th><th>P&L</th></tr>
+      ${positions.map(p => {
+        const plpc = (p.unrealized_plpc * 100).toFixed(2);
+        const cls  = p.unrealized_plpc >= 0 ? "green" : "red";
+        const sym  = shortSym(p.symbol);
+        return `<tr>
+          <td><span class="coin-icon">${coinEmoji(p.symbol)}</span>${sym}</td>
+          <td>${Number(p.qty).toPrecision(4)}</td>
+          <td>${fmt(p.avg_entry,4)}</td>
+          <td>${fmt(p.current_price,4)}</td>
+          <td class="${cls}">${pct(plpc)}</td>
+        </tr>`;
+      }).join("")}
+    </table>`;
+  }
+
+  // Signals
+  const signals  = d.signals || {};
+  const sigPairs = Object.entries(signals).sort((a,b) => (b[1].buy_score||0)-(a[1].buy_score||0)).slice(0,10);
+  const sigEl    = document.getElementById("signalsBody");
+  if (!sigPairs.length) {
+    sigEl.innerHTML = '<div class="empty">No signals yet</div>';
+  } else {
+    sigEl.innerHTML = `<table>
+      <tr><th>Pair</th><th>Price</th><th>RSI</th><th>Score</th><th>Signal</th></tr>
+      ${sigPairs.map(([sym,s]) => {
+        const sigClass = s.signal === "BUY" ? "buy" : s.signal === "SELL" ? "sell" : s.signal === "BULLISH" ? "bull" : s.signal === "BEARISH" ? "bear" : "hold";
+        return `<tr>
+          <td><span class="coin-icon">${coinEmoji(sym)}</span>${shortSym(sym)}</td>
+          <td>${fmt(s.price,s.price>100?2:4)}</td>
+          <td>${(s.rsi||0).toFixed(0)}</td>
+          <td>${s.buy_score||0}</td>
+          <td><span class="badge badge-${sigClass}">${s.signal||"HOLD"}</span></td>
+        </tr>`;
+      }).join("")}
+    </table>`;
+  }
+
+  // Trades
+  const trades = (d.trades || []).slice(-20).reverse();
+  const trEl   = document.getElementById("tradesBody");
+  if (!trades.length) {
+    trEl.innerHTML = '<div class="empty">No trades yet</div>';
+  } else {
+    trEl.innerHTML = `<table>
+      <tr><th>Coin</th><th>Side</th><th>Qty</th><th>Reason</th><th>Time</th></tr>
+      ${trades.map(t => `<tr>
+        <td><span class="coin-icon">${coinEmoji(t.symbol||"")}</span>${shortSym(t.symbol||"—")}</td>
+        <td><span class="badge badge-${t.side==='buy'?'buy':'sell'}">${(t.side||"").toUpperCase()}</span></td>
+        <td>${t.qty||"—"}</td>
+        <td style="color:var(--muted);font-size:0.75rem">${t.reason||"—"}</td>
+        <td style="color:var(--muted);font-size:0.75rem">${t.time ? new Date(t.time).toLocaleTimeString("en-GB") : "—"}</td>
+      </tr>`).join("")}
+    </table>`;
+  }
+}
+
+// ── Run Bot ───────────────────────────────────────────────────────────────────
+function triggerBot() {
+  const saved = localStorage.getItem("gh_token");
+  if (saved) { doTrigger(saved); return; }
+  document.getElementById("tokenModal").classList.add("open");
+}
+function closeModal() { document.getElementById("tokenModal").classList.remove("open"); }
+function submitToken() {
+  const t = document.getElementById("tokenInput").value.trim();
+  if (!t) return;
+  if (document.getElementById("rememberToken").checked) localStorage.setItem("gh_token", t);
+  closeModal();
+  doTrigger(t);
+}
+async function doTrigger(token) {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/crypto-bot.yml/dispatches`, {
+      method: "POST",
+      headers: { Authorization: "Bearer " + token, "Content-Type": "application/json", Accept: "application/vnd.github+json" },
+      body: JSON.stringify({ ref: "main" }),
+    });
+    alert(r.ok ? "✅ Bot triggered! Check GitHub Actions." : "❌ Failed — check your token has workflow scope.");
+  } catch(e) { alert("❌ Error: " + e.message); }
+}
+
+loadReport();
+setInterval(loadReport, 30000);
+</script>
+</body>
+</html>
