@@ -64,11 +64,12 @@ RSI_PERIOD        = 8       # faster RSI
 RSI_OVERSOLD      = 35
 RSI_OVERBOUGHT    = 68
 MAX_POSITIONS     = 6       # max concurrent crypto positions
-POSITION_SIZE     = 0.18    # 18% per position
+POSITION_SIZE     = 0.12    # 12% per position (smaller, shares cash with stock bot)
 STOP_LOSS_PCT     = 0.04    # 4% stop loss (crypto moves fast)
 TAKE_PROFIT_PCT   = 0.04    # 4% take profit (quick gains)
 TRAILING_STOP_PCT = 0.03    # 3% trailing stop
-MIN_CASH_BUFFER   = 0.05
+MIN_CASH_BUFFER   = 0.10    # 10% buffer — higher to protect stock bot's cash
+CRYPTO_CASH_LIMIT = 0.45    # crypto bot uses max 45% of total available cash
 SIGNAL_THRESHOLD  = 3
 LOOKBACK_DAYS     = 30      # crypto only needs 30 days history
 MIN_ORDER_USD     = 1.0     # minimum $1 order
@@ -370,6 +371,20 @@ def run_bot():
     account = get_account(api)
     log.info(f"💰 Portfolio: ${account['portfolio_value']:,.2f} | Cash: ${account['cash']:,.2f}")
 
+    # ── Smart cash sharing with stock bot ──
+    # Count all open positions to understand how much stock bot is using
+    all_positions  = api.list_positions()
+    stock_positions = [p for p in all_positions if not ("USD" in p.symbol and len(p.symbol) <= 7)]
+    crypto_positions_all = [p for p in all_positions if "USD" in p.symbol and len(p.symbol) <= 7]
+    stock_value    = sum(float(p.market_value) for p in stock_positions)
+    crypto_value   = sum(float(p.market_value) for p in crypto_positions_all)
+    total_cash     = account["cash"]
+    # Reserve cash for stock bot — crypto only uses up to CRYPTO_CASH_LIMIT of available cash
+    crypto_budget  = min(total_cash * CRYPTO_CASH_LIMIT, total_cash - (account["portfolio_value"] * MIN_CASH_BUFFER))
+    crypto_budget  = max(0, crypto_budget)
+    log.info(f"📊 Stock positions: {len(stock_positions)} (${stock_value:.2f}) | Crypto: {len(crypto_positions_all)} (${crypto_value:.2f})")
+    log.info(f"💵 Total cash: ${total_cash:.2f} | Crypto budget: ${crypto_budget:.2f}")
+
     if account["status"] != "ACTIVE":
         log.error("Account not active — aborting")
         return
@@ -456,7 +471,7 @@ def run_bot():
 
     # Execute buys
     slots    = MAX_POSITIONS - n_positions
-    cash     = account["cash"]
+    cash     = crypto_budget  # use shared-aware budget
     min_cash = account["portfolio_value"] * MIN_CASH_BUFFER
 
     if slots > 0 and all_buys:
