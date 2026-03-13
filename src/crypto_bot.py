@@ -515,7 +515,7 @@ def compute_indicators(df: pd.DataFrame, agent: dict) -> Optional[dict]:
 def calc_qty(portfolio_value: float, cash: float, price: float) -> float:
     # cash = buying_power (actual spendable), divide across max positions
     slots = max(1, MAX_POSITIONS)
-    alloc = min((cash / slots) * 0.95, cash * 0.90)
+    alloc = min((cash / max(1, MAX_POSITIONS)) * 0.95, cash * 0.90)
     if alloc < MIN_ORDER_USD or price <= 0:
         return 0.0
     qty = alloc / price
