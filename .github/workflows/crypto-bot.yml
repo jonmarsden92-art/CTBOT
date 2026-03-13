@@ -16,9 +16,12 @@ jobs:
   trade:
     runs-on: ubuntu-latest
     timeout-minutes: 58
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -29,54 +32,58 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: pip-crypto-${{ hashFiles('requirements.txt') }}
-          restore-keys: pip-crypto-
+          key: pip-v4-${{ hashFiles('requirements.txt') }}
+          restore-keys: pip-v4-
 
       - name: Install Dependencies
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --upgrade pip --quiet
+          pip install -r requirements.txt --quiet
 
-      - name: Create logs dir
-        run: mkdir -p logs
-
-      - name: Restore State from repo
-        run: |
-          # Pull latest state files directly from repo — most reliable method
-          git pull origin main || true
-          echo "State files present:"
-          ls -la logs/ || echo "No logs yet"
-
-      - name: Run Crypto Bot Loop
-        env:
-          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
-          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-          ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
+      - name: Setup Git and Pull Latest State
         run: |
           git config user.name  "CryptoBot"
           git config user.email "bot@cryptotrader"
+          git pull origin main --rebase || git pull origin main || true
+          mkdir -p logs
+          echo "State files:"
+          ls -la logs/ 2>/dev/null || echo "No logs yet"
 
+      - name: Run Crypto Bot Loop
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_BASE_URL:   ${{ secrets.ALPACA_BASE_URL }}
+        run: |
           END=$((SECONDS + 3300))
           RUN=0
+
           while [ $SECONDS -lt $END ]; do
             RUN=$((RUN + 1))
+            echo ""
             echo "========================================="
             echo ">>> RUN $RUN at $(date -u '+%H:%M:%S UTC')"
             echo "========================================="
 
-            # Run bot — handles buys AND sells in one pass
             python src/crypto_bot.py
 
-            # Immediately commit state + report back to repo
-            # This ensures state persists even if job is interrupted
-            git stash 2>/dev/null || true && git pull origin main 2>/dev/null || true && git stash pop 2>/dev/null || true
             git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json 2>/dev/null || true
-            git diff --staged --quiet || git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" && git push 2>/dev/null || true
+            if ! git diff --staged --quiet; then
+              git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" 2>/dev/null || true
+              git push 2>/dev/null || true
+            fi
 
-            echo ">>> Sleeping 2 minutes..."
+            REMAINING=$((END - SECONDS))
+            if [ $REMAINING -lt 130 ]; then
+              echo ">>> Less than 2m remaining — ending cleanly after $RUN runs"
+              break
+            fi
+
+            echo ">>> Sleeping 2 minutes (${REMAINING}s left in session)..."
             sleep 120
           done
-          echo ">>> Session complete after $RUN runs"
+
+          echo ">>> Session complete — $RUN runs"
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
