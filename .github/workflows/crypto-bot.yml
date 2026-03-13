@@ -2,16 +2,20 @@ name: Crypto Bot
 
 on:
   schedule:
-    - cron: '* * * * *'  # every minute — GitHub fires this, bot loops internally
+    - cron: '* * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: crypto-bot-production
+  cancel-in-progress: false
+
 jobs:
   trade:
     runs-on: ubuntu-latest
-    timeout-minutes: 58  # just under GitHub's 60 min limit
+    timeout-minutes: 58
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,28 +59,25 @@ jobs:
         run: |
           git config user.name  "CryptoBot"
           git config user.email "bot@cryptotrader"
-          
-          # Loop for 55 minutes, running every 2 minutes
+
           END=$((SECONDS + 3300))
           RUN=0
           while [ $SECONDS -lt $END ]; do
             RUN=$((RUN + 1))
             echo "========================================="
-            echo ">>> LOOP RUN $RUN at $(date -u '+%H:%M:%S UTC')"
+            echo ">>> RUN $RUN at $(date -u '+%H:%M:%S UTC')"
             echo "========================================="
-            
+
             python src/crypto_bot.py
-            
-            # Commit report after every run
+
             git pull --rebase origin main || true
             git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json || true
-            git diff --staged --quiet || git commit -m "🪙 Crypto $RUN $(date -u '+%H:%M')" && git push || true
-            
-            # Wait 2 minutes before next run
+            git diff --staged --quiet || git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" && git push || true
+
             echo ">>> Sleeping 2 minutes..."
             sleep 120
           done
-          echo ">>> 55 minute session complete"
+          echo ">>> Session complete"
 
       - name: Save Bot State
         uses: actions/cache@v4
