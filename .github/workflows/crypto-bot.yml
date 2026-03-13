@@ -40,22 +40,18 @@ jobs:
       - name: Create logs dir
         run: mkdir -p logs
 
-      - name: Restore Bot State
-        uses: actions/cache@v4
-        with:
-          path: |
-            logs/crypto_state.json
-            logs/crypto_agent.json
-          key: crypto-state-${{ github.run_id }}
-          restore-keys: crypto-state-
+      - name: Restore State from repo
+        run: |
+          # Pull latest state files directly from repo — most reliable method
+          git pull origin main || true
+          echo "State files present:"
+          ls -la logs/ || echo "No logs yet"
 
       - name: Run Crypto Bot Loop
         env:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
         run: |
           git config user.name  "CryptoBot"
           git config user.email "bot@cryptotrader"
@@ -68,24 +64,19 @@ jobs:
             echo ">>> RUN $RUN at $(date -u '+%H:%M:%S UTC')"
             echo "========================================="
 
+            # Run bot — handles buys AND sells in one pass
             python src/crypto_bot.py
 
-            git pull --rebase origin main || true
-            git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json || true
-            git diff --staged --quiet || git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" && git push || true
+            # Immediately commit state + report back to repo
+            # This ensures state persists even if job is interrupted
+            git stash 2>/dev/null || true && git pull origin main 2>/dev/null || true && git stash pop 2>/dev/null || true
+            git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json 2>/dev/null || true
+            git diff --staged --quiet || git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" && git push 2>/dev/null || true
 
             echo ">>> Sleeping 2 minutes..."
             sleep 120
           done
-          echo ">>> Session complete"
-
-      - name: Save Bot State
-        uses: actions/cache@v4
-        with:
-          path: |
-            logs/crypto_state.json
-            logs/crypto_agent.json
-          key: crypto-state-${{ github.run_id }}
+          echo ">>> Session complete after $RUN runs"
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
