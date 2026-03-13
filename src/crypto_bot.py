@@ -51,7 +51,7 @@ SHORT_WINDOW          = 3
 LONG_WINDOW           = 9
 RSI_PERIOD            = 5
 MAX_POSITIONS         = 8
-POSITION_SIZE         = 0.30
+POSITION_SIZE         = 0.12
 STOP_LOSS_PCT         = 0.03
 TAKE_PROFIT_PCT       = 0.02
 TRAILING_STOP_PCT     = 0.02
@@ -513,7 +513,8 @@ def compute_indicators(df: pd.DataFrame, agent: dict) -> Optional[dict]:
 # =============================================================================
 
 def calc_qty(portfolio_value: float, cash: float, price: float) -> float:
-    alloc = min(portfolio_value * POSITION_SIZE, cash * 0.90)
+    # Use cash (buying power) not portfolio_value to avoid unsettled funds
+    alloc = min(cash * POSITION_SIZE, cash * 0.90)
     if alloc < MIN_ORDER_USD or price <= 0:
         return 0.0
     qty = alloc / price
@@ -603,7 +604,7 @@ def run_bot():
 
     acc             = api.get_account()
     portfolio_value = float(acc.portfolio_value)
-    cash            = float(acc.cash)
+    cash            = float(acc.buying_power)  # use buying_power not cash — avoids unsettled funds
     log.info("💰 Portfolio: $" + str(round(portfolio_value, 2)) + " | Cash: $" + str(round(cash, 2)))
 
     if acc.status != "ACTIVE":
