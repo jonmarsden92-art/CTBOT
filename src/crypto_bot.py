@@ -515,12 +515,8 @@ def compute_indicators(df: pd.DataFrame, agent: dict) -> Optional[dict]:
 def calc_qty(portfolio_value: float, cash: float, price: float) -> float:
     if cash <= 0 or price <= 0:
         return 0.0
-    # Use 80% of spendable cash per slot to stay well within balance
-    slots = max(1, MAX_POSITIONS)
-    alloc = (cash * 0.80) / slots
-    if alloc < MIN_ORDER_USD:
-        # If not enough for full slot, try using all remaining cash
-        alloc = cash * 0.80
+    # Use 90% of available cash — buy one position at a time with what we have
+    alloc = cash * 0.90
     if alloc < MIN_ORDER_USD:
         return 0.0
     qty = alloc / price
