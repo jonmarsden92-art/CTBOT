@@ -513,14 +513,17 @@ def compute_indicators(df: pd.DataFrame, agent: dict) -> Optional[dict]:
 # =============================================================================
 
 def calc_qty(portfolio_value: float, cash: float, price: float) -> float:
-    # cash = buying_power (actual spendable), divide across max positions
+    # Always use 90% of available cash divided by number of slots
+    # cash parameter is already buying_power
+    if cash <= 0 or price <= 0:
+        return 0.0
     slots = max(1, MAX_POSITIONS)
-    alloc = min((cash / max(1, MAX_POSITIONS)) * 0.95, cash * 0.90)
-    if alloc < MIN_ORDER_USD or price <= 0:
+    alloc = (cash * 0.90) / slots
+    if alloc < MIN_ORDER_USD:
         return 0.0
     qty = alloc / price
-    if price > 10000: return round(qty, 6)
-    if price > 10:    return round(qty, 4)
+    if price > 10000: return round(qty, 8)
+    if price > 1:     return round(qty, 6)
     return round(qty, 2)
 
 
@@ -688,13 +691,17 @@ def run_bot():
         pair  = sig["symbol"]
         price = sig["price"]
         qty   = calc_qty(portfolio_value, cash, price)
+        cost  = qty * price if qty > 0 else 0
+
+        log.info("💡 Considering " + pair + " | price=$" + str(round(price, 6)) +
+                 " qty=" + str(qty) + " cost=$" + str(round(cost, 4)) +
+                 " cash=$" + str(round(cash, 2)))
 
         if qty == 0.0:
-            log.info("⚠️  Skip " + pair + " — qty too small")
+            log.info("⚠️  Skip " + pair + " — qty is zero")
             continue
-        cost = qty * price
         if cost < MIN_ORDER_USD:
-            log.info("⚠️  Skip " + pair + " — $" + str(round(cost, 2)) + " below minimum")
+            log.info("⚠️  Skip " + pair + " — cost $" + str(round(cost, 4)) + " below min $" + str(MIN_ORDER_USD))
             continue
         if (cash - cost) < min_cash:
             log.info("⚠️  Skip " + pair + " — low cash buffer")
