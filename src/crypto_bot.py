@@ -47,20 +47,20 @@ CRYPTO_UNIVERSE = [
 ]
 
 # Strategy config (agent tunes these over time)
-SHORT_WINDOW          = 6
-LONG_WINDOW           = 18
-RSI_PERIOD            = 8
-MAX_POSITIONS         = 6
-POSITION_SIZE         = 0.85
-STOP_LOSS_PCT         = 0.04
-TAKE_PROFIT_PCT       = 0.04
-TRAILING_STOP_PCT     = 0.03
-TRAILING_ACTIVATE_PCT = 0.015
-MIN_CASH_BUFFER       = 0.01
-MIN_ORDER_USD         = 1.00
-DEFAULT_RSI_OS        = 35
-DEFAULT_RSI_OB        = 68
-DEFAULT_SIG_MIN       = 3
+SHORT_WINDOW          = 3
+LONG_WINDOW           = 9
+RSI_PERIOD            = 5
+MAX_POSITIONS         = 8
+POSITION_SIZE         = 0.30
+STOP_LOSS_PCT         = 0.03
+TAKE_PROFIT_PCT       = 0.02
+TRAILING_STOP_PCT     = 0.02
+TRAILING_ACTIVATE_PCT = 0.008
+MIN_CASH_BUFFER       = 0.005
+MIN_ORDER_USD         = 0.50
+DEFAULT_RSI_OS        = 45
+DEFAULT_RSI_OB        = 55
+DEFAULT_SIG_MIN       = 1
 
 STATE_FILE  = Path("logs/crypto_state.json")
 AGENT_FILE  = Path("logs/crypto_agent.json")
@@ -81,12 +81,12 @@ DEFAULT_AGENT = {
     "avg_pnl": 0.0,
     "sharpe": 0.0,
     "thresholds": {
-        "rsi_oversold":   DEFAULT_RSI_OS,
-        "rsi_overbought": DEFAULT_RSI_OB,
-        "signal_min":     DEFAULT_SIG_MIN,
-        "take_profit":    TAKE_PROFIT_PCT,
-        "stop_loss":      STOP_LOSS_PCT,
-        "trailing_stop":  TRAILING_STOP_PCT,
+        "rsi_oversold":   45,
+        "rsi_overbought": 55,
+        "signal_min":     1,
+        "take_profit":    0.02,
+        "stop_loss":      0.03,
+        "trailing_stop":  0.02,
     },
     "weights": {
         "ma_cross": 1.0,
