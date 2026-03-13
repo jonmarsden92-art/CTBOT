@@ -513,12 +513,14 @@ def compute_indicators(df: pd.DataFrame, agent: dict) -> Optional[dict]:
 # =============================================================================
 
 def calc_qty(portfolio_value: float, cash: float, price: float) -> float:
-    # Always use 90% of available cash divided by number of slots
-    # cash parameter is already buying_power
     if cash <= 0 or price <= 0:
         return 0.0
+    # Use 80% of spendable cash per slot to stay well within balance
     slots = max(1, MAX_POSITIONS)
-    alloc = (cash * 0.90) / slots
+    alloc = (cash * 0.80) / slots
+    if alloc < MIN_ORDER_USD:
+        # If not enough for full slot, try using all remaining cash
+        alloc = cash * 0.80
     if alloc < MIN_ORDER_USD:
         return 0.0
     qty = alloc / price
@@ -608,7 +610,14 @@ def run_bot():
 
     acc             = api.get_account()
     portfolio_value = float(acc.portfolio_value)
-    cash            = float(acc.buying_power)  # use buying_power not cash — avoids unsettled funds
+    # Use the lower of cash and buying_power to get truly spendable amount
+    raw_cash        = float(acc.cash)
+    buying_power    = float(acc.buying_power)
+    non_marginable  = float(getattr(acc, 'non_marginable_buying_power', buying_power))
+    cash            = min(raw_cash, buying_power, non_marginable)
+    log.info("💵 Buying power breakdown: cash=" + str(round(raw_cash,2)) + 
+             " bp=" + str(round(buying_power,2)) + 
+             " spendable=" + str(round(cash,2)))
     log.info("💰 Portfolio: $" + str(round(portfolio_value, 2)) + " | Cash: $" + str(round(cash, 2)))
 
     if acc.status != "ACTIVE":
