@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "total_learned": 8,
-  "wins": 2,
+  "total_learned": 9,
+  "wins": 3,
   "losses": 6,
   "win_rate_7d": 0.2,
   "win_rate_30d": 0.2,
@@ -30,12 +30,12 @@
   },
   "symbol_memory": {
     "LINKUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -0.6751839930212571,
-      "avg_pnl": -0.6751839930212571,
-      "win_rate": 0.0,
-      "trades": 1
+      "total_pnl": -0.6291312773831725,
+      "avg_pnl": -0.31456563869158627,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "UNIUSD": {
       "wins": 0,
@@ -100,10 +100,10 @@
       "trades": 2
     },
     "14": {
-      "wins": 1,
+      "wins": 2,
       "losses": 3,
-      "total_pnl": -0.6492158758974387,
-      "trades": 4
+      "total_pnl": -0.6031631602593541,
+      "trades": 5
     }
   },
   "open_trades": {
@@ -121,21 +121,6 @@
         "rsi_overbought",
         "rsi_divergence_bull",
         "macd_bull",
-        "near_support"
-      ]
-    },
-    "LINKUSD": {
-      "entry_price": 9.000555,
-      "entry_time": "2026-03-14T14:15:53.928445",
-      "entry_hour": 14,
-      "score": 2.43,
-      "regime": "recovery",
-      "rsi": 77.65,
-      "vol_ratio": 0.206,
-      "trend_slope": 0.0994,
-      "signals_fired": [
-        "rsi_overbought",
-        "rsi_divergence_bull",
         "near_support"
       ]
     },
@@ -168,6 +153,20 @@
         "rsi_divergence_bull",
         "near_support",
         "vol_confirm"
+      ]
+    },
+    "BTCUSD": {
+      "entry_price": 70604.15,
+      "entry_time": "2026-03-14T15:54:53.193051",
+      "entry_hour": 15,
+      "score": 1.73,
+      "regime": "recovery",
+      "rsi": 51.31,
+      "vol_ratio": 0.297,
+      "trend_slope": 0.0034,
+      "signals_fired": [
+        "rsi_divergence_bull",
+        "near_support"
       ]
     }
   },
@@ -326,6 +325,24 @@
         "near_support"
       ],
       "time": "2026-03-14T15:00:58.158518"
+    },
+    {
+      "symbol": "LINKUSD",
+      "entry": 9.000555,
+      "exit": 9.0047,
+      "pnl_pct": 0.04605271563808453,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 2.43,
+      "rsi": 77.65,
+      "vol_ratio": 0.206,
+      "signals_fired": [
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T15:54:53.146274"
     }
   ],
   "calibration_log": [
@@ -350,7 +367,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 2,
+      "wins": 3,
       "losses": 6
     },
     "bull": {
@@ -375,14 +392,14 @@
       "trades": 5
     },
     "rsi_divergence_bull": {
-      "wins": 0,
+      "wins": 1,
       "losses": 5,
-      "trades": 5
+      "trades": 6
     },
     "near_support": {
-      "wins": 2,
+      "wins": 3,
       "losses": 6,
-      "trades": 8
+      "trades": 9
     },
     "stabilising": {
       "wins": 1,
@@ -400,9 +417,9 @@
       "trades": 2
     },
     "rsi_overbought": {
-      "wins": 0,
+      "wins": 1,
       "losses": 3,
-      "trades": 3
+      "trades": 4
     },
     "vol_confirm": {
       "wins": 0,
