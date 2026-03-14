@@ -851,7 +851,6 @@ def run_bot():
     agent      = load_agent()
     risk       = load_risk_state()  if MODULES_LOADED else {}
     grid_state = load_grid_state()  if MODULES_LOADED else {"grids": {}}
-    dca_state  = load_dca_state()   if MODULES_LOADED else {"positions": {}}
     agent_log_summary(agent)
 
     acc          = api.get_account()
@@ -1076,17 +1075,7 @@ def run_bot():
         except Exception as e:
             log.debug("Grid error: " + str(e))
 
-    # ── DCA Trading ──
-    if MODULES_LOADED and not market_bearish:
-        try:
-            dca_orders, dca_state = run_dca(api, all_bars, all_analyses, cash, held, dca_state)
-            if dca_orders:
-                state["trades"].extend(dca_orders)
-                state["daily_trades"] += len(dca_orders)
-                state["total_trades"]  = state.get("total_trades", 0) + len(dca_orders)
-                log.info("📊 DCA executed " + str(len(dca_orders)) + " orders")
-        except Exception as e:
-            log.debug("DCA error: " + str(e))
+
 
     # Get risk sizing multiplier
     risk_size_mult = 1.0
@@ -1147,7 +1136,6 @@ def run_bot():
         try:
             save_risk_state(risk)
             save_grid_state(grid_state)
-            save_dca_state(dca_state)
         except Exception:
             pass
 
@@ -1198,16 +1186,6 @@ def run_bot():
             "last_calibrated":    agent["last_calibrated"],
             "calibration_log":    agent["calibration_log"][-5:],
             "signal_performance": agent.get("signal_type_performance", {}),
-        },
-        "grid": {
-            "active_grids": list(grid_state.get("grids", {}).keys()),
-            "total_grid_buys":  sum(g.get("total_buys", 0)  for g in grid_state.get("grids", {}).values()),
-            "total_grid_sells": sum(g.get("total_sells", 0) for g in grid_state.get("grids", {}).values()),
-            "estimated_pnl":    sum(g.get("estimated_pnl", 0) for g in grid_state.get("grids", {}).values()),
-        },
-        "dca": {
-            "active_positions": list(dca_state.get("positions", {}).keys()),
-            "total_dca_positions": len(dca_state.get("positions", {})),
         },
         "grid": {
             "total_profit": grid_state.get("total_profit", 0) if MODULES_LOADED else 0,
