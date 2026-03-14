@@ -73,13 +73,38 @@ ALPACA_SECRET_KEY = os.environ["ALPACA_SECRET_KEY"]
 ALPACA_BASE_URL   = os.environ.get("ALPACA_BASE_URL", "https://api.alpaca.markets")
 
 CRYPTO_UNIVERSE = [
-    "BTC/USD", "ETH/USD", "SOL/USD", "DOGE/USD",
-    "AVAX/USD", "LINK/USD", "XRP/USD", "LTC/USD",
-    "BCH/USD", "DOT/USD", "UNI/USD", "AAVE/USD",
-    "SHIB/USD", "PEPE/USD",
+    # Major coins
+    "BTC/USD",   # Bitcoin
+    "ETH/USD",   # Ethereum
+    "SOL/USD",   # Solana
+    "XRP/USD",   # Ripple
+    "DOGE/USD",  # Dogecoin
+
+    # Mid caps with good liquidity
+    "AVAX/USD",  # Avalanche
+    "LINK/USD",  # Chainlink
+    "LTC/USD",   # Litecoin
+    "BCH/USD",   # Bitcoin Cash
+    "DOT/USD",   # Polkadot
+    "UNI/USD",   # Uniswap
+    "AAVE/USD",  # Aave
+
+    # High volatility / meme coins
+    "SHIB/USD",  # Shiba Inu
+    "PEPE/USD",  # Pepe
+    "TRUMP/USD", # Trump coin — highly volatile
+
+    # Additional Alpaca supported pairs
+    "BAT/USD",   # Basic Attention Token
+    "CRV/USD",   # Curve Finance
+    "GRT/USD",   # The Graph
+    "SUSHI/USD", # SushiSwap
+    "XTZ/USD",   # Tezos
+    "YFI/USD",   # Yearn Finance
+    "MKR/USD",   # Maker
 ]
 
-MAX_POSITIONS       = 4
+MAX_POSITIONS       = 5  # slightly more with 22 pairs to scan
 MIN_ORDER_USD       = 1.10
 MIN_CASH_BUFFER     = 0.05
 DEFAULT_TP          = 0.025
