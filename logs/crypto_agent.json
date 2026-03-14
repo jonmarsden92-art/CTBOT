@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "total_learned": 4,
+  "total_learned": 5,
   "wins": 1,
-  "losses": 3,
-  "win_rate_7d": 0.5,
-  "win_rate_30d": 0.5,
-  "avg_pnl": 0,
+  "losses": 4,
+  "win_rate_7d": 0.2,
+  "win_rate_30d": 0.2,
+  "avg_pnl": -0.43940810623543725,
   "sharpe": 0,
   "thresholds": {
     "rsi_oversold": 45,
     "rsi_overbought": 55,
     "signal_min": 1,
-    "take_profit": 0.01,
+    "take_profit": 0.015,
     "stop_loss": 0.03,
     "trailing_stop": 0.02
   },
@@ -25,7 +25,8 @@
     "volume_confirm": 1.0,
     "macd_cross": 1.0,
     "bb_bounce": 1.0,
-    "momentum": 1.0
+    "momentum": 1.0,
+    "near_support": 0.85
   },
   "symbol_memory": {
     "LINKUSD": {
@@ -59,6 +60,14 @@
       "avg_pnl": -0.4836902916842389,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "LTCUSD": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -0.2213421382382304,
+      "avg_pnl": -0.2213421382382304,
+      "win_rate": 0.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -76,9 +85,9 @@
     },
     "14": {
       "wins": 0,
-      "losses": 1,
-      "total_pnl": -0.4836902916842389,
-      "trades": 1
+      "losses": 2,
+      "total_pnl": -0.7050324299224693,
+      "trades": 2
     }
   },
   "open_trades": {
@@ -115,22 +124,6 @@
         "vol_confirm"
       ]
     },
-    "LTCUSD": {
-      "entry_price": 54.6665,
-      "entry_time": "2026-03-14T14:03:04.931602",
-      "entry_hour": 14,
-      "score": 5.78,
-      "regime": "recovery",
-      "rsi": 77.14,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.0512,
-      "signals_fired": [
-        "ma_cross_bull",
-        "rsi_overbought",
-        "rsi_divergence_bull",
-        "near_support"
-      ]
-    },
     "LINKUSD": {
       "entry_price": 9.000555,
       "entry_time": "2026-03-14T14:15:53.928445",
@@ -142,6 +135,20 @@
       "trend_slope": 0.0994,
       "signals_fired": [
         "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ]
+    },
+    "UNIUSD": {
+      "entry_price": 3.9325,
+      "entry_time": "2026-03-14T14:44:34.104106",
+      "entry_hour": 14,
+      "score": 1.21,
+      "regime": "recovery",
+      "rsi": 54.53,
+      "vol_ratio": 0.0,
+      "trend_slope": 0.0225,
+      "signals_fired": [
         "rsi_divergence_bull",
         "near_support"
       ]
@@ -227,10 +234,39 @@
         "near_support"
       ],
       "time": "2026-03-14T14:15:53.895484"
+    },
+    {
+      "symbol": "LTCUSD",
+      "entry": 54.6665,
+      "exit": 54.5455,
+      "pnl_pct": -0.2213421382382304,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.78,
+      "rsi": 77.14,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T14:44:34.070683"
     }
   ],
-  "calibration_log": [],
-  "last_calibrated": null,
+  "calibration_log": [
+    {
+      "time": "2026-03-14T14:44:34.070815",
+      "changes": [
+        "TP->0.015 (bank faster)",
+        "near_support->0.85 (losing)"
+      ],
+      "wr20": 0.2,
+      "avg_pnl": -0.439
+    }
+  ],
+  "last_calibrated": "2026-03-14T14:44:34.070811",
   "regime_performance": {
     "crash": {
       "wins": 0,
@@ -242,7 +278,7 @@
     },
     "recovery": {
       "wins": 1,
-      "losses": 3
+      "losses": 4
     },
     "bull": {
       "wins": 0,
@@ -267,13 +303,13 @@
     },
     "rsi_divergence_bull": {
       "wins": 0,
-      "losses": 3,
-      "trades": 3
+      "losses": 4,
+      "trades": 4
     },
     "near_support": {
       "wins": 1,
-      "losses": 3,
-      "trades": 4
+      "losses": 4,
+      "trades": 5
     },
     "stabilising": {
       "wins": 1,
@@ -287,13 +323,13 @@
     },
     "ma_cross_bull": {
       "wins": 0,
-      "losses": 1,
-      "trades": 1
+      "losses": 2,
+      "trades": 2
     },
     "rsi_overbought": {
       "wins": 0,
-      "losses": 1,
-      "trades": 1
+      "losses": 2,
+      "trades": 2
     }
   }
 }
