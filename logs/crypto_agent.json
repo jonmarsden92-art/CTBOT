@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "total_learned": 2,
-  "wins": 0,
+  "total_learned": 3,
+  "wins": 1,
   "losses": 2,
   "win_rate_7d": 0.5,
   "win_rate_30d": 0.5,
@@ -43,6 +43,14 @@
       "avg_pnl": -1.0579929399899142,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "AAVEUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.24116883175645432,
+      "avg_pnl": 0.24116883175645432,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -51,26 +59,15 @@
       "losses": 2,
       "total_pnl": -1.7331769330111713,
       "trades": 2
+    },
+    "12": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.24116883175645432,
+      "trades": 1
     }
   },
   "open_trades": {
-    "AAVEUSD": {
-      "entry_price": 110.5035,
-      "entry_time": "2026-03-14T12:02:54.765610",
-      "entry_hour": 12,
-      "score": 3.85,
-      "regime": "recovery",
-      "rsi": 18.93,
-      "vol_ratio": 0.046,
-      "trend_slope": -0.149,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "near_support",
-        "stabilising"
-      ]
-    },
     "DOTUSD": {
       "entry_price": 1.43746,
       "entry_time": "2026-03-14T12:04:56.895876",
@@ -102,6 +99,38 @@
         "rsi_oversold",
         "near_support",
         "vol_confirm"
+      ]
+    },
+    "LTCUSD": {
+      "entry_price": 54.6665,
+      "entry_time": "2026-03-14T14:03:04.931602",
+      "entry_hour": 14,
+      "score": 5.78,
+      "regime": "recovery",
+      "rsi": 77.14,
+      "vol_ratio": 0.0,
+      "trend_slope": 0.0512,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ]
+    },
+    "SOLUSD": {
+      "entry_price": 87.2228886445,
+      "entry_time": "2026-03-14T14:03:05.012376",
+      "entry_hour": 14,
+      "score": 4.04,
+      "regime": "recovery",
+      "rsi": 77.01,
+      "vol_ratio": 0.031,
+      "trend_slope": 0.0717,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
       ]
     }
   },
@@ -146,6 +175,26 @@
         "stabilising"
       ],
       "time": "2026-03-14T12:02:54.722667"
+    },
+    {
+      "symbol": "AAVEUSD",
+      "entry": 110.5035,
+      "exit": 110.77,
+      "pnl_pct": 0.24116883175645432,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 3.85,
+      "rsi": 18.93,
+      "vol_ratio": 0.046,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "near_support",
+        "stabilising"
+      ],
+      "time": "2026-03-14T14:03:04.853243"
     }
   ],
   "calibration_log": [],
@@ -160,7 +209,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2
     },
     "bull": {
@@ -170,9 +219,9 @@
   },
   "signal_type_performance": {
     "trend_bear": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "trades": 2
+      "trades": 3
     },
     "ma_cross_bear": {
       "wins": 0,
@@ -180,9 +229,9 @@
       "trades": 1
     },
     "rsi_oversold": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "trades": 2
+      "trades": 3
     },
     "rsi_divergence_bull": {
       "wins": 0,
@@ -190,14 +239,19 @@
       "trades": 2
     },
     "near_support": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "trades": 2
+      "trades": 3
     },
     "stabilising": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "trades": 2
+      "trades": 3
+    },
+    "bb_lower": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   }
 }
