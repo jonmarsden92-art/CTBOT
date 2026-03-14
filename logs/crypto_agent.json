@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "total_learned": 9,
+  "total_learned": 10,
   "wins": 3,
-  "losses": 6,
-  "win_rate_7d": 0.2,
-  "win_rate_30d": 0.2,
-  "avg_pnl": -0.43940810623543725,
-  "sharpe": 0,
+  "losses": 7,
+  "win_rate_7d": 0.2857142857142857,
+  "win_rate_30d": 0.3,
+  "avg_pnl": -0.24268754397853068,
+  "sharpe": -0.649,
   "thresholds": {
     "rsi_oversold": 45,
     "rsi_overbought": 55,
-    "signal_min": 1,
+    "signal_min": 2,
     "take_profit": 0.015,
     "stop_loss": 0.03,
     "trailing_stop": 0.02
@@ -26,7 +26,8 @@
     "macd_cross": 1.0,
     "bb_bounce": 1.0,
     "momentum": 1.0,
-    "near_support": 0.85
+    "near_support": 0.85,
+    "rsi_divergence_bull": 0.85
   },
   "symbol_memory": {
     "LINKUSD": {
@@ -39,11 +40,11 @@
     },
     "UNIUSD": {
       "wins": 0,
-      "losses": 1,
-      "total_pnl": -1.0579929399899142,
-      "avg_pnl": -1.0579929399899142,
+      "losses": 2,
+      "total_pnl": -1.2124748217445245,
+      "avg_pnl": -0.6062374108722622,
       "win_rate": 0.0,
-      "trades": 1
+      "trades": 2
     },
     "AAVEUSD": {
       "wins": 1,
@@ -101,9 +102,9 @@
     },
     "14": {
       "wins": 2,
-      "losses": 3,
-      "total_pnl": -0.6031631602593541,
-      "trades": 5
+      "losses": 4,
+      "total_pnl": -0.7576450420139644,
+      "trades": 6
     }
   },
   "open_trades": {
@@ -121,20 +122,6 @@
         "rsi_overbought",
         "rsi_divergence_bull",
         "macd_bull",
-        "near_support"
-      ]
-    },
-    "UNIUSD": {
-      "entry_price": 3.9325,
-      "entry_time": "2026-03-14T14:44:34.104106",
-      "entry_hour": 14,
-      "score": 1.21,
-      "regime": "recovery",
-      "rsi": 54.53,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.0225,
-      "signals_fired": [
-        "rsi_divergence_bull",
         "near_support"
       ]
     },
@@ -165,6 +152,22 @@
       "vol_ratio": 0.297,
       "trend_slope": 0.0034,
       "signals_fired": [
+        "rsi_divergence_bull",
+        "near_support"
+      ]
+    },
+    "LTCUSD": {
+      "entry_price": 54.45655,
+      "entry_time": "2026-03-14T16:01:33.671635",
+      "entry_hour": 16,
+      "score": 3.34,
+      "regime": "recovery",
+      "rsi": 20.85,
+      "vol_ratio": 0.0,
+      "trend_slope": -0.0683,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
         "rsi_divergence_bull",
         "near_support"
       ]
@@ -343,6 +346,23 @@
         "near_support"
       ],
       "time": "2026-03-14T15:54:53.146274"
+    },
+    {
+      "symbol": "UNIUSD",
+      "entry": 3.9325,
+      "exit": 3.926425,
+      "pnl_pct": -0.15448188175461036,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 1.21,
+      "rsi": 54.53,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T16:01:33.596225"
     }
   ],
   "calibration_log": [
@@ -354,9 +374,20 @@
       ],
       "wr20": 0.2,
       "avg_pnl": -0.439
+    },
+    {
+      "time": "2026-03-14T16:01:33.596417",
+      "changes": [
+        "TP->0.015 (bank faster)",
+        "SigMin->2",
+        "RSI OB->55",
+        "rsi_divergence_bull->0.85 (losing)"
+      ],
+      "wr20": 0.3,
+      "avg_pnl": -0.243
     }
   ],
-  "last_calibrated": "2026-03-14T14:44:34.070811",
+  "last_calibrated": "2026-03-14T16:01:33.596412",
   "regime_performance": {
     "crash": {
       "wins": 0,
@@ -368,7 +399,7 @@
     },
     "recovery": {
       "wins": 3,
-      "losses": 6
+      "losses": 7
     },
     "bull": {
       "wins": 0,
@@ -393,13 +424,13 @@
     },
     "rsi_divergence_bull": {
       "wins": 1,
-      "losses": 5,
-      "trades": 6
+      "losses": 6,
+      "trades": 7
     },
     "near_support": {
       "wins": 3,
-      "losses": 6,
-      "trades": 9
+      "losses": 7,
+      "trades": 10
     },
     "stabilising": {
       "wins": 1,
