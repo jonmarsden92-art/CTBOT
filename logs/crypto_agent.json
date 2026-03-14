@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "total_learned": 17,
-  "wins": 6,
-  "losses": 11,
+  "total_learned": 20,
+  "wins": 7,
+  "losses": 13,
   "win_rate_7d": 0.42857142857142855,
-  "win_rate_30d": 0.3333333333333333,
-  "avg_pnl": -0.17728497499008758,
-  "sharpe": -0.531,
+  "win_rate_30d": 0.35,
+  "avg_pnl": -0.12322175923132539,
+  "sharpe": -0.361,
   "thresholds": {
     "rsi_oversold": 45,
     "rsi_overbought": 55,
@@ -27,17 +27,17 @@
     "bb_bounce": 1.0,
     "momentum": 1.0,
     "near_support": 0.85,
-    "rsi_divergence_bull": 0.7,
-    "rsi_overbought": 0.85
+    "rsi_divergence_bull": 0.55,
+    "rsi_overbought": 0.7
   },
   "symbol_memory": {
     "LINKUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": -0.6291312773831725,
-      "avg_pnl": -0.31456563869158627,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": -0.22348557833893828,
+      "avg_pnl": -0.0744951927796461,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "UNIUSD": {
       "wins": 0,
@@ -105,9 +105,17 @@
     },
     "DOTUSD": {
       "wins": 0,
+      "losses": 2,
+      "total_pnl": -0.7571564829191553,
+      "avg_pnl": -0.37857824145957764,
+      "win_rate": 0.0,
+      "trades": 2
+    },
+    "PEPEUSD": {
+      "wins": 0,
       "losses": 1,
-      "total_pnl": -0.34887927316238304,
-      "avg_pnl": -0.34887927316238304,
+      "total_pnl": -0.14903129657227876,
+      "avg_pnl": -0.14903129657227876,
       "win_rate": 0.0,
       "trades": 1
     }
@@ -138,43 +146,13 @@
       "trades": 2
     },
     "16": {
-      "wins": 3,
-      "losses": 1,
-      "total_pnl": 0.528337919940211,
-      "trades": 4
+      "wins": 4,
+      "losses": 3,
+      "total_pnl": 0.37667511265539433,
+      "trades": 7
     }
   },
   "open_trades": {
-    "LINKUSD": {
-      "entry_price": 8.998,
-      "entry_time": "2026-03-14T16:05:42.051909",
-      "entry_hour": 16,
-      "score": 2.31,
-      "regime": "recovery",
-      "rsi": 51.37,
-      "vol_ratio": 0.104,
-      "trend_slope": 0.0056,
-      "signals_fired": [
-        "macd_bull",
-        "near_support"
-      ]
-    },
-    "DOTUSD": {
-      "entry_price": 1.43285,
-      "entry_time": "2026-03-14T16:20:10.305804",
-      "entry_hour": 16,
-      "score": 2.57,
-      "regime": "recovery",
-      "rsi": 34.06,
-      "vol_ratio": 2.456,
-      "trend_slope": -0.0407,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "near_support",
-        "vol_confirm"
-      ]
-    },
     "LTCUSD": {
       "entry_price": 54.60105,
       "entry_time": "2026-03-14T16:41:00.604402",
@@ -189,22 +167,6 @@
         "rsi_oversold",
         "rsi_divergence_bull",
         "near_support"
-      ]
-    },
-    "PEPEUSD": {
-      "entry_price": 3.355e-06,
-      "entry_time": "2026-03-14T16:47:12.352750",
-      "entry_hour": 16,
-      "score": 6.38,
-      "regime": "recovery",
-      "rsi": 66.67,
-      "vol_ratio": 12.297,
-      "trend_slope": 0.0749,
-      "signals_fired": [
-        "rsi_overbought",
-        "macd_bull",
-        "near_support",
-        "vol_confirm"
       ]
     }
   },
@@ -533,6 +495,61 @@
         "near_support"
       ],
       "time": "2026-03-14T16:41:00.526029"
+    },
+    {
+      "symbol": "LINKUSD",
+      "entry": 8.998,
+      "exit": 9.0345,
+      "pnl_pct": 0.40564569904423425,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 2.31,
+      "rsi": 51.37,
+      "vol_ratio": 0.104,
+      "signals_fired": [
+        "macd_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T17:01:57.995347"
+    },
+    {
+      "symbol": "DOTUSD",
+      "entry": 1.43285,
+      "exit": 1.427,
+      "pnl_pct": -0.40827720975677223,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 2.57,
+      "rsi": 34.06,
+      "vol_ratio": 2.456,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "near_support",
+        "vol_confirm"
+      ],
+      "time": "2026-03-14T17:01:58.010250"
+    },
+    {
+      "symbol": "PEPEUSD",
+      "entry": 3.355e-06,
+      "exit": 3.35e-06,
+      "pnl_pct": -0.14903129657227876,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 6.38,
+      "rsi": 66.67,
+      "vol_ratio": 12.297,
+      "signals_fired": [
+        "rsi_overbought",
+        "macd_bull",
+        "near_support",
+        "vol_confirm"
+      ],
+      "time": "2026-03-14T17:01:58.023676"
     }
   ],
   "calibration_log": [
@@ -567,9 +584,20 @@
       ],
       "wr20": 0.333,
       "avg_pnl": -0.177
+    },
+    {
+      "time": "2026-03-14T17:01:58.023833",
+      "changes": [
+        "TP->0.015 (bank faster)",
+        "RSI OB->55",
+        "rsi_divergence_bull->0.55 (losing)",
+        "rsi_overbought->0.7 (losing)"
+      ],
+      "wr20": 0.35,
+      "avg_pnl": -0.123
     }
   ],
-  "last_calibrated": "2026-03-14T16:20:10.229599",
+  "last_calibrated": "2026-03-14T17:01:58.023828",
   "regime_performance": {
     "crash": {
       "wins": 0,
@@ -580,8 +608,8 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 6,
-      "losses": 11
+      "wins": 7,
+      "losses": 13
     },
     "bull": {
       "wins": 0,
@@ -591,8 +619,8 @@
   "signal_type_performance": {
     "trend_bear": {
       "wins": 5,
-      "losses": 5,
-      "trades": 10
+      "losses": 6,
+      "trades": 11
     },
     "ma_cross_bear": {
       "wins": 0,
@@ -601,8 +629,8 @@
     },
     "rsi_oversold": {
       "wins": 5,
-      "losses": 3,
-      "trades": 8
+      "losses": 4,
+      "trades": 9
     },
     "rsi_divergence_bull": {
       "wins": 4,
@@ -610,9 +638,9 @@
       "trades": 14
     },
     "near_support": {
-      "wins": 6,
-      "losses": 11,
-      "trades": 17
+      "wins": 7,
+      "losses": 13,
+      "trades": 20
     },
     "stabilising": {
       "wins": 2,
@@ -631,18 +659,18 @@
     },
     "rsi_overbought": {
       "wins": 1,
-      "losses": 6,
-      "trades": 7
+      "losses": 7,
+      "trades": 8
     },
     "vol_confirm": {
       "wins": 0,
-      "losses": 2,
-      "trades": 2
+      "losses": 4,
+      "trades": 4
     },
     "macd_bull": {
-      "wins": 0,
-      "losses": 1,
-      "trades": 1
+      "wins": 1,
+      "losses": 2,
+      "trades": 3
     }
   }
 }
