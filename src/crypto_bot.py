@@ -37,21 +37,6 @@ from typing import List, Optional, Dict
 from pathlib import Path
 
 import alpaca_trade_api as tradeapi
-
-# Intelligence modules
-try:
-    from sentiment    import get_sentiment
-    from momentum     import get_momentum_score
-    from patterns     import detect_patterns
-    from correlation  import get_correlation_signals
-    from risk         import (load_risk_state, save_risk_state, update_risk_state,
-                              check_risk, get_position_size_multiplier, record_trade_result)
-    from grid         import (load_grid_state, save_grid_state, run_grid)
-    from dca          import (load_dca_state, save_dca_state, run_dca)
-    MODULES_LOADED = True
-except ImportError as e:
-    log.warning("Intelligence module not loaded: " + str(e))
-    MODULES_LOADED = False
 import pandas as pd
 import numpy as np
 
@@ -69,6 +54,22 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 for noisy in ("urllib3", "requests", "alpaca_trade_api"):
     logging.getLogger(noisy).setLevel(logging.CRITICAL)
+
+# Intelligence modules — loaded after logging so errors are captured
+MODULES_LOADED = False
+try:
+    from sentiment   import get_sentiment
+    from momentum    import get_momentum_score
+    from patterns    import detect_patterns
+    from correlation import get_correlation_signals
+    from risk        import (load_risk_state, save_risk_state, update_risk_state,
+                             check_risk, get_position_size_multiplier, record_trade_result)
+    from grid        import load_grid_state, save_grid_state, run_grid
+    MODULES_LOADED = True
+    log.info("✅ All intelligence modules loaded")
+except ImportError as e:
+    log.warning("⚠️  Intelligence module not loaded: " + str(e))
+    log.warning("⚠️  Running with core strategy only")
 
 ALPACA_API_KEY    = os.environ["ALPACA_API_KEY"]
 ALPACA_SECRET_KEY = os.environ["ALPACA_SECRET_KEY"]
@@ -1207,6 +1208,10 @@ def run_bot():
         "dca": {
             "active_positions": list(dca_state.get("positions", {}).keys()),
             "total_dca_positions": len(dca_state.get("positions", {})),
+        },
+        "grid": {
+            "total_profit": grid_state.get("total_profit", 0) if MODULES_LOADED else 0,
+            "active_grids": len(grid_state.get("grids", {})) if MODULES_LOADED else 0,
         },
         "performance": {
             "total_trades":   state.get("total_trades", 0),
