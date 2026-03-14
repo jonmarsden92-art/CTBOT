@@ -65,6 +65,8 @@ try:
     from risk        import (load_risk_state, save_risk_state, update_risk_state,
                              check_risk, get_position_size_multiplier, record_trade_result)
     from grid        import load_grid_state, save_grid_state, run_grid
+    from predictor   import (load_training_data, save_training_data, load_model,
+                             predict_probability, record_training_example, run_predictor)
     MODULES_LOADED = True
     log.info("✅ All intelligence modules loaded")
 except ImportError as e:
@@ -935,6 +937,14 @@ def run_bot():
     peak_prices = state.get("peak_prices", {})
     log.info("📊 Positions: " + str(n_pos) + "/" + str(MAX_POSITIONS))
 
+    # Run ML predictor — update outcomes and retrain if ready
+    sentiment_score = sentiment_data.get("score", 50) if sentiment_data else 50
+    if MODULES_LOADED:
+        try:
+            training_data, ml_model = run_predictor(training_data, all_bars, ml_model)
+        except Exception as e:
+            log.debug("Predictor error: " + str(e))
+
     all_analyses = {}
     btc_df = all_bars.get("BTC/USD")
 
@@ -990,6 +1000,27 @@ def run_bot():
             analysis["signal"] = "BUY"
         elif analysis["sell_score"] >= sig_min:
             analysis["signal"] = "SELL"
+
+        # Get ML prediction probability
+        if MODULES_LOADED:
+            try:
+                ml_prob = predict_probability(ml_model, analysis, sentiment_score)
+                analysis["ml_probability"] = ml_prob
+                # ML boosts or reduces buy score based on predicted probability
+                if ml_prob > 0.65:
+                    analysis["buy_score"]   *= 1.3
+                    analysis["final_score"]  = analysis["buy_score"]
+                    analysis["signals_fired"].append("ml_high_prob_" + str(round(ml_prob * 100)))
+                elif ml_prob < 0.35:
+                    analysis["buy_score"]   *= 0.6
+                    analysis["final_score"]  = analysis["buy_score"]
+                # Record this analysis for future training
+                training_data = record_training_example(training_data, pair, analysis, sentiment_score)
+            except Exception as e:
+                log.debug("ML prediction error " + pair + ": " + str(e))
+                analysis["ml_probability"] = 0.5
+        else:
+            analysis["ml_probability"] = 0.5
 
         analysis["symbol"] = pair
         all_analyses[pair] = analysis
@@ -1186,6 +1217,11 @@ def run_bot():
             "last_calibrated":    agent["last_calibrated"],
             "calibration_log":    agent["calibration_log"][-5:],
             "signal_performance": agent.get("signal_type_performance", {}),
+        },
+        "ml": {
+            "training_examples": len([e for e in training_data if e.get("outcome") in (0,1)]) if MODULES_LOADED else 0,
+            "model_ready":       ml_model is not None if MODULES_LOADED else False,
+            "pending_outcomes":  len([e for e in training_data if e.get("outcome") is None]) if MODULES_LOADED else 0,
         },
         "grid": {
             "total_profit": grid_state.get("total_profit", 0) if MODULES_LOADED else 0,
