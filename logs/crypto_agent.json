@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "total_learned": 7,
+  "total_learned": 8,
   "wins": 2,
-  "losses": 5,
+  "losses": 6,
   "win_rate_7d": 0.2,
   "win_rate_30d": 0.2,
   "avg_pnl": -0.43940810623543725,
@@ -71,11 +71,11 @@
     },
     "ETHUSD": {
       "wins": 0,
-      "losses": 1,
-      "total_pnl": -0.1772222965166256,
-      "avg_pnl": -0.1772222965166256,
+      "losses": 2,
+      "total_pnl": -0.2301569758458072,
+      "avg_pnl": -0.1150784879229036,
       "win_rate": 0.0,
-      "trades": 1
+      "trades": 2
     },
     "XRPUSD": {
       "wins": 1,
@@ -101,9 +101,9 @@
     },
     "14": {
       "wins": 1,
-      "losses": 2,
-      "total_pnl": -0.5962811965682571,
-      "trades": 3
+      "losses": 3,
+      "total_pnl": -0.6492158758974387,
+      "trades": 4
     }
   },
   "open_trades": {
@@ -149,21 +149,6 @@
       "vol_ratio": 0.0,
       "trend_slope": 0.0225,
       "signals_fired": [
-        "rsi_divergence_bull",
-        "near_support"
-      ]
-    },
-    "ETHUSD": {
-      "entry_price": 2073.31,
-      "entry_time": "2026-03-14T14:54:49.295563",
-      "entry_hour": 14,
-      "score": 1.39,
-      "regime": "recovery",
-      "rsi": 63.61,
-      "vol_ratio": 0.084,
-      "trend_slope": 0.0461,
-      "signals_fired": [
-        "rsi_overbought",
         "rsi_divergence_bull",
         "near_support"
       ]
@@ -306,6 +291,24 @@
         "near_support"
       ],
       "time": "2026-03-14T14:52:46.402700"
+    },
+    {
+      "symbol": "ETHUSD",
+      "entry": 2073.31,
+      "exit": 2072.2125,
+      "pnl_pct": -0.052934679329181576,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 1.39,
+      "rsi": 63.61,
+      "vol_ratio": 0.084,
+      "signals_fired": [
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T15:00:58.158518"
     }
   ],
   "calibration_log": [
@@ -331,7 +334,7 @@
     },
     "recovery": {
       "wins": 2,
-      "losses": 5
+      "losses": 6
     },
     "bull": {
       "wins": 0,
@@ -356,13 +359,13 @@
     },
     "rsi_divergence_bull": {
       "wins": 0,
-      "losses": 4,
-      "trades": 4
+      "losses": 5,
+      "trades": 5
     },
     "near_support": {
       "wins": 2,
-      "losses": 5,
-      "trades": 7
+      "losses": 6,
+      "trades": 8
     },
     "stabilising": {
       "wins": 1,
@@ -381,8 +384,8 @@
     },
     "rsi_overbought": {
       "wins": 0,
-      "losses": 2,
-      "trades": 2
+      "losses": 3,
+      "trades": 3
     },
     "vol_confirm": {
       "wins": 0,
