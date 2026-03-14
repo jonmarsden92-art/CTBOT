@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 30,
-  "wins": 9,
+  "total_learned": 31,
+  "wins": 10,
   "losses": 21,
   "win_rate_7d": 0.35,
   "win_rate_30d": 0.35,
@@ -111,6 +111,14 @@
       "avg_pnl": -0.1,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "BCHUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.3780934304649793,
+      "avg_pnl": 0.3780934304649793,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -149,6 +157,12 @@
       "losses": 2,
       "total_pnl": -0.1,
       "trades": 3
+    },
+    "21": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.3780934304649793,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -161,7 +175,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 9,
+      "wins": 10,
       "losses": 21
     },
     "bull": {
@@ -214,6 +228,21 @@
       "wins": 0,
       "losses": 4,
       "trades": 4
+    },
+    "trend_bull": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "near_resistance": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "squeeze_bull_breakout": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -235,23 +264,43 @@
         "pattern_three_white_soldiers"
       ]
     },
-    "BCHUSD": {
-      "entry_price": 463.9065,
-      "entry_time": "2026-03-14T21:03:36.616096",
-      "entry_hour": 21,
-      "score": 5.474,
+    "YFIUSD": {
+      "entry_price": 2609.35,
+      "entry_time": "2026-03-14T22:02:28.850343",
+      "entry_hour": 22,
+      "score": 5.3759999999999994,
       "regime": "recovery",
+      "rsi": NaN,
+      "vol_ratio": 1.0,
+      "trend_slope": 0.4663,
+      "signals_fired": [
+        "trend_bull",
+        "bb_upper",
+        "resistance_breakout",
+        "volatility_expanding_bull"
+      ]
+    }
+  },
+  "closed_trades": [
+    {
+      "symbol": "BCHUSD",
+      "entry": 463.9065,
+      "exit": 465.6605,
+      "pnl_pct": 0.3780934304649793,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.474,
       "rsi": 63.47,
       "vol_ratio": 0.0,
-      "trend_slope": 0.0386,
       "signals_fired": [
         "trend_bull",
         "near_resistance",
         "squeeze_bull_breakout"
-      ]
+      ],
+      "time": "2026-03-14T22:02:28.776381"
     }
-  },
-  "closed_trades": [],
+  ],
   "calibration_log": [
     {
       "time": "2026-03-14T20:00:00",
