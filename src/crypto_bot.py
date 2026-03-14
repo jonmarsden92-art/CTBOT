@@ -855,14 +855,14 @@ def run_bot():
     grid_state = load_grid_state()  if MODULES_LOADED else {"grids": {}}
 
   # --- ML predictor state ---
-training_data = []
-ml_model = None
-if MODULES_LOADED:
-    try:
-        training_data = load_training_data()
-        ml_model = load_model()
-    except Exception as e:
-        log.debug("ML load error: " + str(e))
+    training_data = []
+    ml_model = None
+    if MODULES_LOADED:
+        try:
+            training_data = load_training_data()
+            ml_model = load_model()
+        except Exception as e:
+            log.debug("ML load error: " + str(e))
       
     agent_log_summary(agent)
 
