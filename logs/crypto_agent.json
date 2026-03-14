@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "total_learned": 26,
+  "total_learned": 27,
   "wins": 8,
-  "losses": 18,
+  "losses": 19,
   "win_rate_7d": 0.14285714285714285,
   "win_rate_30d": 0.35,
   "avg_pnl": -0.019915437498909738,
@@ -50,11 +50,11 @@
     },
     "AAVEUSD": {
       "wins": 1,
-      "losses": 1,
-      "total_pnl": 0.22178304559519776,
-      "avg_pnl": 0.11089152279759888,
-      "win_rate": 0.5,
-      "trades": 2
+      "losses": 2,
+      "total_pnl": -0.048767524815598456,
+      "avg_pnl": -0.016255841605199484,
+      "win_rate": 0.3333333333333333,
+      "trades": 3
     },
     "SOLUSD": {
       "wins": 1,
@@ -154,29 +154,12 @@
     },
     "17": {
       "wins": 0,
-      "losses": 5,
-      "total_pnl": -0.29215038164919194,
-      "trades": 5
+      "losses": 6,
+      "total_pnl": -0.5627009520599882,
+      "trades": 6
     }
   },
-  "open_trades": {
-    "AAVEUSD": {
-      "entry_price": 110.885,
-      "entry_time": "2026-03-14T17:04:00.113910",
-      "entry_hour": 17,
-      "score": 4.04,
-      "regime": "recovery",
-      "rsi": 72.49,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.105,
-      "signals_fired": [
-        "ma_cross_bull",
-        "rsi_overbought",
-        "rsi_divergence_bull",
-        "near_support"
-      ]
-    }
-  },
+  "open_trades": {},
   "closed_trades": [
     {
       "symbol": "LINKUSD",
@@ -672,6 +655,25 @@
         "stabilising"
       ],
       "time": "2026-03-14T17:51:14.690710"
+    },
+    {
+      "symbol": "AAVEUSD",
+      "entry": 110.885,
+      "exit": 110.585,
+      "pnl_pct": -0.2705505704107962,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 4.04,
+      "rsi": 72.49,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T17:53:18.207667"
     }
   ],
   "calibration_log": [
@@ -742,7 +744,7 @@
     },
     "recovery": {
       "wins": 8,
-      "losses": 18
+      "losses": 19
     },
     "bull": {
       "wins": 0,
@@ -767,13 +769,13 @@
     },
     "rsi_divergence_bull": {
       "wins": 5,
-      "losses": 11,
-      "trades": 16
+      "losses": 12,
+      "trades": 17
     },
     "near_support": {
       "wins": 8,
-      "losses": 18,
-      "trades": 26
+      "losses": 19,
+      "trades": 27
     },
     "stabilising": {
       "wins": 2,
@@ -787,13 +789,13 @@
     },
     "ma_cross_bull": {
       "wins": 0,
-      "losses": 3,
-      "trades": 3
+      "losses": 4,
+      "trades": 4
     },
     "rsi_overbought": {
       "wins": 1,
-      "losses": 7,
-      "trades": 8
+      "losses": 8,
+      "trades": 9
     },
     "vol_confirm": {
       "wins": 0,
