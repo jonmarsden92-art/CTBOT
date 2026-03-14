@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "total_learned": 15,
-  "wins": 5,
+  "total_learned": 16,
+  "wins": 6,
   "losses": 10,
   "win_rate_7d": 0.42857142857142855,
   "win_rate_30d": 0.3333333333333333,
@@ -64,12 +64,12 @@
       "trades": 2
     },
     "LTCUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -0.2213421382382304,
-      "avg_pnl": -0.2213421382382304,
-      "win_rate": 0.0,
-      "trades": 1
+      "total_pnl": 0.144545895432649,
+      "avg_pnl": 0.0722729477163245,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "ETHUSD": {
       "wins": 0,
@@ -138,29 +138,13 @@
       "trades": 2
     },
     "16": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "total_pnl": 0.1818356724305881,
-      "trades": 2
+      "total_pnl": 0.5477237061014675,
+      "trades": 3
     }
   },
   "open_trades": {
-    "LTCUSD": {
-      "entry_price": 54.45655,
-      "entry_time": "2026-03-14T16:01:33.671635",
-      "entry_hour": 16,
-      "score": 3.34,
-      "regime": "recovery",
-      "rsi": 20.85,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.0683,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "rsi_divergence_bull",
-        "near_support"
-      ]
-    },
     "LINKUSD": {
       "entry_price": 8.998,
       "entry_time": "2026-03-14T16:05:42.051909",
@@ -479,6 +463,25 @@
         "stabilising"
       ],
       "time": "2026-03-14T16:20:10.229429"
+    },
+    {
+      "symbol": "LTCUSD",
+      "entry": 54.45655,
+      "exit": 54.6558,
+      "pnl_pct": 0.3658880336708794,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 3.34,
+      "rsi": 20.85,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "rsi_divergence_bull",
+        "near_support"
+      ],
+      "time": "2026-03-14T16:34:40.812121"
     }
   ],
   "calibration_log": [
@@ -526,7 +529,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 5,
+      "wins": 6,
       "losses": 10
     },
     "bull": {
@@ -536,9 +539,9 @@
   },
   "signal_type_performance": {
     "trend_bear": {
-      "wins": 4,
+      "wins": 5,
       "losses": 5,
-      "trades": 9
+      "trades": 10
     },
     "ma_cross_bear": {
       "wins": 0,
@@ -546,19 +549,19 @@
       "trades": 1
     },
     "rsi_oversold": {
-      "wins": 4,
+      "wins": 5,
       "losses": 3,
-      "trades": 7
+      "trades": 8
     },
     "rsi_divergence_bull": {
-      "wins": 3,
+      "wins": 4,
       "losses": 9,
-      "trades": 12
+      "trades": 13
     },
     "near_support": {
-      "wins": 5,
+      "wins": 6,
       "losses": 10,
-      "trades": 15
+      "trades": 16
     },
     "stabilising": {
       "wins": 2,
