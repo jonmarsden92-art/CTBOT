@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "total_learned": 14,
-  "wins": 4,
+  "total_learned": 15,
+  "wins": 5,
   "losses": 10,
-  "win_rate_7d": 0.2857142857142857,
-  "win_rate_30d": 0.3,
-  "avg_pnl": -0.24268754397853068,
-  "sharpe": -0.649,
+  "win_rate_7d": 0.42857142857142855,
+  "win_rate_30d": 0.3333333333333333,
+  "avg_pnl": -0.17728497499008758,
+  "sharpe": -0.531,
   "thresholds": {
     "rsi_oversold": 45,
     "rsi_overbought": 55,
-    "signal_min": 2,
+    "signal_min": 3,
     "take_profit": 0.015,
     "stop_loss": 0.03,
     "trailing_stop": 0.02
@@ -27,7 +27,8 @@
     "bb_bounce": 1.0,
     "momentum": 1.0,
     "near_support": 0.85,
-    "rsi_divergence_bull": 0.85
+    "rsi_divergence_bull": 0.7,
+    "rsi_overbought": 0.85
   },
   "symbol_memory": {
     "LINKUSD": {
@@ -79,12 +80,12 @@
       "trades": 2
     },
     "XRPUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.10875123335421216,
-      "avg_pnl": 0.10875123335421216,
+      "total_pnl": 0.27953373427297756,
+      "avg_pnl": 0.13976686713648878,
       "win_rate": 1.0,
-      "trades": 1
+      "trades": 2
     },
     "AVAXUSD": {
       "wins": 0,
@@ -137,10 +138,10 @@
       "trades": 2
     },
     "16": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.011053171511822677,
-      "trades": 1
+      "total_pnl": 0.1818356724305881,
+      "trades": 2
     }
   },
   "open_trades": {
@@ -174,22 +175,20 @@
         "near_support"
       ]
     },
-    "XRPUSD": {
-      "entry_price": 1.38773,
-      "entry_time": "2026-03-14T16:07:46.419982",
+    "DOTUSD": {
+      "entry_price": 1.43285,
+      "entry_time": "2026-03-14T16:20:10.305804",
       "entry_hour": 16,
-      "score": 4.86,
+      "score": 2.57,
       "regime": "recovery",
-      "rsi": 30.07,
-      "vol_ratio": 0.099,
-      "trend_slope": -0.057,
+      "rsi": 34.06,
+      "vol_ratio": 2.456,
+      "trend_slope": -0.0407,
       "signals_fired": [
         "trend_bear",
         "rsi_oversold",
-        "rsi_divergence_bull",
-        "bb_lower",
         "near_support",
-        "stabilising"
+        "vol_confirm"
       ]
     }
   },
@@ -459,6 +458,27 @@
         "near_support"
       ],
       "time": "2026-03-14T16:05:41.977183"
+    },
+    {
+      "symbol": "XRPUSD",
+      "entry": 1.38773,
+      "exit": 1.3901,
+      "pnl_pct": 0.17078250091876543,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 4.86,
+      "rsi": 30.07,
+      "vol_ratio": 0.099,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "rsi_divergence_bull",
+        "bb_lower",
+        "near_support",
+        "stabilising"
+      ],
+      "time": "2026-03-14T16:20:10.229429"
     }
   ],
   "calibration_log": [
@@ -481,9 +501,21 @@
       ],
       "wr20": 0.3,
       "avg_pnl": -0.243
+    },
+    {
+      "time": "2026-03-14T16:20:10.229604",
+      "changes": [
+        "TP->0.015 (bank faster)",
+        "SigMin->3",
+        "RSI OB->55",
+        "rsi_divergence_bull->0.7 (losing)",
+        "rsi_overbought->0.85 (losing)"
+      ],
+      "wr20": 0.333,
+      "avg_pnl": -0.177
     }
   ],
-  "last_calibrated": "2026-03-14T16:01:33.596412",
+  "last_calibrated": "2026-03-14T16:20:10.229599",
   "regime_performance": {
     "crash": {
       "wins": 0,
@@ -494,7 +526,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 4,
+      "wins": 5,
       "losses": 10
     },
     "bull": {
@@ -504,9 +536,9 @@
   },
   "signal_type_performance": {
     "trend_bear": {
-      "wins": 3,
+      "wins": 4,
       "losses": 5,
-      "trades": 8
+      "trades": 9
     },
     "ma_cross_bear": {
       "wins": 0,
@@ -514,29 +546,29 @@
       "trades": 1
     },
     "rsi_oversold": {
-      "wins": 3,
+      "wins": 4,
       "losses": 3,
-      "trades": 6
+      "trades": 7
     },
     "rsi_divergence_bull": {
-      "wins": 2,
+      "wins": 3,
       "losses": 9,
-      "trades": 11
+      "trades": 12
     },
     "near_support": {
-      "wins": 4,
+      "wins": 5,
       "losses": 10,
-      "trades": 14
+      "trades": 15
     },
     "stabilising": {
-      "wins": 1,
+      "wins": 2,
       "losses": 2,
-      "trades": 3
+      "trades": 4
     },
     "bb_lower": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "trades": 2
+      "trades": 3
     },
     "ma_cross_bull": {
       "wins": 0,
