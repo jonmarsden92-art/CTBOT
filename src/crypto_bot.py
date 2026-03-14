@@ -73,7 +73,7 @@ DEFAULT_TP          = 0.025
 DEFAULT_SL          = 0.03
 DEFAULT_TRAIL       = 0.015
 TRAIL_ACTIVATE      = 0.008
-MIN_SIGNAL_SCORE    = 3
+MIN_SIGNAL_SCORE    = 5  # raised — only trade strong setups
 TREND_LOOKBACK_H    = 6
 
 STATE_FILE  = Path("logs/crypto_state.json")
@@ -597,15 +597,13 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
 
         # 4. BOLLINGER BANDS
         bw = wts.get("bb_bounce", 1.0)
-        if bb_pct_v < 0.15:
-            buy_score += 2 * bw
+        if bb_pct_v < 0.10:   # tighter — only deep lower band
+            buy_score += 4 * bw   # boosted — 4W/0L historically
             signals_fired.append("bb_lower")
-        elif bb_pct_v > 0.85:
-            sell_score += 2 * bw
+        elif bb_pct_v > 0.90:
+            sell_score += 3 * bw
             signals_fired.append("bb_upper")
-        if near_sup:
-            buy_score += 1.5 * bw
-            signals_fired.append("near_support")
+        # near_support removed — data shows 10W/20L, not reliable
 
         # 5. VOLUME
         vw = wts.get("volume_confirm", 1.0)
@@ -625,14 +623,16 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
             signals_fired.append("momentum_down")
 
         # FALLING KNIFE PREVENTION
-        if trend_4h < -0.04 and not stabilising:
-            buy_score *= 0.25
+        if trend_4h < -0.03 and not stabilising:
+            buy_score *= 0.15  # much harder penalty
             signals_fired.append("falling_knife")
         if stabilising and rsi_v < 40:
             buy_score *= 1.3
             signals_fired.append("stabilising")
-        if slope_24h < -0.08:
-            buy_score *= 0.7
+        if slope_24h < -0.05:
+            buy_score *= 0.4   # don't buy coins down 5%+ today
+        if slope_24h < -0.10:
+            buy_score *= 0.1   # almost never buy coins down 10%+ today
 
         # REGIME ADJUSTMENT
         rm = agent_get_regime_mult(agent, regime)
@@ -774,12 +774,12 @@ def check_exits(api, positions: list, peak_prices: dict,
         elif plpc >= dyn_tp:
             reason = "take_profit"
             log.info("🎯 PROFIT " + symbol + " +" + str(round(plpc * 100, 1)) + "%")
-        elif peak > entry * (1 + TRAIL_ACTIVATE):
+        elif peak > entry * (1 + TRAIL_ACTIVATE * 2):  # needs 1.6% gain before trailing
             trail = peak * (1 - thr["trailing_stop"])
             if price <= trail:
                 reason = "trailing_stop"
                 log.info("📉 TRAIL " + symbol)
-        elif sell_score >= thr["signal_min"] * 1.5 and plpc > 0.005:
+        elif sell_score >= thr["signal_min"] * 2.5 and plpc > 0.008:
             reason = "signal_exit"
             log.info("📊 SIGNAL EXIT " + symbol + " +" + str(round(plpc * 100, 1)) + "%")
 
@@ -842,6 +842,7 @@ def run_bot():
     log.info("🌍 Regime: " + regime.upper())
     if regime == "crash":
         log.warning("🚨 CRASH mode — very limited buying")
+    market_bearish = False  # will be set after analysis
 
     all_pos    = api.list_positions()
     crypto_pos = [p for p in all_pos if "USD" in p.symbol and len(p.symbol) <= 8]
@@ -855,6 +856,14 @@ def run_bot():
         if analysis:
             analysis["symbol"] = pair
             all_analyses[pair] = analysis
+
+    # Check broad market health using fresh analysis data
+    bearish_count  = sum(1 for a in all_analyses.values() if a.get("trend_24h", 0) < -0.05)
+    market_bearish = bearish_count >= 8
+    if market_bearish:
+        log.warning("📉 BROAD MARKET DOWN (" + str(bearish_count) + "/14 coins -5%+ today) — pausing buys")
+    elif regime == "crash":
+        market_bearish = True
 
     exits, peak_prices = check_exits(api, crypto_pos, peak_prices, agent, state, all_analyses)
     if exits:
@@ -880,6 +889,8 @@ def run_bot():
             all_sells.append(analysis)
 
     all_buys.sort(key=lambda x: (x.get("confidence", 0), x.get("final_score", 0)), reverse=True)
+    if market_bearish:
+        all_buys = []  # no new buys when market broadly declining
     log.info("📊 Candidates | Buys=" + str(len(all_buys)) + " Sells=" + str(len(all_sells)))
 
     for a in all_buys[:3]:
