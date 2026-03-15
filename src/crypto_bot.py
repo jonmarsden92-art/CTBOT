@@ -368,6 +368,19 @@ def agent_calibrate(agent: dict):
 
 def agent_log_summary(agent: dict):
     n = agent["total_learned"]
+    # Recount wins/losses from closed trades to fix any counting bugs
+    closed = agent.get("closed_trades", [])
+    if closed:
+        actual_wins   = sum(1 for t in closed if t.get("won"))
+        actual_losses = sum(1 for t in closed if not t.get("won"))
+        if actual_wins + actual_losses > 0:
+            agent["wins"]   = actual_wins
+            agent["losses"] = actual_losses
+            r20 = closed[-20:]
+            if r20:
+                agent["win_rate_7d"]  = sum(1 for t in closed[-7:]  if t.get("won")) / min(len(closed), 7)
+                agent["win_rate_30d"] = sum(1 for t in r20 if t.get("won")) / len(r20)
+                agent["avg_pnl"]      = sum(t.get("pnl_pct", 0) for t in r20) / len(r20)
     log.info("🧠 Agent | n=" + str(n) +
              " WR7=" + str(round(agent["win_rate_7d"] * 100)) + "%" +
              " WR30=" + str(round(agent["win_rate_30d"] * 100)) + "%" +
@@ -851,19 +864,15 @@ def run_bot():
     api   = tradeapi.REST(ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL, api_version="v2")
     state      = load_state()
     agent      = load_agent()
-    risk       = load_risk_state()  if MODULES_LOADED else {}
-    grid_state = load_grid_state()  if MODULES_LOADED else {"grids": {}}
-
-  # --- ML predictor state ---
+    risk          = {}
+    grid_state    = {"grids": {}, "total_profit": 0.0, "trades": []}
     training_data = []
-    ml_model = None
+    ml_model      = None
     if MODULES_LOADED:
-        try:
-            training_data = load_training_data()
-            ml_model = load_model()
-        except Exception as e:
-            log.debug("ML load error: " + str(e))
-      
+        risk          = load_risk_state()
+        grid_state    = load_grid_state()
+        training_data = load_training_data()
+        ml_model      = load_model()
     agent_log_summary(agent)
 
     acc          = api.get_account()
@@ -932,7 +941,7 @@ def run_bot():
             total  = wins + losses
             recent_wr = wins / total if total > 0 else 0.5
             risk  = update_risk_state(risk, pv)
-            risk_check = check_risk(risk, pv, recent_wr, len(crypto_pos))
+            risk_check = check_risk(risk, pv, recent_wr, 0)
             if not risk_check["can_trade"]:
                 log.warning("🛑 Risk blocked: " + risk_check["reason"])
                 save_risk_state(risk)
@@ -981,12 +990,17 @@ def run_bot():
             try:
                 pat = detect_patterns(df)
                 if pat["score"] > 0:
-                    analysis["buy_score"]  += pat["score"] * 0.4
+                    analysis["buy_score"]  += pat["score"] * 0.5
                     analysis["final_score"] = analysis["buy_score"]
                     for p in pat.get("patterns", []):
                         analysis["signals_fired"].append("pattern_" + p)
                 elif pat["score"] < 0:
-                    analysis["sell_score"] += abs(pat["score"]) * 0.4
+                    # Bearish pattern — penalise buy score AND boost sell score
+                    analysis["buy_score"]  *= max(0.3, 1.0 + pat["score"] * 0.15)
+                    analysis["sell_score"] += abs(pat["score"]) * 0.5
+                    analysis["final_score"] = analysis["buy_score"]
+                    for p in pat.get("patterns", []):
+                        analysis["signals_fired"].append("pattern_" + p)
                 analysis["patterns"] = pat
             except Exception as e:
                 log.debug("Pattern error " + pair + ": " + str(e))
@@ -1005,12 +1019,20 @@ def run_bot():
                 analysis["final_score"] = analysis["buy_score"]
                 analysis["signals_fired"].append("btc_lagging_boost")
 
-        # Update signal based on new scores
+        # Recalculate signal after ALL module adjustments
         sig_min = agent["thresholds"]["signal_min"]
-        if analysis["buy_score"] >= sig_min:
+        bs = analysis["buy_score"]
+        ss = analysis["sell_score"]
+        if bs >= sig_min and bs > ss:
             analysis["signal"] = "BUY"
-        elif analysis["sell_score"] >= sig_min:
+        elif ss >= sig_min and ss > bs:
             analysis["signal"] = "SELL"
+        elif bs > ss:
+            analysis["signal"] = "BULLISH"
+        elif ss > bs:
+            analysis["signal"] = "BEARISH"
+        else:
+            analysis["signal"] = "HOLD"
 
         # Get ML prediction probability
         if MODULES_LOADED:
@@ -1095,8 +1117,7 @@ def run_bot():
             state["trades"].append({**order, "symbol": pos_sym})
             state["daily_trades"] += 1
             state["total_trades"]  = state.get("total_trades", 0) + 1
-            if plpc > 0: state["wins"]   = state.get("wins",   0) + 1
-            else:        state["losses"] = state.get("losses", 0) + 1
+            # wins/losses tracked in check_exits — don't double count here
             held.discard(pos_sym)
             n_pos -= 1
             peak_prices.pop(pos_sym, None)
@@ -1108,12 +1129,8 @@ def run_bot():
     # ── Grid Trading ──
     if MODULES_LOADED and not market_bearish:
         try:
-            grid_orders, grid_state = run_grid(api, all_bars, cash, held, grid_state)
-            if grid_orders:
-                state["trades"].extend(grid_orders)
-                state["daily_trades"] += len(grid_orders)
-                state["total_trades"]  = state.get("total_trades", 0) + len(grid_orders)
-                log.info("🔲 Grid executed " + str(len(grid_orders)) + " orders")
+            grid_state = run_grid(api, all_bars, cash, regime, grid_state, state)
+            save_grid_state(grid_state)
         except Exception as e:
             log.debug("Grid error: " + str(e))
 
@@ -1177,7 +1194,10 @@ def run_bot():
     if MODULES_LOADED:
         try:
             save_risk_state(risk)
-            save_grid_state(grid_state)
+        except Exception:
+            pass
+        try:
+            save_training_data(training_data)
         except Exception:
             pass
 
