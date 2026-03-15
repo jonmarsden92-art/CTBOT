@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 35,
-  "wins": 4,
+  "total_learned": 36,
+  "wins": 5,
   "losses": 1,
   "win_rate_7d": 0.8,
   "win_rate_30d": 0.8,
@@ -89,12 +89,12 @@
       "trades": 2
     },
     "AVAXUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": 0.0,
-      "avg_pnl": 0.0,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": 0.6380341814954775,
+      "avg_pnl": 0.2126780604984925,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "LINKUSD": {
       "wins": 0,
@@ -183,6 +183,12 @@
       "losses": 1,
       "total_pnl": -0.5115746477497312,
       "trades": 1
+    },
+    "20": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.6380341814954775,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -199,7 +205,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1
     }
   },
@@ -230,9 +236,9 @@
       "trades": 9
     },
     "rsi_overbought": {
-      "wins": 3,
+      "wins": 4,
       "losses": 9,
-      "trades": 12
+      "trades": 13
     },
     "vol_confirm": {
       "wins": 3,
@@ -245,9 +251,9 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 1,
+      "wins": 2,
       "losses": 4,
-      "trades": 5
+      "trades": 6
     },
     "macd_bear": {
       "wins": 1,
@@ -260,14 +266,14 @@
       "trades": 2
     },
     "squeeze_building": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
-      "trades": 3
+      "trades": 4
     },
     "trend_bull": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
-      "trades": 3
+      "trades": 4
     },
     "rsi_divergence_bear": {
       "wins": 2,
@@ -359,22 +365,6 @@
         "support_bounce",
         "squeeze_building",
         "pattern_morning_star"
-      ]
-    },
-    "AVAXUSD": {
-      "entry_price": 9.80355,
-      "entry_time": "2026-03-15T20:47:26.366602",
-      "entry_hour": 20,
-      "score": 6.24,
-      "regime": "bull",
-      "rsi": 68.64,
-      "vol_ratio": 0.534,
-      "trend_slope": 0.1478,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_overbought",
-        "squeeze_building"
       ]
     }
   },
@@ -488,6 +478,25 @@
         "squeeze_building"
       ],
       "time": "2026-03-15T20:47:26.331742"
+    },
+    {
+      "symbol": "AVAXUSD",
+      "entry": 9.80355,
+      "exit": 9.8661,
+      "pnl_pct": 0.6380341814954775,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 6.24,
+      "rsi": 68.64,
+      "vol_ratio": 0.534,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T22:32:41.659481"
     }
   ],
   "calibration_log": [
