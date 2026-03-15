@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 31,
-  "wins": 10,
+  "total_learned": 32,
+  "wins": 11,
   "losses": 34,
   "win_rate_7d": 0.5,
   "win_rate_30d": 0.5,
@@ -81,12 +81,12 @@
       "trades": 1
     },
     "SOLUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -0.05,
-      "avg_pnl": -0.05,
-      "win_rate": 0.0,
-      "trades": 1
+      "total_pnl": 0.14567746346423022,
+      "avg_pnl": 0.07283873173211511,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "AVAXUSD": {
       "wins": 1,
@@ -163,6 +163,12 @@
       "losses": 0,
       "total_pnl": 0.0858369098712438,
       "trades": 1
+    },
+    "9": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.19567746346423023,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -179,7 +185,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0
     }
   },
@@ -210,14 +216,14 @@
       "trades": 9
     },
     "rsi_overbought": {
-      "wins": 1,
+      "wins": 2,
       "losses": 8,
-      "trades": 9
+      "trades": 10
     },
     "vol_confirm": {
-      "wins": 0,
+      "wins": 1,
       "losses": 4,
-      "trades": 4
+      "trades": 5
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -240,6 +246,26 @@
       "trades": 1
     },
     "squeeze_building": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "trend_bull": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "rsi_divergence_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "volume_breakout_bull": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "near_resistance": {
       "wins": 1,
       "losses": 0,
       "trades": 1
@@ -278,24 +304,6 @@
         "vol_confirm",
         "volume_breakout_bull"
       ]
-    },
-    "SOLUSD": {
-      "entry_price": 88.58540832,
-      "entry_time": "2026-03-15T09:03:07.718318",
-      "entry_hour": 9,
-      "score": 6.064,
-      "regime": "bull",
-      "rsi": 74.22,
-      "vol_ratio": 4.045,
-      "trend_slope": 0.0482,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance"
-      ]
     }
   },
   "closed_trades": [
@@ -320,6 +328,27 @@
         "squeeze_building"
       ],
       "time": "2026-03-15T07:41:23.674660"
+    },
+    {
+      "symbol": "SOLUSD",
+      "entry": 88.58540832,
+      "exit": 88.75875,
+      "pnl_pct": 0.19567746346423023,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 6.064,
+      "rsi": 74.22,
+      "vol_ratio": 4.045,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "rsi_divergence_bear",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance"
+      ],
+      "time": "2026-03-15T09:09:27.966275"
     }
   ],
   "calibration_log": [
