@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 34,
-  "wins": 12,
+  "total_learned": 35,
+  "wins": 13,
   "losses": 35,
   "win_rate_7d": 0.5,
   "win_rate_30d": 0.5,
@@ -105,12 +105,12 @@
       "trades": 2
     },
     "UNIUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -0.1,
-      "avg_pnl": -0.1,
-      "win_rate": 0.0,
-      "trades": 1
+      "total_pnl": 0.4166590963408541,
+      "avg_pnl": 0.20832954817042704,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "SHIBUSD": {
       "wins": 1,
@@ -161,10 +161,10 @@
       "trades": 4
     },
     "19": {
-      "wins": 2,
+      "wins": 3,
       "losses": 2,
-      "total_pnl": 0.10531604948697401,
-      "trades": 4
+      "total_pnl": 0.6219751458278281,
+      "trades": 5
     },
     "7": {
       "wins": 1,
@@ -195,7 +195,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 10,
+      "wins": 11,
       "losses": 21
     },
     "bull": {
@@ -230,14 +230,14 @@
       "trades": 9
     },
     "rsi_overbought": {
-      "wins": 2,
+      "wins": 3,
       "losses": 9,
-      "trades": 11
+      "trades": 12
     },
     "vol_confirm": {
-      "wins": 2,
+      "wins": 3,
       "losses": 5,
-      "trades": 7
+      "trades": 8
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -245,9 +245,9 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 0,
+      "wins": 1,
       "losses": 4,
-      "trades": 4
+      "trades": 5
     },
     "macd_bear": {
       "wins": 1,
@@ -260,29 +260,29 @@
       "trades": 2
     },
     "squeeze_building": {
+      "wins": 3,
+      "losses": 0,
+      "trades": 3
+    },
+    "trend_bull": {
+      "wins": 2,
+      "losses": 1,
+      "trades": 3
+    },
+    "rsi_divergence_bear": {
       "wins": 2,
       "losses": 0,
       "trades": 2
     },
-    "trend_bull": {
-      "wins": 1,
-      "losses": 1,
-      "trades": 2
-    },
-    "rsi_divergence_bear": {
-      "wins": 1,
-      "losses": 0,
-      "trades": 1
-    },
     "volume_breakout_bull": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "trades": 2
+      "trades": 3
     },
     "near_resistance": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "trades": 2
+      "trades": 3
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -328,26 +328,6 @@
         "near_support_range"
       ]
     },
-    "UNIUSD": {
-      "entry_price": 3.995865,
-      "entry_time": "2026-03-15T19:22:36.654348",
-      "entry_hour": 19,
-      "score": 5.56,
-      "regime": "recovery",
-      "rsi": 66.29,
-      "vol_ratio": 5.966,
-      "trend_slope": 0.1237,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_overbought",
-        "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "squeeze_building"
-      ]
-    },
     "SUSHIUSD": {
       "entry_price": 0.2127865,
       "entry_time": "2026-03-15T19:58:48.476313",
@@ -379,6 +359,22 @@
         "support_bounce",
         "squeeze_building",
         "pattern_morning_star"
+      ]
+    },
+    "AVAXUSD": {
+      "entry_price": 9.80355,
+      "entry_time": "2026-03-15T20:47:26.366602",
+      "entry_hour": 20,
+      "score": 6.24,
+      "regime": "bull",
+      "rsi": 68.64,
+      "vol_ratio": 0.534,
+      "trend_slope": 0.1478,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "squeeze_building"
       ]
     }
   },
@@ -469,6 +465,29 @@
         "squeeze_building"
       ],
       "time": "2026-03-15T19:14:14.930942"
+    },
+    {
+      "symbol": "UNIUSD",
+      "entry": 3.995865,
+      "exit": 4.01651,
+      "pnl_pct": 0.516659096340854,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.56,
+      "rsi": 66.29,
+      "vol_ratio": 5.966,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bear",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T20:47:26.331742"
     }
   ],
   "calibration_log": [
