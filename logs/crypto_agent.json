@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 36,
-  "wins": 13,
+  "total_learned": 37,
+  "wins": 14,
   "losses": 23,
   "win_rate_7d": 0.8,
   "win_rate_30d": 0.8,
@@ -140,12 +140,12 @@
       "trades": 1
     },
     "YFIUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -1.9365934044877,
-      "avg_pnl": -1.9365934044877,
-      "win_rate": 0.0,
-      "trades": 1
+      "total_pnl": -1.7887642809863635,
+      "avg_pnl": -0.8943821404931818,
+      "win_rate": 0.5,
+      "trades": 2
     }
   },
   "hour_performance": {
@@ -202,6 +202,12 @@
       "losses": 1,
       "total_pnl": -1.9365934044877,
       "trades": 1
+    },
+    "4": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.14782912350133648,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -218,7 +224,7 @@
       "losses": 22
     },
     "bull": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1
     }
   },
@@ -264,14 +270,14 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 0,
+      "wins": 1,
       "losses": 5,
-      "trades": 5
+      "trades": 6
     },
     "trend_bull": {
-      "wins": 4,
+      "wins": 5,
       "losses": 2,
-      "trades": 6
+      "trades": 7
     },
     "near_resistance": {
       "wins": 1,
@@ -340,18 +346,23 @@
         "rsi_divergence_bear"
       ]
     },
-    "YFIUSD": {
-      "entry_price": 2577.3,
-      "entry_time": "2026-03-15T04:01:26.787853",
-      "entry_hour": 4,
-      "score": 4.88,
+    "LINKUSD": {
+      "entry_price": 9.23,
+      "entry_time": "2026-03-15T05:37:10.303924",
+      "entry_hour": 5,
+      "score": 6.5440000000000005,
       "regime": "bull",
-      "rsi": 49.67,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.0028,
+      "rsi": 82.05,
+      "vol_ratio": 5.122,
+      "trend_slope": 0.1586,
       "signals_fired": [
         "trend_bull",
-        "ma_cross_bull"
+        "rsi_overbought",
+        "bb_upper",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance",
+        "volatility_expanding_bull"
       ]
     }
   },
@@ -473,6 +484,23 @@
         "volatility_expanding_bull"
       ],
       "time": "2026-03-15T00:34:13.881363"
+    },
+    {
+      "symbol": "YFIUSD",
+      "entry": 2577.3,
+      "exit": 2581.11,
+      "pnl_pct": 0.14782912350133648,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 4.88,
+      "rsi": 49.67,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull"
+      ],
+      "time": "2026-03-15T05:37:10.221020"
     }
   ],
   "calibration_log": [
