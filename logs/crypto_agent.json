@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 32,
-  "wins": 11,
+  "total_learned": 34,
+  "wins": 13,
   "losses": 21,
   "win_rate_7d": 0.35,
   "win_rate_30d": 0.35,
@@ -97,12 +97,12 @@
       "trades": 2
     },
     "LINKUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "total_pnl": -0.2,
-      "avg_pnl": -0.1,
-      "win_rate": 0.0,
-      "trades": 2
+      "total_pnl": 0.1011176570152365,
+      "avg_pnl": 0.033705885671745504,
+      "win_rate": 0.3333333333333333,
+      "trades": 3
     },
     "UNIUSD": {
       "wins": 0,
@@ -121,12 +121,12 @@
       "trades": 1
     },
     "XTZUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.6780812791472366,
-      "avg_pnl": 0.6780812791472366,
+      "total_pnl": 0.7402744484846769,
+      "avg_pnl": 0.37013722424233847,
       "win_rate": 1.0,
-      "trades": 1
+      "trades": 2
     }
   },
   "hour_performance": {
@@ -171,6 +171,12 @@
       "losses": 0,
       "total_pnl": 1.0561747096122158,
       "trades": 2
+    },
+    "23": {
+      "wins": 2,
+      "losses": 0,
+      "total_pnl": 0.36331082635267686,
+      "trades": 2
     }
   },
   "regime_performance": {
@@ -183,7 +189,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 11,
+      "wins": 13,
       "losses": 21
     },
     "bull": {
@@ -218,14 +224,14 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 2,
+      "wins": 4,
       "losses": 8,
-      "trades": 10
+      "trades": 12
     },
     "vol_confirm": {
-      "wins": 0,
+      "wins": 1,
       "losses": 4,
-      "trades": 4
+      "trades": 5
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -238,9 +244,9 @@
       "trades": 4
     },
     "trend_bull": {
-      "wins": 2,
+      "wins": 4,
       "losses": 0,
-      "trades": 2
+      "trades": 4
     },
     "near_resistance": {
       "wins": 1,
@@ -258,11 +264,31 @@
       "trades": 1
     },
     "squeeze_building": {
+      "wins": 2,
+      "losses": 0,
+      "trades": 2
+    },
+    "pattern_three_white_soldiers": {
       "wins": 1,
       "losses": 0,
       "trades": 1
     },
-    "pattern_three_white_soldiers": {
+    "bb_upper": {
+      "wins": 2,
+      "losses": 0,
+      "trades": 2
+    },
+    "resistance_breakout": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "volume_breakout_bull": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "near_support_range": {
       "wins": 1,
       "losses": 0,
       "trades": 1
@@ -299,41 +325,6 @@
         "ma_cross_bull",
         "near_resistance",
         "squeeze_building"
-      ]
-    },
-    "XTZUSD": {
-      "entry_price": 0.377855,
-      "entry_time": "2026-03-14T23:51:10.946303",
-      "entry_hour": 23,
-      "score": 7.2799999999999985,
-      "regime": "recovery",
-      "rsi": 93.91,
-      "vol_ratio": 5.735,
-      "trend_slope": 0.1991,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "bb_upper",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_support_range",
-        "squeeze_building"
-      ]
-    },
-    "LINKUSD": {
-      "entry_price": 9.15755,
-      "entry_time": "2026-03-14T23:51:11.019066",
-      "entry_hour": 23,
-      "score": 5.039999999999999,
-      "regime": "recovery",
-      "rsi": 91.95,
-      "vol_ratio": 0.708,
-      "trend_slope": 0.2569,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "bb_upper",
-        "resistance_breakout"
       ]
     }
   },
@@ -376,6 +367,47 @@
         "pattern_three_white_soldiers"
       ],
       "time": "2026-03-14T23:49:02.874523"
+    },
+    {
+      "symbol": "LINKUSD",
+      "entry": 9.15755,
+      "exit": 9.185125,
+      "pnl_pct": 0.3011176570152365,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.039999999999999,
+      "rsi": 91.95,
+      "vol_ratio": 0.708,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "bb_upper",
+        "resistance_breakout"
+      ],
+      "time": "2026-03-15T00:01:43.992111"
+    },
+    {
+      "symbol": "XTZUSD",
+      "entry": 0.377855,
+      "exit": 0.37809,
+      "pnl_pct": 0.06219316933744035,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 7.2799999999999985,
+      "rsi": 93.91,
+      "vol_ratio": 5.735,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "bb_upper",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_support_range",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T00:01:44.065861"
     }
   ],
   "calibration_log": [
