@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 37,
+  "total_learned": 38,
   "wins": 14,
-  "losses": 23,
+  "losses": 24,
   "win_rate_7d": 0.8,
   "win_rate_30d": 0.8,
   "avg_pnl": 0.06431054151247202,
@@ -117,11 +117,11 @@
     },
     "BCHUSD": {
       "wins": 1,
-      "losses": 0,
-      "total_pnl": 0.3780934304649793,
-      "avg_pnl": 0.3780934304649793,
-      "win_rate": 1.0,
-      "trades": 1
+      "losses": 1,
+      "total_pnl": 0.17501187581040376,
+      "avg_pnl": 0.08750593790520188,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "XTZUSD": {
       "wins": 2,
@@ -208,6 +208,12 @@
       "losses": 0,
       "total_pnl": 0.14782912350133648,
       "trades": 1
+    },
+    "3": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -0.20308155465457553,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -225,7 +231,7 @@
     },
     "bull": {
       "wins": 1,
-      "losses": 1
+      "losses": 2
     }
   },
   "signal_type_performance": {
@@ -271,13 +277,13 @@
     },
     "ma_cross_bull": {
       "wins": 1,
-      "losses": 5,
-      "trades": 6
+      "losses": 6,
+      "trades": 7
     },
     "trend_bull": {
       "wins": 5,
-      "losses": 2,
-      "trades": 7
+      "losses": 3,
+      "trades": 8
     },
     "near_resistance": {
       "wins": 1,
@@ -328,24 +334,14 @@
       "wins": 0,
       "losses": 1,
       "trades": 1
+    },
+    "rsi_divergence_bear": {
+      "wins": 0,
+      "losses": 1,
+      "trades": 1
     }
   },
   "open_trades": {
-    "BCHUSD": {
-      "entry_price": 465.5375,
-      "entry_time": "2026-03-15T03:34:23.477952",
-      "entry_hour": 3,
-      "score": 4.88,
-      "regime": "bull",
-      "rsi": 49.24,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.0043,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_divergence_bear"
-      ]
-    },
     "LINKUSD": {
       "entry_price": 9.23,
       "entry_time": "2026-03-15T05:37:10.303924",
@@ -363,6 +359,20 @@
         "volume_breakout_bull",
         "near_resistance",
         "volatility_expanding_bull"
+      ]
+    },
+    "YFIUSD": {
+      "entry_price": 2574.19,
+      "entry_time": "2026-03-15T06:34:08.947551",
+      "entry_hour": 6,
+      "score": 4.88,
+      "regime": "bull",
+      "rsi": 59.59,
+      "vol_ratio": 0.0,
+      "trend_slope": 0.068,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull"
       ]
     }
   },
@@ -501,6 +511,24 @@
         "ma_cross_bull"
       ],
       "time": "2026-03-15T05:37:10.221020"
+    },
+    {
+      "symbol": "BCHUSD",
+      "entry": 465.5375,
+      "exit": 464.5920792075,
+      "pnl_pct": -0.20308155465457553,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 4.88,
+      "rsi": 49.24,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_divergence_bear"
+      ],
+      "time": "2026-03-15T06:34:08.931166"
     }
   ],
   "calibration_log": [
