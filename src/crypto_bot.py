@@ -276,7 +276,7 @@ def agent_record_close(agent: dict, symbol: str, exit_price: float, reason: str)
 
 def agent_calibrate(agent: dict):
     trades = agent["closed_trades"]
-    if len(trades) < 5:
+    if len(trades) < 10:  # need at least 10 before calibrating
         return
 
     r20     = trades[-20:]
@@ -368,19 +368,21 @@ def agent_calibrate(agent: dict):
 
 def agent_log_summary(agent: dict):
     n = agent["total_learned"]
-    # Recount wins/losses from closed trades to fix any counting bugs
+    # Only calculate win rate if we have enough closed trades for it to be meaningful
     closed = agent.get("closed_trades", [])
-    if closed:
-        actual_wins   = sum(1 for t in closed if t.get("won"))
-        actual_losses = sum(1 for t in closed if not t.get("won"))
-        if actual_wins + actual_losses > 0:
-            agent["wins"]   = actual_wins
-            agent["losses"] = actual_losses
-            r20 = closed[-20:]
-            if r20:
-                agent["win_rate_7d"]  = sum(1 for t in closed[-7:]  if t.get("won")) / min(len(closed), 7)
-                agent["win_rate_30d"] = sum(1 for t in r20 if t.get("won")) / len(r20)
-                agent["avg_pnl"]      = sum(t.get("pnl_pct", 0) for t in r20) / len(r20)
+    if len(closed) >= 5:
+        r7  = closed[-7:]
+        r20 = closed[-20:]
+        agent["win_rate_7d"]  = sum(1 for t in r7  if t.get("won")) / len(r7)
+        agent["win_rate_30d"] = sum(1 for t in r20 if t.get("won")) / len(r20)
+        agent["avg_pnl"]      = sum(t.get("pnl_pct", 0) for t in r20) / len(r20)
+        agent["wins"]         = sum(1 for t in closed if t.get("won"))
+        agent["losses"]       = sum(1 for t in closed if not t.get("won"))
+    elif len(closed) > 0:
+        # Too few trades — show neutral until we have enough data
+        agent["win_rate_7d"]  = 0.5
+        agent["win_rate_30d"] = 0.5
+        log.info("🧠 Agent: only " + str(len(closed)) + " closed trades — win rate not meaningful yet")
     log.info("🧠 Agent | n=" + str(n) +
              " WR7=" + str(round(agent["win_rate_7d"] * 100)) + "%" +
              " WR30=" + str(round(agent["win_rate_30d"] * 100)) + "%" +
