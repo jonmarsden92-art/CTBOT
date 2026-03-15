@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 33,
-  "wins": 11,
+  "total_learned": 34,
+  "wins": 12,
   "losses": 35,
   "win_rate_7d": 0.5,
   "win_rate_30d": 0.5,
@@ -119,6 +119,14 @@
       "avg_pnl": 0.0858369098712438,
       "win_rate": 1.0,
       "trades": 1
+    },
+    "DOGEUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.20531604948697402,
+      "avg_pnl": 0.20531604948697402,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -153,10 +161,10 @@
       "trades": 4
     },
     "19": {
-      "wins": 1,
+      "wins": 2,
       "losses": 2,
-      "total_pnl": -0.1,
-      "trades": 3
+      "total_pnl": 0.10531604948697401,
+      "trades": 4
     },
     "7": {
       "wins": 1,
@@ -187,7 +195,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 9,
+      "wins": 10,
       "losses": 21
     },
     "bull": {
@@ -197,24 +205,24 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 5,
+      "wins": 6,
       "losses": 0,
-      "trades": 5
+      "trades": 6
     },
     "stabilising": {
-      "wins": 5,
+      "wins": 6,
       "losses": 4,
-      "trades": 9
+      "trades": 10
     },
     "rsi_oversold": {
-      "wins": 9,
+      "wins": 10,
       "losses": 10,
-      "trades": 19
+      "trades": 20
     },
     "trend_bear": {
-      "wins": 8,
+      "wins": 9,
       "losses": 12,
-      "trades": 20
+      "trades": 21
     },
     "macd_bull": {
       "wins": 2,
@@ -227,9 +235,9 @@
       "trades": 11
     },
     "vol_confirm": {
-      "wins": 1,
+      "wins": 2,
       "losses": 5,
-      "trades": 6
+      "trades": 7
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -247,14 +255,14 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     },
     "squeeze_building": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     },
     "trend_bull": {
       "wins": 1,
@@ -275,6 +283,16 @@
       "wins": 1,
       "losses": 1,
       "trades": 2
+    },
+    "volume_breakout_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "support_bounce": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -308,27 +326,6 @@
         "ma_cross_bull",
         "rsi_overbought",
         "near_support_range"
-      ]
-    },
-    "DOGEUSD": {
-      "entry_price": 0.094732,
-      "entry_time": "2026-03-15T19:10:03.715028",
-      "entry_hour": 19,
-      "score": 6.480000000000001,
-      "regime": "recovery",
-      "rsi": 31.95,
-      "vol_ratio": 6.045,
-      "trend_slope": -0.1524,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "vol_confirm",
-        "momentum_down",
-        "stabilising",
-        "volume_breakout_bear",
-        "support_bounce",
-        "squeeze_building"
       ]
     }
   },
@@ -395,6 +392,30 @@
         "near_resistance"
       ],
       "time": "2026-03-15T18:49:10.797731"
+    },
+    {
+      "symbol": "DOGEUSD",
+      "entry": 0.094732,
+      "exit": 0.0949265,
+      "pnl_pct": 0.20531604948697402,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 6.480000000000001,
+      "rsi": 31.95,
+      "vol_ratio": 6.045,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "vol_confirm",
+        "momentum_down",
+        "stabilising",
+        "volume_breakout_bear",
+        "support_bounce",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T19:14:14.930942"
     }
   ],
   "calibration_log": [
