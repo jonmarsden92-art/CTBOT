@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 30,
-  "wins": 9,
+  "total_learned": 31,
+  "wins": 10,
   "losses": 34,
   "win_rate_7d": 0.209,
   "win_rate_30d": 0.209,
@@ -111,6 +111,14 @@
       "avg_pnl": -0.1,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "SHIBUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.0858369098712438,
+      "avg_pnl": 0.0858369098712438,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -149,6 +157,12 @@
       "losses": 2,
       "total_pnl": -0.1,
       "trades": 3
+    },
+    "7": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.0858369098712438,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -165,30 +179,30 @@
       "losses": 21
     },
     "bull": {
-      "wins": 0,
+      "wins": 1,
       "losses": 0
     }
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 4,
+      "wins": 5,
       "losses": 0,
-      "trades": 4
+      "trades": 5
     },
     "stabilising": {
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
-      "trades": 8
+      "trades": 9
     },
     "rsi_oversold": {
-      "wins": 8,
+      "wins": 9,
       "losses": 10,
-      "trades": 18
+      "trades": 19
     },
     "trend_bear": {
-      "wins": 7,
+      "wins": 8,
       "losses": 12,
-      "trades": 19
+      "trades": 20
     },
     "macd_bull": {
       "wins": 2,
@@ -214,18 +228,36 @@
       "wins": 0,
       "losses": 4,
       "trades": 4
+    },
+    "macd_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "momentum_down": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "squeeze_building": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
-  "open_trades": {
-    "SHIBUSD": {
-      "entry_price": 5.825e-06,
-      "entry_time": "2026-03-15T07:39:19.606901",
-      "entry_hour": 7,
-      "score": 11.088000000000001,
+  "open_trades": {},
+  "closed_trades": [
+    {
+      "symbol": "SHIBUSD",
+      "entry": 5.825e-06,
+      "exit": 5.83e-06,
+      "pnl_pct": 0.0858369098712438,
+      "won": true,
+      "reason": "signal_sell",
       "regime": "bull",
+      "score": 11.088000000000001,
       "rsi": 5.26,
       "vol_ratio": 0.935,
-      "trend_slope": -0.2397,
       "signals_fired": [
         "trend_bear",
         "rsi_oversold",
@@ -234,10 +266,10 @@
         "momentum_down",
         "stabilising",
         "squeeze_building"
-      ]
+      ],
+      "time": "2026-03-15T07:41:23.674660"
     }
-  },
-  "closed_trades": [],
+  ],
   "calibration_log": [
     {
       "time": "2026-03-14T20:00:00",
