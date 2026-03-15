@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 32,
+  "total_learned": 33,
   "wins": 11,
-  "losses": 34,
+  "losses": 35,
   "win_rate_7d": 0.5,
   "win_rate_30d": 0.5,
   "avg_pnl": -0.5,
@@ -42,11 +42,11 @@
     },
     "LTCUSD": {
       "wins": 1,
-      "losses": 2,
-      "total_pnl": -0.1,
-      "avg_pnl": -0.03,
-      "win_rate": 0.33,
-      "trades": 3
+      "losses": 3,
+      "total_pnl": -0.6115746477497311,
+      "avg_pnl": -0.15289366193743278,
+      "win_rate": 0.25,
+      "trades": 4
     },
     "XRPUSD": {
       "wins": 0,
@@ -169,6 +169,12 @@
       "losses": 0,
       "total_pnl": 0.19567746346423023,
       "trades": 1
+    },
+    "8": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -0.5115746477497312,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -186,7 +192,7 @@
     },
     "bull": {
       "wins": 2,
-      "losses": 0
+      "losses": 1
     }
   },
   "signal_type_performance": {
@@ -217,13 +223,13 @@
     },
     "rsi_overbought": {
       "wins": 2,
-      "losses": 8,
-      "trades": 10
+      "losses": 9,
+      "trades": 11
     },
     "vol_confirm": {
       "wins": 1,
-      "losses": 4,
-      "trades": 5
+      "losses": 5,
+      "trades": 6
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -252,8 +258,8 @@
     },
     "trend_bull": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     },
     "rsi_divergence_bear": {
       "wins": 1,
@@ -262,33 +268,16 @@
     },
     "volume_breakout_bull": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     },
     "near_resistance": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     }
   },
   "open_trades": {
-    "LTCUSD": {
-      "entry_price": 55.2803,
-      "entry_time": "2026-03-15T08:44:03.870022",
-      "entry_hour": 8,
-      "score": 6.064,
-      "regime": "bull",
-      "rsi": 69.97,
-      "vol_ratio": 4.279,
-      "trend_slope": 0.0454,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance"
-      ]
-    },
     "YFIUSD": {
       "entry_price": 2579.9335,
       "entry_time": "2026-03-15T08:44:03.953179",
@@ -365,6 +354,26 @@
         "near_resistance"
       ],
       "time": "2026-03-15T09:09:27.966275"
+    },
+    {
+      "symbol": "LTCUSD",
+      "entry": 55.2803,
+      "exit": 54.9975,
+      "pnl_pct": -0.5115746477497312,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 6.064,
+      "rsi": 69.97,
+      "vol_ratio": 4.279,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance"
+      ],
+      "time": "2026-03-15T18:49:10.797731"
     }
   ],
   "calibration_log": [
