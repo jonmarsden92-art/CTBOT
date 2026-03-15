@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 38,
-  "wins": 14,
+  "total_learned": 39,
+  "wins": 15,
   "losses": 24,
   "win_rate_7d": 0.8,
   "win_rate_30d": 0.8,
@@ -146,6 +146,14 @@
       "avg_pnl": -0.8943821404931818,
       "win_rate": 0.5,
       "trades": 2
+    },
+    "SHIBUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.1715265866209246,
+      "avg_pnl": 0.1715265866209246,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -214,6 +222,12 @@
       "losses": 1,
       "total_pnl": -0.20308155465457553,
       "trades": 1
+    },
+    "6": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.1715265866209246,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -230,15 +244,15 @@
       "losses": 22
     },
     "bull": {
-      "wins": 1,
+      "wins": 2,
       "losses": 2
     }
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 4,
+      "wins": 5,
       "losses": 0,
-      "trades": 4
+      "trades": 5
     },
     "stabilising": {
       "wins": 4,
@@ -251,9 +265,9 @@
       "trades": 18
     },
     "trend_bear": {
-      "wins": 7,
+      "wins": 8,
       "losses": 12,
-      "trades": 19
+      "trades": 20
     },
     "macd_bull": {
       "wins": 3,
@@ -301,9 +315,9 @@
       "trades": 1
     },
     "squeeze_building": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
-      "trades": 3
+      "trades": 4
     },
     "pattern_three_white_soldiers": {
       "wins": 1,
@@ -339,6 +353,16 @@
       "wins": 0,
       "losses": 1,
       "trades": 1
+    },
+    "ma_cross_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "macd_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -373,23 +397,6 @@
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull"
-      ]
-    },
-    "SHIBUSD": {
-      "entry_price": 5.83e-06,
-      "entry_time": "2026-03-15T06:40:22.264234",
-      "entry_hour": 6,
-      "score": 5.24,
-      "regime": "bull",
-      "rsi": 41.38,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.0712,
-      "signals_fired": [
-        "trend_bear",
-        "ma_cross_bear",
-        "macd_bear",
-        "bb_lower",
-        "squeeze_building"
       ]
     }
   },
@@ -546,6 +553,26 @@
         "rsi_divergence_bear"
       ],
       "time": "2026-03-15T06:34:08.931166"
+    },
+    {
+      "symbol": "SHIBUSD",
+      "entry": 5.83e-06,
+      "exit": 5.84e-06,
+      "pnl_pct": 0.1715265866209246,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 5.24,
+      "rsi": 41.38,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bear",
+        "ma_cross_bear",
+        "macd_bear",
+        "bb_lower",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T06:44:30.350893"
     }
   ],
   "calibration_log": [
