@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "total_learned": 34,
+  "total_learned": 35,
   "wins": 13,
-  "losses": 21,
-  "win_rate_7d": 0.35,
-  "win_rate_30d": 0.35,
-  "avg_pnl": -0.01,
+  "losses": 22,
+  "win_rate_7d": 0.8,
+  "win_rate_30d": 0.8,
+  "avg_pnl": 0.06431054151247202,
   "sharpe": -0.3,
   "thresholds": {
     "take_profit": 0.025,
@@ -21,7 +21,10 @@
     "volume_confirm": 0.6,
     "macd_cross": 0.7,
     "bb_bounce": 1.8,
-    "momentum": 1.0
+    "momentum": 1.0,
+    "vol_confirm": 0.85,
+    "ma_cross_bull": 0.85,
+    "trend_bull": 1.15
   },
   "symbol_memory": {
     "DOTUSD": {
@@ -127,6 +130,14 @@
       "avg_pnl": 0.37013722424233847,
       "win_rate": 1.0,
       "trades": 2
+    },
+    "TRUMPUSD": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -1.0979328284025327,
+      "avg_pnl": -1.0979328284025327,
+      "win_rate": 0.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -174,9 +185,9 @@
     },
     "23": {
       "wins": 2,
-      "losses": 0,
-      "total_pnl": 0.36331082635267686,
-      "trades": 2
+      "losses": 1,
+      "total_pnl": -0.7346220020498558,
+      "trades": 3
     }
   },
   "regime_performance": {
@@ -194,7 +205,7 @@
     },
     "bull": {
       "wins": 0,
-      "losses": 0
+      "losses": 1
     }
   },
   "signal_type_performance": {
@@ -240,18 +251,18 @@
     },
     "ma_cross_bull": {
       "wins": 0,
-      "losses": 4,
-      "trades": 4
+      "losses": 5,
+      "trades": 5
     },
     "trend_bull": {
       "wins": 4,
-      "losses": 0,
-      "trades": 4
+      "losses": 1,
+      "trades": 5
     },
     "near_resistance": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     },
     "squeeze_bull_breakout": {
       "wins": 1,
@@ -265,8 +276,8 @@
     },
     "squeeze_building": {
       "wins": 2,
-      "losses": 0,
-      "trades": 2
+      "losses": 1,
+      "trades": 3
     },
     "pattern_three_white_soldiers": {
       "wins": 1,
@@ -309,22 +320,6 @@
         "bb_upper",
         "resistance_breakout",
         "volatility_expanding_bull"
-      ]
-    },
-    "TRUMPUSD": {
-      "entry_price": 4.028935,
-      "entry_time": "2026-03-14T23:40:35.855826",
-      "entry_hour": 23,
-      "score": 8.204,
-      "regime": "bull",
-      "rsi": 51.18,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.0112,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "near_resistance",
-        "squeeze_building"
       ]
     }
   },
@@ -408,6 +403,25 @@
         "squeeze_building"
       ],
       "time": "2026-03-15T00:01:44.065861"
+    },
+    {
+      "symbol": "TRUMPUSD",
+      "entry": 4.028935,
+      "exit": 3.9847,
+      "pnl_pct": -1.0979328284025327,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 8.204,
+      "rsi": 51.18,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "near_resistance",
+        "squeeze_building"
+      ],
+      "time": "2026-03-15T00:12:17.190785"
     }
   ],
   "calibration_log": [
@@ -423,7 +437,17 @@
       ],
       "wr20": 0.35,
       "avg_pnl": -0.01
+    },
+    {
+      "time": "2026-03-15T00:12:17.190928",
+      "changes": [
+        "vol_confirm->0.85 (losing)",
+        "ma_cross_bull->0.85 (losing)",
+        "trend_bull->1.15 (winning)"
+      ],
+      "wr20": 0.8,
+      "avg_pnl": 0.064
     }
   ],
-  "last_calibrated": "2026-03-14T20:00:00"
+  "last_calibrated": "2026-03-15T00:12:17.190923"
 }
