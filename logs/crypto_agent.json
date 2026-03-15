@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 35,
+  "total_learned": 36,
   "wins": 13,
-  "losses": 22,
+  "losses": 23,
   "win_rate_7d": 0.8,
   "win_rate_30d": 0.8,
   "avg_pnl": 0.06431054151247202,
@@ -138,6 +138,14 @@
       "avg_pnl": -1.0979328284025327,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "YFIUSD": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -1.9365934044877,
+      "avg_pnl": -1.9365934044877,
+      "win_rate": 0.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -188,6 +196,12 @@
       "losses": 1,
       "total_pnl": -0.7346220020498558,
       "trades": 3
+    },
+    "22": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -1.9365934044877,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -201,7 +215,7 @@
     },
     "recovery": {
       "wins": 13,
-      "losses": 21
+      "losses": 22
     },
     "bull": {
       "wins": 0,
@@ -256,8 +270,8 @@
     },
     "trend_bull": {
       "wins": 4,
-      "losses": 1,
-      "trades": 5
+      "losses": 2,
+      "trades": 6
     },
     "near_resistance": {
       "wins": 1,
@@ -286,13 +300,13 @@
     },
     "bb_upper": {
       "wins": 2,
-      "losses": 0,
-      "trades": 2
+      "losses": 1,
+      "trades": 3
     },
     "resistance_breakout": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     },
     "volume_breakout_bull": {
       "wins": 1,
@@ -303,26 +317,14 @@
       "wins": 1,
       "losses": 0,
       "trades": 1
+    },
+    "volatility_expanding_bull": {
+      "wins": 0,
+      "losses": 1,
+      "trades": 1
     }
   },
-  "open_trades": {
-    "YFIUSD": {
-      "entry_price": 2609.35,
-      "entry_time": "2026-03-14T22:02:28.850343",
-      "entry_hour": 22,
-      "score": 5.3759999999999994,
-      "regime": "recovery",
-      "rsi": NaN,
-      "vol_ratio": 1.0,
-      "trend_slope": 0.4663,
-      "signals_fired": [
-        "trend_bull",
-        "bb_upper",
-        "resistance_breakout",
-        "volatility_expanding_bull"
-      ]
-    }
-  },
+  "open_trades": {},
   "closed_trades": [
     {
       "symbol": "BCHUSD",
@@ -422,6 +424,25 @@
         "squeeze_building"
       ],
       "time": "2026-03-15T00:12:17.190785"
+    },
+    {
+      "symbol": "YFIUSD",
+      "entry": 2609.35,
+      "exit": 2558.8175,
+      "pnl_pct": -1.9365934044877,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.3759999999999994,
+      "rsi": NaN,
+      "vol_ratio": 1.0,
+      "signals_fired": [
+        "trend_bull",
+        "bb_upper",
+        "resistance_breakout",
+        "volatility_expanding_bull"
+      ],
+      "time": "2026-03-15T00:34:13.881363"
     }
   ],
   "calibration_log": [
