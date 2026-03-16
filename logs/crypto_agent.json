@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 46,
-  "wins": 15,
+  "total_learned": 47,
+  "wins": 16,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9375,
@@ -149,6 +149,14 @@
       "avg_pnl": 0.15619595271221526,
       "win_rate": 1.0,
       "trades": 1
+    },
+    "XTZUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 3.3845086212901596,
+      "avg_pnl": 3.3845086212901596,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -195,10 +203,10 @@
       "trades": 1
     },
     "9": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.19567746346423023,
-      "trades": 1
+      "total_pnl": 3.58018608475439,
+      "trades": 2
     },
     "8": {
       "wins": 1,
@@ -251,7 +259,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 13,
+      "wins": 14,
       "losses": 1
     }
   },
@@ -282,9 +290,9 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 10,
+      "wins": 11,
       "losses": 9,
-      "trades": 19
+      "trades": 20
     },
     "vol_confirm": {
       "wins": 8,
@@ -297,9 +305,9 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 6,
+      "wins": 7,
       "losses": 4,
-      "trades": 10
+      "trades": 11
     },
     "macd_bear": {
       "wins": 1,
@@ -317,9 +325,9 @@
       "trades": 7
     },
     "trend_bull": {
-      "wins": 12,
+      "wins": 13,
       "losses": 1,
-      "trades": 13
+      "trades": 14
     },
     "rsi_divergence_bear": {
       "wins": 6,
@@ -375,6 +383,11 @@
       "wins": 1,
       "losses": 0,
       "trades": 1
+    },
+    "near_support_range": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -392,22 +405,6 @@
         "rsi_divergence_bear",
         "vol_confirm",
         "volume_breakout_bull"
-      ]
-    },
-    "XTZUSD": {
-      "entry_price": 0.3804245,
-      "entry_time": "2026-03-15T09:13:41.622848",
-      "entry_hour": 9,
-      "score": 5.2,
-      "regime": "bull",
-      "rsi": 91.34,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.1581,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_overbought",
-        "near_support_range"
       ]
     },
     "AVAXUSD": {
@@ -793,6 +790,25 @@
         "near_resistance"
       ],
       "time": "2026-03-16T18:11:58.478162"
+    },
+    {
+      "symbol": "XTZUSD",
+      "entry": 0.3804245,
+      "exit": 0.3933,
+      "pnl_pct": 3.3845086212901596,
+      "won": true,
+      "reason": "take_profit",
+      "regime": "bull",
+      "score": 5.2,
+      "rsi": 91.34,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "near_support_range"
+      ],
+      "time": "2026-03-16T18:49:53.887881"
     }
   ],
   "calibration_log": [
