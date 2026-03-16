@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 42,
-  "wins": 11,
+  "total_learned": 43,
+  "wins": 12,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9166666666666666,
@@ -131,6 +131,14 @@
       "avg_pnl": 0.20531604948697402,
       "win_rate": 1.0,
       "trades": 1
+    },
+    "SUSHIUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 1.8086203777025351,
+      "avg_pnl": 1.8086203777025351,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -165,10 +173,10 @@
       "trades": 4
     },
     "19": {
-      "wins": 3,
+      "wins": 4,
       "losses": 2,
-      "total_pnl": 0.6219751458278281,
-      "trades": 5
+      "total_pnl": 2.4305955235303633,
+      "trades": 6
     },
     "7": {
       "wins": 1,
@@ -233,7 +241,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 9,
+      "wins": 10,
       "losses": 1
     }
   },
@@ -279,9 +287,9 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
-      "trades": 8
+      "trades": 9
     },
     "macd_bear": {
       "wins": 1,
@@ -299,9 +307,9 @@
       "trades": 7
     },
     "trend_bull": {
-      "wins": 8,
+      "wins": 9,
       "losses": 1,
-      "trades": 9
+      "trades": 10
     },
     "rsi_divergence_bear": {
       "wins": 3,
@@ -339,9 +347,9 @@
       "trades": 4
     },
     "resistance_breakout": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
-      "trades": 3
+      "trades": 4
     },
     "squeeze_bull_breakout": {
       "wins": 1,
@@ -385,21 +393,6 @@
         "ma_cross_bull",
         "rsi_overbought",
         "near_support_range"
-      ]
-    },
-    "SUSHIUSD": {
-      "entry_price": 0.2127865,
-      "entry_time": "2026-03-15T19:58:48.476313",
-      "entry_hour": 19,
-      "score": 5.032,
-      "regime": "bull",
-      "rsi": 63.03,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.0897,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "resistance_breakout"
       ]
     },
     "AVAXUSD": {
@@ -694,6 +687,24 @@
         "squeeze_building"
       ],
       "time": "2026-03-16T14:03:42.181298"
+    },
+    {
+      "symbol": "SUSHIUSD",
+      "entry": 0.2127865,
+      "exit": 0.216635,
+      "pnl_pct": 1.8086203777025351,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 5.032,
+      "rsi": 63.03,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "resistance_breakout"
+      ],
+      "time": "2026-03-16T14:31:08.731785"
     }
   ],
   "calibration_log": [
