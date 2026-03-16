@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 41,
-  "wins": 10,
+  "total_learned": 42,
+  "wins": 11,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9090909090909091,
@@ -109,12 +109,12 @@
       "trades": 2
     },
     "UNIUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": 0.4166590963408541,
-      "avg_pnl": 0.20832954817042704,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": 1.3634486688528669,
+      "avg_pnl": 0.4544828896176223,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "SHIBUSD": {
       "wins": 2,
@@ -183,10 +183,10 @@
       "trades": 1
     },
     "8": {
-      "wins": 0,
+      "wins": 1,
       "losses": 1,
-      "total_pnl": -0.5115746477497312,
-      "trades": 1
+      "total_pnl": 0.43521492476228174,
+      "trades": 2
     },
     "20": {
       "wins": 2,
@@ -233,7 +233,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 8,
+      "wins": 9,
       "losses": 1
     }
   },
@@ -279,9 +279,9 @@
       "trades": 18
     },
     "ma_cross_bull": {
-      "wins": 3,
+      "wins": 4,
       "losses": 4,
-      "trades": 7
+      "trades": 8
     },
     "macd_bear": {
       "wins": 1,
@@ -294,19 +294,19 @@
       "trades": 2
     },
     "squeeze_building": {
-      "wins": 6,
+      "wins": 7,
       "losses": 0,
-      "trades": 6
+      "trades": 7
     },
     "trend_bull": {
-      "wins": 7,
+      "wins": 8,
       "losses": 1,
-      "trades": 8
+      "trades": 9
     },
     "rsi_divergence_bear": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "trades": 2
+      "trades": 3
     },
     "volume_breakout_bull": {
       "wins": 5,
@@ -339,9 +339,9 @@
       "trades": 4
     },
     "resistance_breakout": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "trades": 2
+      "trades": 3
     },
     "squeeze_bull_breakout": {
       "wins": 1,
@@ -402,23 +402,6 @@
         "resistance_breakout"
       ]
     },
-    "UNIUSD": {
-      "entry_price": 4.1007,
-      "entry_time": "2026-03-16T08:12:53.569445",
-      "entry_hour": 8,
-      "score": 15.323000000000002,
-      "regime": "bull",
-      "rsi": 49.51,
-      "vol_ratio": 0.02,
-      "trend_slope": -0.0073,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_divergence_bear",
-        "resistance_breakout",
-        "squeeze_building"
-      ]
-    },
     "AVAXUSD": {
       "entry_price": 10.25065,
       "entry_time": "2026-03-16T09:03:38.957585",
@@ -435,6 +418,24 @@
         "momentum_down",
         "stabilising",
         "pattern_doji"
+      ]
+    },
+    "XRPUSD": {
+      "entry_price": 1.4871,
+      "entry_time": "2026-03-16T14:03:42.222275",
+      "entry_hour": 14,
+      "score": 12.6896,
+      "regime": "bull",
+      "rsi": 76.91,
+      "vol_ratio": 0.002,
+      "trend_slope": 0.14,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bear",
+        "resistance_breakout",
+        "pattern_three_white_soldiers"
       ]
     }
   },
@@ -673,6 +674,26 @@
         "squeeze_building"
       ],
       "time": "2026-03-16T08:53:03.799622"
+    },
+    {
+      "symbol": "UNIUSD",
+      "entry": 4.1007,
+      "exit": 4.139525,
+      "pnl_pct": 0.9467895725120129,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 15.323000000000002,
+      "rsi": 49.51,
+      "vol_ratio": 0.02,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_divergence_bear",
+        "resistance_breakout",
+        "squeeze_building"
+      ],
+      "time": "2026-03-16T14:03:42.181298"
     }
   ],
   "calibration_log": [
