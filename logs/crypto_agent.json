@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "total_learned": 39,
-  "wins": 8,
+  "total_learned": 40,
+  "wins": 9,
   "losses": 1,
-  "win_rate_7d": 0.8571428571428571,
-  "win_rate_30d": 0.8888888888888888,
-  "avg_pnl": 0.5090421767994614,
-  "sharpe": -0.3,
+  "win_rate_7d": 1.0,
+  "win_rate_30d": 0.9,
+  "avg_pnl": 0.8228057062832098,
+  "sharpe": 0.754,
   "thresholds": {
     "take_profit": 0.025,
     "stop_loss": 0.03,
@@ -21,7 +21,11 @@
     "volume_confirm": 0.6,
     "macd_cross": 0.7,
     "bb_bounce": 1.8,
-    "momentum": 1.0
+    "momentum": 1.0,
+    "bb_lower": 1.15,
+    "squeeze_building": 1.15,
+    "trend_bull": 1.15,
+    "volume_breakout_bull": 1.15
   },
   "symbol_memory": {
     "DOTUSD": {
@@ -113,12 +117,12 @@
       "trades": 2
     },
     "SHIBUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.0858369098712438,
-      "avg_pnl": 0.0858369098712438,
+      "total_pnl": 3.7325143815081896,
+      "avg_pnl": 1.8662571907540948,
       "win_rate": 1.0,
-      "trades": 1
+      "trades": 2
     },
     "DOGEUSD": {
       "wins": 1,
@@ -201,6 +205,12 @@
       "losses": 0,
       "total_pnl": 1.0915916234195169,
       "trades": 1
+    },
+    "5": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 3.646677471636946,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -217,7 +227,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 6,
+      "wins": 7,
       "losses": 1
     }
   },
@@ -248,14 +258,14 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 7,
+      "wins": 8,
       "losses": 9,
-      "trades": 16
+      "trades": 17
     },
     "vol_confirm": {
-      "wins": 5,
+      "wins": 6,
       "losses": 5,
-      "trades": 10
+      "trades": 11
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -283,9 +293,9 @@
       "trades": 5
     },
     "trend_bull": {
-      "wins": 5,
+      "wins": 6,
       "losses": 1,
-      "trades": 6
+      "trades": 7
     },
     "rsi_divergence_bear": {
       "wins": 2,
@@ -293,14 +303,14 @@
       "trades": 2
     },
     "volume_breakout_bull": {
+      "wins": 4,
+      "losses": 1,
+      "trades": 5
+    },
+    "near_resistance": {
       "wins": 3,
       "losses": 1,
       "trades": 4
-    },
-    "near_resistance": {
-      "wins": 2,
-      "losses": 1,
-      "trades": 3
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -318,9 +328,9 @@
       "trades": 1
     },
     "bb_upper": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "trades": 2
+      "trades": 3
     },
     "resistance_breakout": {
       "wins": 2,
@@ -333,9 +343,9 @@
       "trades": 1
     },
     "volatility_expanding_bull": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     }
   },
   "open_trades": {
@@ -386,25 +396,6 @@
         "resistance_breakout"
       ]
     },
-    "SHIBUSD": {
-      "entry_price": 6.17e-06,
-      "entry_time": "2026-03-16T05:33:27.585164",
-      "entry_hour": 5,
-      "score": 16.9554,
-      "regime": "bull",
-      "rsi": 80.43,
-      "vol_ratio": 7.303,
-      "trend_slope": 0.387,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "bb_upper",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "volatility_expanding_bull"
-      ]
-    },
     "PEPEUSD": {
       "entry_price": 3.77e-06,
       "entry_time": "2026-03-16T06:00:52.594929",
@@ -419,6 +410,23 @@
         "bb_upper",
         "vol_confirm",
         "volume_breakout_bull",
+        "squeeze_building"
+      ]
+    },
+    "UNIUSD": {
+      "entry_price": 4.1007,
+      "entry_time": "2026-03-16T08:12:53.569445",
+      "entry_hour": 8,
+      "score": 15.323000000000002,
+      "regime": "bull",
+      "rsi": 49.51,
+      "vol_ratio": 0.02,
+      "trend_slope": -0.0073,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_divergence_bear",
+        "resistance_breakout",
         "squeeze_building"
       ]
     }
@@ -616,6 +624,28 @@
         "volatility_expanding_bull"
       ],
       "time": "2026-03-16T05:33:27.520836"
+    },
+    {
+      "symbol": "SHIBUSD",
+      "entry": 6.17e-06,
+      "exit": 6.395e-06,
+      "pnl_pct": 3.646677471636946,
+      "won": true,
+      "reason": "take_profit",
+      "regime": "bull",
+      "score": 16.9554,
+      "rsi": 80.43,
+      "vol_ratio": 7.303,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "bb_upper",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance",
+        "volatility_expanding_bull"
+      ],
+      "time": "2026-03-16T08:12:53.343473"
     }
   ],
   "calibration_log": [
@@ -631,7 +661,18 @@
       ],
       "wr20": 0.35,
       "avg_pnl": -0.01
+    },
+    {
+      "time": "2026-03-16T08:12:53.343659",
+      "changes": [
+        "bb_lower->1.15 (winning)",
+        "squeeze_building->1.15 (winning)",
+        "trend_bull->1.15 (winning)",
+        "volume_breakout_bull->1.15 (winning)"
+      ],
+      "wr20": 0.9,
+      "avg_pnl": 0.823
     }
   ],
-  "last_calibrated": "2026-03-14T20:00:00"
+  "last_calibrated": "2026-03-16T08:12:53.343654"
 }
