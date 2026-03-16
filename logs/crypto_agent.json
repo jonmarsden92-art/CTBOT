@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 43,
-  "wins": 12,
+  "total_learned": 44,
+  "wins": 13,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9230769230769231,
@@ -139,14 +139,22 @@
       "avg_pnl": 1.8086203777025351,
       "win_rate": 1.0,
       "trades": 1
+    },
+    "BCHUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.15619595271221526,
+      "avg_pnl": 0.15619595271221526,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
     "14": {
-      "wins": 1,
+      "wins": 2,
       "losses": 3,
-      "total_pnl": -0.3,
-      "trades": 4
+      "total_pnl": -0.14380404728778473,
+      "trades": 5
     },
     "15": {
       "wins": 1,
@@ -241,7 +249,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 10,
+      "wins": 11,
       "losses": 1
     }
   },
@@ -272,14 +280,14 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 8,
+      "wins": 9,
       "losses": 9,
-      "trades": 17
+      "trades": 18
     },
     "vol_confirm": {
-      "wins": 7,
+      "wins": 8,
       "losses": 5,
-      "trades": 12
+      "trades": 13
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -307,19 +315,19 @@
       "trades": 7
     },
     "trend_bull": {
-      "wins": 9,
+      "wins": 10,
       "losses": 1,
-      "trades": 10
+      "trades": 11
     },
     "rsi_divergence_bear": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
-      "trades": 3
+      "trades": 4
     },
     "volume_breakout_bull": {
-      "wins": 5,
+      "wins": 6,
       "losses": 1,
-      "trades": 6
+      "trades": 7
     },
     "near_resistance": {
       "wins": 3,
@@ -431,21 +439,19 @@
         "pattern_three_white_soldiers"
       ]
     },
-    "BCHUSD": {
-      "entry_price": 476.010990099,
-      "entry_time": "2026-03-16T14:33:15.039554",
-      "entry_hour": 14,
-      "score": 10.8262,
+    "ETHUSD": {
+      "entry_price": 2284.69,
+      "entry_time": "2026-03-16T15:08:10.341280",
+      "entry_hour": 15,
+      "score": 11.7348,
       "regime": "bull",
-      "rsi": 74.12,
-      "vol_ratio": 3.621,
-      "trend_slope": 0.1674,
+      "rsi": 61.11,
+      "vol_ratio": 0.839,
+      "trend_slope": 0.0505,
       "signals_fired": [
         "trend_bull",
-        "rsi_overbought",
         "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull"
+        "near_resistance"
       ]
     }
   },
@@ -722,6 +728,26 @@
         "resistance_breakout"
       ],
       "time": "2026-03-16T14:31:08.731785"
+    },
+    {
+      "symbol": "BCHUSD",
+      "entry": 476.010990099,
+      "exit": 476.7545,
+      "pnl_pct": 0.15619595271221526,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 10.8262,
+      "rsi": 74.12,
+      "vol_ratio": 3.621,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "rsi_divergence_bear",
+        "vol_confirm",
+        "volume_breakout_bull"
+      ],
+      "time": "2026-03-16T15:08:10.253878"
     }
   ],
   "calibration_log": [
