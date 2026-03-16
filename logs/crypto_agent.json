@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 47,
-  "wins": 16,
+  "total_learned": 48,
+  "wins": 17,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9411764705882353,
@@ -157,6 +157,14 @@
       "avg_pnl": 3.3845086212901596,
       "win_rate": 1.0,
       "trades": 1
+    },
+    "YFIUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 4.616223635221601,
+      "avg_pnl": 4.616223635221601,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -209,10 +217,10 @@
       "trades": 2
     },
     "8": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": 0.43521492476228174,
-      "trades": 2
+      "total_pnl": 5.051438559983883,
+      "trades": 3
     },
     "20": {
       "wins": 2,
@@ -259,7 +267,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 14,
+      "wins": 15,
       "losses": 1
     }
   },
@@ -295,9 +303,9 @@
       "trades": 20
     },
     "vol_confirm": {
-      "wins": 8,
+      "wins": 9,
       "losses": 5,
-      "trades": 13
+      "trades": 14
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -325,19 +333,19 @@
       "trades": 7
     },
     "trend_bull": {
-      "wins": 13,
+      "wins": 14,
       "losses": 1,
-      "trades": 14
+      "trades": 15
     },
     "rsi_divergence_bear": {
-      "wins": 6,
+      "wins": 7,
       "losses": 0,
-      "trades": 6
+      "trades": 7
     },
     "volume_breakout_bull": {
-      "wins": 6,
+      "wins": 7,
       "losses": 1,
-      "trades": 7
+      "trades": 8
     },
     "near_resistance": {
       "wins": 4,
@@ -391,22 +399,6 @@
     }
   },
   "open_trades": {
-    "YFIUSD": {
-      "entry_price": 2579.9335,
-      "entry_time": "2026-03-15T08:44:03.953179",
-      "entry_hour": 8,
-      "score": 5.744,
-      "regime": "bull",
-      "rsi": 55.97,
-      "vol_ratio": 5.754,
-      "trend_slope": 0.0171,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull"
-      ]
-    },
     "AVAXUSD": {
       "entry_price": 10.25065,
       "entry_time": "2026-03-16T09:03:38.957585",
@@ -823,6 +815,25 @@
         "near_support_range"
       ],
       "time": "2026-03-16T18:49:53.887881"
+    },
+    {
+      "symbol": "YFIUSD",
+      "entry": 2579.9335,
+      "exit": 2699.029,
+      "pnl_pct": 4.616223635221601,
+      "won": true,
+      "reason": "take_profit",
+      "regime": "bull",
+      "score": 5.744,
+      "rsi": 55.97,
+      "vol_ratio": 5.754,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_divergence_bear",
+        "vol_confirm",
+        "volume_breakout_bull"
+      ],
+      "time": "2026-03-16T19:40:09.865229"
     }
   ],
   "calibration_log": [
