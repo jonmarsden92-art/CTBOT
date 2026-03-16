@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 45,
-  "wins": 14,
+  "total_learned": 46,
+  "wins": 15,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9333333333333333,
@@ -63,12 +63,12 @@
       "trades": 3
     },
     "ETHUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "total_pnl": -0.15,
-      "avg_pnl": -0.07,
-      "win_rate": 0.0,
-      "trades": 2
+      "total_pnl": 1.8581717869820307,
+      "avg_pnl": 0.6193905956606769,
+      "win_rate": 0.3333333333333333,
+      "trades": 3
     },
     "AAVEUSD": {
       "wins": 2,
@@ -159,10 +159,10 @@
       "trades": 6
     },
     "15": {
-      "wins": 1,
+      "wins": 2,
       "losses": 2,
-      "total_pnl": -0.2,
-      "trades": 3
+      "total_pnl": 1.8081717869820306,
+      "trades": 4
     },
     "16": {
       "wins": 3,
@@ -251,7 +251,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 12,
+      "wins": 13,
       "losses": 1
     }
   },
@@ -317,14 +317,14 @@
       "trades": 7
     },
     "trend_bull": {
-      "wins": 11,
+      "wins": 12,
       "losses": 1,
-      "trades": 12
+      "trades": 13
     },
     "rsi_divergence_bear": {
-      "wins": 5,
+      "wins": 6,
       "losses": 0,
-      "trades": 5
+      "trades": 6
     },
     "volume_breakout_bull": {
       "wins": 6,
@@ -332,9 +332,9 @@
       "trades": 7
     },
     "near_resistance": {
-      "wins": 3,
+      "wins": 4,
       "losses": 1,
-      "trades": 4
+      "trades": 5
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -428,21 +428,6 @@
         "pattern_doji"
       ]
     },
-    "ETHUSD": {
-      "entry_price": 2284.69,
-      "entry_time": "2026-03-16T15:08:10.341280",
-      "entry_hour": 15,
-      "score": 11.7348,
-      "regime": "bull",
-      "rsi": 61.11,
-      "vol_ratio": 0.839,
-      "trend_slope": 0.0505,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_divergence_bear",
-        "near_resistance"
-      ]
-    },
     "LTCUSD": {
       "entry_price": 58.315,
       "entry_time": "2026-03-16T16:36:48.865040",
@@ -459,6 +444,20 @@
         "vol_confirm",
         "volume_breakout_bull",
         "resistance_breakout"
+      ]
+    },
+    "DOTUSD": {
+      "entry_price": 1.60655,
+      "entry_time": "2026-03-16T18:11:58.496170",
+      "entry_hour": 18,
+      "score": 9.1476,
+      "regime": "bull",
+      "rsi": 63.11,
+      "vol_ratio": 0.148,
+      "trend_slope": 0.1633,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull"
       ]
     }
   },
@@ -776,6 +775,24 @@
         "pattern_three_white_soldiers"
       ],
       "time": "2026-03-16T16:36:48.787420"
+    },
+    {
+      "symbol": "ETHUSD",
+      "entry": 2284.69,
+      "exit": 2330.5705,
+      "pnl_pct": 2.0081717869820306,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 11.7348,
+      "rsi": 61.11,
+      "vol_ratio": 0.839,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_divergence_bear",
+        "near_resistance"
+      ],
+      "time": "2026-03-16T18:11:58.478162"
     }
   ],
   "calibration_log": [
