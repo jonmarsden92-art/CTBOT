@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 38,
-  "wins": 7,
+  "total_learned": 39,
+  "wins": 8,
   "losses": 1,
   "win_rate_7d": 0.8571428571428571,
   "win_rate_30d": 0.875,
@@ -65,12 +65,12 @@
       "trades": 2
     },
     "AAVEUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": 0.0,
-      "avg_pnl": 0.0,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": 1.0915916234195169,
+      "avg_pnl": 0.3638638744731723,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "PEPEUSD": {
       "wins": 1,
@@ -195,6 +195,12 @@
       "losses": 0,
       "total_pnl": 1.6201939444523805,
       "trades": 1
+    },
+    "23": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 1.0915916234195169,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -211,7 +217,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 5,
+      "wins": 6,
       "losses": 1
     }
   },
@@ -242,14 +248,14 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 6,
+      "wins": 7,
       "losses": 9,
-      "trades": 15
+      "trades": 16
     },
     "vol_confirm": {
-      "wins": 4,
+      "wins": 5,
       "losses": 5,
-      "trades": 9
+      "trades": 10
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -277,9 +283,9 @@
       "trades": 5
     },
     "trend_bull": {
-      "wins": 4,
+      "wins": 5,
       "losses": 1,
-      "trades": 5
+      "trades": 6
     },
     "rsi_divergence_bear": {
       "wins": 2,
@@ -287,9 +293,9 @@
       "trades": 2
     },
     "volume_breakout_bull": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
-      "trades": 3
+      "trades": 4
     },
     "near_resistance": {
       "wins": 2,
@@ -312,16 +318,21 @@
       "trades": 1
     },
     "bb_upper": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     },
     "resistance_breakout": {
+      "wins": 2,
+      "losses": 0,
+      "trades": 2
+    },
+    "squeeze_bull_breakout": {
       "wins": 1,
       "losses": 0,
       "trades": 1
     },
-    "squeeze_bull_breakout": {
+    "volatility_expanding_bull": {
       "wins": 1,
       "losses": 0,
       "trades": 1
@@ -375,22 +386,22 @@
         "resistance_breakout"
       ]
     },
-    "AAVEUSD": {
-      "entry_price": 117.368811881,
-      "entry_time": "2026-03-15T23:14:26.950476",
-      "entry_hour": 23,
-      "score": 10.0408,
+    "SHIBUSD": {
+      "entry_price": 6.17e-06,
+      "entry_time": "2026-03-16T05:33:27.585164",
+      "entry_hour": 5,
+      "score": 16.9554,
       "regime": "bull",
-      "rsi": 94.42,
-      "vol_ratio": 5.292,
-      "trend_slope": 0.4794,
+      "rsi": 80.43,
+      "vol_ratio": 7.303,
+      "trend_slope": 0.387,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
         "bb_upper",
         "vol_confirm",
         "volume_breakout_bull",
-        "resistance_breakout",
+        "near_resistance",
         "volatility_expanding_bull"
       ]
     }
@@ -566,6 +577,28 @@
         "squeeze_bull_breakout"
       ],
       "time": "2026-03-15T23:14:26.898882"
+    },
+    {
+      "symbol": "AAVEUSD",
+      "entry": 117.368811881,
+      "exit": 118.65,
+      "pnl_pct": 1.0915916234195169,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 10.0408,
+      "rsi": 94.42,
+      "vol_ratio": 5.292,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "bb_upper",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "resistance_breakout",
+        "volatility_expanding_bull"
+      ],
+      "time": "2026-03-16T05:33:27.520836"
     }
   ],
   "calibration_log": [
