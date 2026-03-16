@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 40,
-  "wins": 9,
+  "total_learned": 41,
+  "wins": 10,
   "losses": 1,
   "win_rate_7d": 1.0,
   "win_rate_30d": 0.9,
@@ -77,12 +77,12 @@
       "trades": 3
     },
     "PEPEUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": 0.6396449704142068,
-      "avg_pnl": 0.3198224852071034,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": 5.546806774127743,
+      "avg_pnl": 1.8489355913759145,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "SOLUSD": {
       "wins": 2,
@@ -211,6 +211,12 @@
       "losses": 0,
       "total_pnl": 3.646677471636946,
       "trades": 1
+    },
+    "6": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 4.907161803713537,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -227,7 +233,7 @@
       "losses": 21
     },
     "bull": {
-      "wins": 7,
+      "wins": 8,
       "losses": 1
     }
   },
@@ -263,9 +269,9 @@
       "trades": 17
     },
     "vol_confirm": {
-      "wins": 6,
+      "wins": 7,
       "losses": 5,
-      "trades": 11
+      "trades": 12
     },
     "rsi_divergence_bull": {
       "wins": 6,
@@ -288,14 +294,14 @@
       "trades": 2
     },
     "squeeze_building": {
-      "wins": 5,
+      "wins": 6,
       "losses": 0,
-      "trades": 5
+      "trades": 6
     },
     "trend_bull": {
-      "wins": 6,
+      "wins": 7,
       "losses": 1,
-      "trades": 7
+      "trades": 8
     },
     "rsi_divergence_bear": {
       "wins": 2,
@@ -303,9 +309,9 @@
       "trades": 2
     },
     "volume_breakout_bull": {
-      "wins": 4,
+      "wins": 5,
       "losses": 1,
-      "trades": 5
+      "trades": 6
     },
     "near_resistance": {
       "wins": 3,
@@ -328,9 +334,9 @@
       "trades": 1
     },
     "bb_upper": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
-      "trades": 3
+      "trades": 4
     },
     "resistance_breakout": {
       "wins": 2,
@@ -394,23 +400,6 @@
         "trend_bull",
         "ma_cross_bull",
         "resistance_breakout"
-      ]
-    },
-    "PEPEUSD": {
-      "entry_price": 3.77e-06,
-      "entry_time": "2026-03-16T06:00:52.594929",
-      "entry_hour": 6,
-      "score": 15.4154,
-      "regime": "bull",
-      "rsi": NaN,
-      "vol_ratio": 4.626,
-      "trend_slope": 1.3372,
-      "signals_fired": [
-        "trend_bull",
-        "bb_upper",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "squeeze_building"
       ]
     },
     "UNIUSD": {
@@ -646,6 +635,26 @@
         "volatility_expanding_bull"
       ],
       "time": "2026-03-16T08:12:53.343473"
+    },
+    {
+      "symbol": "PEPEUSD",
+      "entry": 3.77e-06,
+      "exit": 3.955e-06,
+      "pnl_pct": 4.907161803713537,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 15.4154,
+      "rsi": NaN,
+      "vol_ratio": 4.626,
+      "signals_fired": [
+        "trend_bull",
+        "bb_upper",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "squeeze_building"
+      ],
+      "time": "2026-03-16T08:53:03.799622"
     }
   ],
   "calibration_log": [
