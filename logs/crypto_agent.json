@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 51,
+  "total_learned": 52,
   "wins": 19,
-  "losses": 2,
+  "losses": 3,
   "win_rate_7d": 0.8571428571428571,
   "win_rate_30d": 0.9,
   "avg_pnl": 1.3652600926758418,
@@ -57,11 +57,11 @@
     },
     "XRPUSD": {
       "wins": 1,
-      "losses": 2,
-      "total_pnl": 0.9313966780983032,
-      "avg_pnl": 0.31046555936610104,
-      "win_rate": 0.3333333333333333,
-      "trades": 3
+      "losses": 3,
+      "total_pnl": -2.440885667342661,
+      "avg_pnl": -0.6102214168356652,
+      "win_rate": 0.25,
+      "trades": 4
     },
     "ETHUSD": {
       "wins": 1,
@@ -252,6 +252,12 @@
       "losses": 0,
       "total_pnl": 4.907161803713537,
       "trades": 1
+    },
+    "2": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -3.372282345440964,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -269,7 +275,7 @@
     },
     "bull": {
       "wins": 17,
-      "losses": 2
+      "losses": 3
     }
   },
   "signal_type_performance": {
@@ -300,8 +306,8 @@
     },
     "rsi_overbought": {
       "wins": 12,
-      "losses": 10,
-      "trades": 22
+      "losses": 11,
+      "trades": 23
     },
     "vol_confirm": {
       "wins": 10,
@@ -335,8 +341,8 @@
     },
     "trend_bull": {
       "wins": 16,
-      "losses": 2,
-      "trades": 18
+      "losses": 3,
+      "trades": 19
     },
     "rsi_divergence_bear": {
       "wins": 8,
@@ -370,13 +376,13 @@
     },
     "bb_upper": {
       "wins": 4,
-      "losses": 0,
-      "trades": 4
+      "losses": 1,
+      "trades": 5
     },
     "resistance_breakout": {
       "wins": 6,
-      "losses": 0,
-      "trades": 6
+      "losses": 1,
+      "trades": 7
     },
     "squeeze_bull_breakout": {
       "wins": 1,
@@ -385,8 +391,8 @@
     },
     "volatility_expanding_bull": {
       "wins": 2,
-      "losses": 0,
-      "trades": 2
+      "losses": 1,
+      "trades": 3
     },
     "pattern_three_white_soldiers": {
       "wins": 1,
@@ -440,23 +446,6 @@
       "signals_fired": [
         "ma_cross_bull",
         "stabilising"
-      ]
-    },
-    "XRPUSD": {
-      "entry_price": 1.599955,
-      "entry_time": "2026-03-17T02:52:53.464872",
-      "entry_hour": 2,
-      "score": 10.904299999999997,
-      "regime": "bull",
-      "rsi": 91.0,
-      "vol_ratio": 0.767,
-      "trend_slope": 0.7848,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "bb_upper",
-        "resistance_breakout",
-        "volatility_expanding_bull"
       ]
     },
     "CRVUSD": {
@@ -921,6 +910,26 @@
         "resistance_breakout"
       ],
       "time": "2026-03-17T03:07:34.304329"
+    },
+    {
+      "symbol": "XRPUSD",
+      "entry": 1.599955,
+      "exit": 1.546,
+      "pnl_pct": -3.372282345440964,
+      "won": false,
+      "reason": "stop_loss",
+      "regime": "bull",
+      "score": 10.904299999999997,
+      "rsi": 91.0,
+      "vol_ratio": 0.767,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "bb_upper",
+        "resistance_breakout",
+        "volatility_expanding_bull"
+      ],
+      "time": "2026-03-17T03:36:46.394602"
     }
   ],
   "calibration_log": [
