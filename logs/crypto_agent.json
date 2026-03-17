@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "total_learned": 59,
-  "wins": 21,
+  "total_learned": 60,
+  "wins": 22,
   "losses": 8,
   "win_rate_7d": 0.2857142857142857,
   "win_rate_30d": 0.65,
-  "avg_pnl": 0.7156366291586846,
-  "sharpe": 0.476,
+  "avg_pnl": 0.5351530410494529,
+  "sharpe": 0.35,
   "thresholds": {
     "take_profit": 0.025,
     "stop_loss": 0.03,
@@ -22,14 +22,15 @@
     "macd_cross": 0.7,
     "bb_bounce": 1.8,
     "momentum": 1.0,
-    "bb_lower": 1.6,
+    "bb_lower": 1.75,
     "squeeze_building": 1.6,
-    "trend_bull": 1.6,
-    "volume_breakout_bull": 1.6,
-    "rsi_divergence_bear": 1.45,
-    "resistance_breakout": 1.45,
-    "near_resistance": 1.3,
-    "bb_upper": 1.15
+    "trend_bull": 1.75,
+    "volume_breakout_bull": 1.75,
+    "rsi_divergence_bear": 1.6,
+    "resistance_breakout": 1.6,
+    "near_resistance": 1.45,
+    "bb_upper": 1.3,
+    "momentum_down": 1.15
   },
   "symbol_memory": {
     "DOTUSD": {
@@ -145,12 +146,12 @@
       "trades": 1
     },
     "BCHUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.15619595271221526,
-      "avg_pnl": 0.15619595271221526,
+      "total_pnl": 0.19320166216453316,
+      "avg_pnl": 0.09660083108226658,
       "win_rate": 1.0,
-      "trades": 1
+      "trades": 2
     },
     "XTZUSD": {
       "wins": 1,
@@ -251,10 +252,10 @@
       "trades": 1
     },
     "5": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 3.646677471636946,
-      "trades": 1
+      "total_pnl": 3.683683181089264,
+      "trades": 2
     },
     "6": {
       "wins": 1,
@@ -297,7 +298,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 12,
+      "wins": 13,
       "losses": 22
     },
     "bull": {
@@ -307,19 +308,19 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 6,
+      "wins": 7,
       "losses": 1,
-      "trades": 7
+      "trades": 8
     },
     "stabilising": {
-      "wins": 7,
+      "wins": 8,
       "losses": 6,
-      "trades": 13
+      "trades": 14
     },
     "rsi_oversold": {
-      "wins": 11,
+      "wins": 12,
       "losses": 11,
-      "trades": 22
+      "trades": 23
     },
     "trend_bear": {
       "wins": 9,
@@ -357,9 +358,9 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 3,
+      "wins": 4,
       "losses": 1,
-      "trades": 4
+      "trades": 5
     },
     "squeeze_building": {
       "wins": 7,
@@ -478,22 +479,6 @@
         "squeeze_building"
       ]
     },
-    "BCHUSD": {
-      "entry_price": 472.9,
-      "entry_time": "2026-03-17T05:01:12.858100",
-      "entry_hour": 5,
-      "score": 7.2795,
-      "regime": "recovery",
-      "rsi": 0.0,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.221,
-      "signals_fired": [
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising"
-      ]
-    },
     "YFIUSD": {
       "entry_price": 2723.605,
       "entry_time": "2026-03-17T08:03:35.624316",
@@ -523,6 +508,23 @@
       "signals_fired": [
         "ma_cross_bull",
         "rsi_overbought"
+      ]
+    },
+    "GRTUSD": {
+      "entry_price": 0.02787615,
+      "entry_time": "2026-03-17T15:23:17.045206",
+      "entry_hour": 15,
+      "score": 5.0255,
+      "regime": "recovery",
+      "rsi": 39.43,
+      "vol_ratio": 13.857,
+      "trend_slope": -0.0909,
+      "signals_fired": [
+        "trend_bull",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance",
+        "squeeze_building"
       ]
     }
   },
@@ -1108,6 +1110,25 @@
         "pattern_morning_star"
       ],
       "time": "2026-03-17T14:08:46.464363"
+    },
+    {
+      "symbol": "BCHUSD",
+      "entry": 472.9,
+      "exit": 473.075,
+      "pnl_pct": 0.03700570945231791,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 7.2795,
+      "rsi": 0.0,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising"
+      ],
+      "time": "2026-03-17T15:23:17.032402"
     }
   ],
   "calibration_log": [
@@ -1176,7 +1197,22 @@
       ],
       "wr20": 0.8,
       "avg_pnl": 1.061
+    },
+    {
+      "time": "2026-03-17T15:23:17.032591",
+      "changes": [
+        "bb_lower->1.75 (winning)",
+        "momentum_down->1.15 (winning)",
+        "trend_bull->1.75 (winning)",
+        "rsi_divergence_bear->1.6 (winning)",
+        "volume_breakout_bull->1.75 (winning)",
+        "near_resistance->1.45 (winning)",
+        "bb_upper->1.3 (winning)",
+        "resistance_breakout->1.6 (winning)"
+      ],
+      "wr20": 0.65,
+      "avg_pnl": 0.535
     }
   ],
-  "last_calibrated": "2026-03-17T05:01:12.841133"
+  "last_calibrated": "2026-03-17T15:23:17.032586"
 }
