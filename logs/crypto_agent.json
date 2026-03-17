@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 61,
-  "wins": 22,
+  "total_learned": 62,
+  "wins": 23,
   "losses": 9,
   "win_rate_7d": 0.2857142857142857,
   "win_rate_30d": 0.6,
@@ -106,12 +106,12 @@
       "trades": 4
     },
     "LINKUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 2,
-      "total_pnl": -0.2,
-      "avg_pnl": -0.1,
-      "win_rate": 0.0,
-      "trades": 2
+      "total_pnl": 0.026217509427849145,
+      "avg_pnl": 0.008739169809283048,
+      "win_rate": 0.3333333333333333,
+      "trades": 3
     },
     "UNIUSD": {
       "wins": 2,
@@ -188,10 +188,10 @@
   },
   "hour_performance": {
     "14": {
-      "wins": 3,
+      "wins": 4,
       "losses": 3,
-      "total_pnl": 0.9875926308105184,
-      "trades": 6
+      "total_pnl": 1.2138101402383676,
+      "trades": 7
     },
     "15": {
       "wins": 2,
@@ -310,7 +310,7 @@
       "losses": 23
     },
     "bull": {
-      "wins": 18,
+      "wins": 19,
       "losses": 7
     }
   },
@@ -341,9 +341,9 @@
       "trades": 10
     },
     "rsi_overbought": {
-      "wins": 12,
+      "wins": 13,
       "losses": 11,
-      "trades": 23
+      "trades": 24
     },
     "vol_confirm": {
       "wins": 10,
@@ -356,9 +356,9 @@
       "trades": 19
     },
     "ma_cross_bull": {
-      "wins": 9,
+      "wins": 10,
       "losses": 7,
-      "trades": 16
+      "trades": 17
     },
     "macd_bear": {
       "wins": 1,
@@ -502,20 +502,6 @@
         "rsi_overbought",
         "rsi_divergence_bear",
         "near_resistance"
-      ]
-    },
-    "LINKUSD": {
-      "entry_price": 9.8644,
-      "entry_time": "2026-03-17T14:47:48.827615",
-      "entry_hour": 14,
-      "score": 5.427999999999999,
-      "regime": "bull",
-      "rsi": 73.89,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.1657,
-      "signals_fired": [
-        "ma_cross_bull",
-        "rsi_overbought"
       ]
     },
     "AVAXUSD": {
@@ -1157,6 +1143,23 @@
         "squeeze_building"
       ],
       "time": "2026-03-17T16:37:01.354776"
+    },
+    {
+      "symbol": "LINKUSD",
+      "entry": 9.8644,
+      "exit": 9.886715,
+      "pnl_pct": 0.22621750942784916,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 5.427999999999999,
+      "rsi": 73.89,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_overbought"
+      ],
+      "time": "2026-03-17T17:55:35.652438"
     }
   ],
   "calibration_log": [
