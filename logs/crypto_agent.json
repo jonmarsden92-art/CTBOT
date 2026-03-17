@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 55,
+  "total_learned": 56,
   "wins": 20,
-  "losses": 5,
+  "losses": 6,
   "win_rate_7d": 0.42857142857142855,
   "win_rate_30d": 0.8,
   "avg_pnl": 1.0608741010724176,
@@ -114,11 +114,11 @@
     },
     "UNIUSD": {
       "wins": 2,
-      "losses": 1,
-      "total_pnl": 1.3634486688528669,
-      "avg_pnl": 0.4544828896176223,
-      "win_rate": 0.6666666666666666,
-      "trades": 3
+      "losses": 2,
+      "total_pnl": 0.9915171042607378,
+      "avg_pnl": 0.24787927606518445,
+      "win_rate": 0.5,
+      "trades": 4
     },
     "SHIBUSD": {
       "wins": 2,
@@ -273,6 +273,12 @@
       "losses": 1,
       "total_pnl": -1.7592083562396967,
       "trades": 1
+    },
+    "4": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -0.3719315645921291,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -286,7 +292,7 @@
     },
     "recovery": {
       "wins": 11,
-      "losses": 21
+      "losses": 22
     },
     "bull": {
       "wins": 18,
@@ -296,18 +302,18 @@
   "signal_type_performance": {
     "bb_lower": {
       "wins": 6,
-      "losses": 0,
-      "trades": 6
+      "losses": 1,
+      "trades": 7
     },
     "stabilising": {
       "wins": 7,
-      "losses": 5,
-      "trades": 12
+      "losses": 6,
+      "trades": 13
     },
     "rsi_oversold": {
       "wins": 11,
-      "losses": 10,
-      "trades": 21
+      "losses": 11,
+      "trades": 22
     },
     "trend_bear": {
       "wins": 9,
@@ -346,13 +352,13 @@
     },
     "momentum_down": {
       "wins": 3,
-      "losses": 0,
-      "trades": 3
+      "losses": 1,
+      "trades": 4
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 2,
-      "trades": 9
+      "losses": 3,
+      "trades": 10
     },
     "trend_bull": {
       "wins": 17,
@@ -381,8 +387,8 @@
     },
     "support_bounce": {
       "wins": 2,
-      "losses": 0,
-      "trades": 2
+      "losses": 1,
+      "trades": 3
     },
     "pattern_morning_star": {
       "wins": 1,
@@ -460,24 +466,6 @@
         "trend_bull",
         "rsi_divergence_bear",
         "volatility_expanding_bull"
-      ]
-    },
-    "UNIUSD": {
-      "entry_price": 4.033,
-      "entry_time": "2026-03-17T04:50:49.672643",
-      "entry_hour": 4,
-      "score": 10.189,
-      "regime": "recovery",
-      "rsi": 5.6,
-      "vol_ratio": 1.029,
-      "trend_slope": -0.4953,
-      "signals_fired": [
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building"
       ]
     },
     "PEPEUSD": {
@@ -1022,6 +1010,27 @@
         "squeeze_building"
       ],
       "time": "2026-03-17T05:01:12.840914"
+    },
+    {
+      "symbol": "UNIUSD",
+      "entry": 4.033,
+      "exit": 4.018,
+      "pnl_pct": -0.3719315645921291,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 10.189,
+      "rsi": 5.6,
+      "vol_ratio": 1.029,
+      "signals_fired": [
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising",
+        "support_bounce",
+        "squeeze_building"
+      ],
+      "time": "2026-03-17T06:44:24.470163"
     }
   ],
   "calibration_log": [
