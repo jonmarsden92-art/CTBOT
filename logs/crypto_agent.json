@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 58,
-  "wins": 20,
+  "total_learned": 59,
+  "wins": 21,
   "losses": 8,
   "win_rate_7d": 0.14285714285714285,
   "win_rate_30d": 0.65,
@@ -65,12 +65,12 @@
       "trades": 5
     },
     "ETHUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 2,
-      "total_pnl": 1.8581717869820307,
-      "avg_pnl": 0.6193905956606769,
-      "win_rate": 0.3333333333333333,
-      "trades": 3
+      "total_pnl": 2.1849434235742557,
+      "avg_pnl": 0.5462358558935639,
+      "win_rate": 0.5,
+      "trades": 4
     },
     "AAVEUSD": {
       "wins": 2,
@@ -279,6 +279,12 @@
       "losses": 1,
       "total_pnl": -0.3719315645921291,
       "trades": 1
+    },
+    "11": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.32677163659222513,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -291,7 +297,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 11,
+      "wins": 12,
       "losses": 22
     },
     "bull": {
@@ -336,14 +342,14 @@
       "trades": 16
     },
     "rsi_divergence_bull": {
-      "wins": 6,
+      "wins": 7,
       "losses": 12,
-      "trades": 18
+      "trades": 19
     },
     "ma_cross_bull": {
-      "wins": 8,
+      "wins": 9,
       "losses": 7,
-      "trades": 15
+      "trades": 16
     },
     "macd_bear": {
       "wins": 1,
@@ -391,9 +397,9 @@
       "trades": 3
     },
     "pattern_morning_star": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     },
     "bb_upper": {
       "wins": 4,
@@ -503,21 +509,6 @@
         "rsi_overbought",
         "rsi_divergence_bear",
         "near_resistance"
-      ]
-    },
-    "ETHUSD": {
-      "entry_price": 2322.57,
-      "entry_time": "2026-03-17T11:14:04.869408",
-      "entry_hour": 11,
-      "score": 7.5095,
-      "regime": "recovery",
-      "rsi": 60.97,
-      "vol_ratio": 1.029,
-      "trend_slope": 0.0596,
-      "signals_fired": [
-        "ma_cross_bull",
-        "rsi_divergence_bull",
-        "pattern_morning_star"
       ]
     }
   },
@@ -1085,6 +1076,24 @@
         "volatility_expanding_bull"
       ],
       "time": "2026-03-17T10:08:57.916221"
+    },
+    {
+      "symbol": "ETHUSD",
+      "entry": 2322.57,
+      "exit": 2330.1595,
+      "pnl_pct": 0.32677163659222513,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 7.5095,
+      "rsi": 60.97,
+      "vol_ratio": 1.029,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_divergence_bull",
+        "pattern_morning_star"
+      ],
+      "time": "2026-03-17T14:08:46.464363"
     }
   ],
   "calibration_log": [
