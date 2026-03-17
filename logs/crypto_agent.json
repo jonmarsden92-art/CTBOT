@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 56,
+  "total_learned": 57,
   "wins": 20,
-  "losses": 6,
+  "losses": 7,
   "win_rate_7d": 0.2857142857142857,
   "win_rate_30d": 0.75,
   "avg_pnl": 1.0103758137680374,
@@ -170,11 +170,11 @@
     },
     "BATUSD": {
       "wins": 0,
-      "losses": 1,
-      "total_pnl": -1.7592083562396967,
-      "avg_pnl": -1.7592083562396967,
+      "losses": 2,
+      "total_pnl": -1.8848185780590643,
+      "avg_pnl": -0.9424092890295321,
       "win_rate": 0.0,
-      "trades": 1
+      "trades": 2
     }
   },
   "hour_performance": {
@@ -216,9 +216,9 @@
     },
     "7": {
       "wins": 1,
-      "losses": 0,
-      "total_pnl": 0.0858369098712438,
-      "trades": 1
+      "losses": 1,
+      "total_pnl": -0.03977331194812385,
+      "trades": 2
     },
     "9": {
       "wins": 3,
@@ -296,7 +296,7 @@
     },
     "bull": {
       "wins": 18,
-      "losses": 5
+      "losses": 6
     }
   },
   "signal_type_performance": {
@@ -342,8 +342,8 @@
     },
     "ma_cross_bull": {
       "wins": 8,
-      "losses": 6,
-      "trades": 14
+      "losses": 7,
+      "trades": 15
     },
     "macd_bear": {
       "wins": 1,
@@ -357,13 +357,13 @@
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 3,
-      "trades": 10
+      "losses": 4,
+      "trades": 11
     },
     "trend_bull": {
       "wins": 17,
-      "losses": 4,
-      "trades": 21
+      "losses": 5,
+      "trades": 22
     },
     "rsi_divergence_bear": {
       "wins": 9,
@@ -422,8 +422,8 @@
     },
     "near_support_range": {
       "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 1,
+      "trades": 2
     },
     "pattern_doji": {
       "wins": 1,
@@ -501,22 +501,6 @@
         "bb_lower",
         "momentum_down",
         "stabilising"
-      ]
-    },
-    "BATUSD": {
-      "entry_price": 0.1086695,
-      "entry_time": "2026-03-17T07:13:00.400525",
-      "entry_hour": 7,
-      "score": 10.9825,
-      "regime": "bull",
-      "rsi": 42.88,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.1478,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "near_support_range",
-        "squeeze_building"
       ]
     }
   },
@@ -1047,6 +1031,25 @@
         "squeeze_building"
       ],
       "time": "2026-03-17T06:44:24.470163"
+    },
+    {
+      "symbol": "BATUSD",
+      "entry": 0.1086695,
+      "exit": 0.108533,
+      "pnl_pct": -0.12561022181936765,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 10.9825,
+      "rsi": 42.88,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "near_support_range",
+        "squeeze_building"
+      ],
+      "time": "2026-03-17T08:01:28.674999"
     }
   ],
   "calibration_log": [
