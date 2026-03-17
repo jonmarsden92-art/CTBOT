@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 62,
+  "total_learned": 63,
   "wins": 23,
-  "losses": 9,
+  "losses": 10,
   "win_rate_7d": 0.42857142857142855,
   "win_rate_30d": 0.6,
   "avg_pnl": 0.24028708317698402,
@@ -99,11 +99,11 @@
     },
     "AVAXUSD": {
       "wins": 3,
-      "losses": 1,
-      "total_pnl": 0.9829196277842382,
-      "avg_pnl": 0.24572990694605956,
-      "win_rate": 0.75,
-      "trades": 4
+      "losses": 2,
+      "total_pnl": 0.9634681591983535,
+      "avg_pnl": 0.1926936318396707,
+      "win_rate": 0.6,
+      "trades": 5
     },
     "LINKUSD": {
       "wins": 1,
@@ -201,9 +201,9 @@
     },
     "16": {
       "wins": 4,
-      "losses": 5,
-      "total_pnl": 0.16694675469433473,
-      "trades": 9
+      "losses": 6,
+      "total_pnl": 0.14749528610845,
+      "trades": 10
     },
     "17": {
       "wins": 2,
@@ -307,7 +307,7 @@
     },
     "recovery": {
       "wins": 13,
-      "losses": 23
+      "losses": 24
     },
     "bull": {
       "wins": 19,
@@ -352,13 +352,13 @@
     },
     "rsi_divergence_bull": {
       "wins": 7,
-      "losses": 12,
-      "trades": 19
+      "losses": 13,
+      "trades": 20
     },
     "ma_cross_bull": {
       "wins": 10,
-      "losses": 7,
-      "trades": 17
+      "losses": 8,
+      "trades": 18
     },
     "macd_bear": {
       "wins": 1,
@@ -437,8 +437,8 @@
     },
     "near_support_range": {
       "wins": 1,
-      "losses": 1,
-      "trades": 2
+      "losses": 2,
+      "trades": 3
     },
     "pattern_doji": {
       "wins": 1,
@@ -446,6 +446,16 @@
       "trades": 2
     },
     "pattern_shooting_star": {
+      "wins": 0,
+      "losses": 1,
+      "trades": 1
+    },
+    "volume_uptick": {
+      "wins": 0,
+      "losses": 1,
+      "trades": 1
+    },
+    "btc_lagging_boost": {
       "wins": 0,
       "losses": 1,
       "trades": 1
@@ -502,23 +512,6 @@
         "rsi_overbought",
         "rsi_divergence_bear",
         "near_resistance"
-      ]
-    },
-    "AVAXUSD": {
-      "entry_price": 10.282,
-      "entry_time": "2026-03-17T16:51:44.434200",
-      "entry_hour": 16,
-      "score": 6.862049999999999,
-      "regime": "recovery",
-      "rsi": 60.79,
-      "vol_ratio": 2.996,
-      "trend_slope": 0.03,
-      "signals_fired": [
-        "ma_cross_bull",
-        "rsi_divergence_bull",
-        "volume_uptick",
-        "near_support_range",
-        "btc_lagging_boost"
       ]
     },
     "GRTUSD": {
@@ -1176,6 +1169,26 @@
         "rsi_overbought"
       ],
       "time": "2026-03-17T17:55:35.652438"
+    },
+    {
+      "symbol": "AVAXUSD",
+      "entry": 10.282,
+      "exit": 10.28,
+      "pnl_pct": -0.01945146858588473,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 6.862049999999999,
+      "rsi": 60.79,
+      "vol_ratio": 2.996,
+      "signals_fired": [
+        "ma_cross_bull",
+        "rsi_divergence_bull",
+        "volume_uptick",
+        "near_support_range",
+        "btc_lagging_boost"
+      ],
+      "time": "2026-03-17T19:21:59.960196"
     }
   ],
   "calibration_log": [
