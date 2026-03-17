@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 60,
+  "total_learned": 61,
   "wins": 22,
-  "losses": 8,
+  "losses": 9,
   "win_rate_7d": 0.2857142857142857,
   "win_rate_30d": 0.65,
   "avg_pnl": 0.5351530410494529,
@@ -176,6 +176,14 @@
       "avg_pnl": -0.9424092890295321,
       "win_rate": 0.0,
       "trades": 2
+    },
+    "GRTUSD": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -0.2695852906516844,
+      "avg_pnl": -0.2695852906516844,
+      "win_rate": 0.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -187,9 +195,9 @@
     },
     "15": {
       "wins": 2,
-      "losses": 2,
-      "total_pnl": 1.8081717869820306,
-      "trades": 4
+      "losses": 3,
+      "total_pnl": 1.5385864963303462,
+      "trades": 5
     },
     "16": {
       "wins": 4,
@@ -299,7 +307,7 @@
     },
     "recovery": {
       "wins": 13,
-      "losses": 22
+      "losses": 23
     },
     "bull": {
       "wins": 18,
@@ -339,8 +347,8 @@
     },
     "vol_confirm": {
       "wins": 10,
-      "losses": 6,
-      "trades": 16
+      "losses": 7,
+      "trades": 17
     },
     "rsi_divergence_bull": {
       "wins": 7,
@@ -364,13 +372,13 @@
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 4,
-      "trades": 11
+      "losses": 5,
+      "trades": 12
     },
     "trend_bull": {
       "wins": 17,
-      "losses": 6,
-      "trades": 23
+      "losses": 7,
+      "trades": 24
     },
     "rsi_divergence_bear": {
       "wins": 9,
@@ -379,13 +387,13 @@
     },
     "volume_breakout_bull": {
       "wins": 8,
-      "losses": 2,
-      "trades": 10
+      "losses": 3,
+      "trades": 11
     },
     "near_resistance": {
       "wins": 4,
-      "losses": 1,
-      "trades": 5
+      "losses": 2,
+      "trades": 6
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -508,23 +516,6 @@
       "signals_fired": [
         "ma_cross_bull",
         "rsi_overbought"
-      ]
-    },
-    "GRTUSD": {
-      "entry_price": 0.02787615,
-      "entry_time": "2026-03-17T15:23:17.045206",
-      "entry_hour": 15,
-      "score": 5.0255,
-      "regime": "recovery",
-      "rsi": 39.43,
-      "vol_ratio": 13.857,
-      "trend_slope": -0.0909,
-      "signals_fired": [
-        "trend_bull",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "squeeze_building"
       ]
     }
   },
@@ -1129,6 +1120,26 @@
         "stabilising"
       ],
       "time": "2026-03-17T15:23:17.032402"
+    },
+    {
+      "symbol": "GRTUSD",
+      "entry": 0.02787615,
+      "exit": 0.027801,
+      "pnl_pct": -0.2695852906516844,
+      "won": false,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 5.0255,
+      "rsi": 39.43,
+      "vol_ratio": 13.857,
+      "signals_fired": [
+        "trend_bull",
+        "vol_confirm",
+        "volume_breakout_bull",
+        "near_resistance",
+        "squeeze_building"
+      ],
+      "time": "2026-03-17T16:37:01.354776"
     }
   ],
   "calibration_log": [
