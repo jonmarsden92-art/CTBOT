@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 65,
+  "total_learned": 66,
   "wins": 23,
-  "losses": 12,
+  "losses": 13,
   "win_rate_7d": 0.42857142857142855,
   "win_rate_30d": 0.45,
   "avg_pnl": -0.12692457158029205,
@@ -185,6 +185,14 @@
       "avg_pnl": -0.6235893080552501,
       "win_rate": 0.0,
       "trades": 2
+    },
+    "CRVUSD": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -4.7793246733073085,
+      "avg_pnl": -4.7793246733073085,
+      "win_rate": 0.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -280,9 +288,9 @@
     },
     "3": {
       "wins": 0,
-      "losses": 2,
-      "total_pnl": -4.4037229249135095,
-      "trades": 2
+      "losses": 3,
+      "total_pnl": -9.183047598220817,
+      "trades": 3
     },
     "4": {
       "wins": 0,
@@ -312,7 +320,7 @@
     },
     "bull": {
       "wins": 19,
-      "losses": 9
+      "losses": 10
     }
   },
   "signal_type_performance": {
@@ -343,8 +351,8 @@
     },
     "rsi_overbought": {
       "wins": 13,
-      "losses": 12,
-      "trades": 25
+      "losses": 13,
+      "trades": 26
     },
     "vol_confirm": {
       "wins": 10,
@@ -378,8 +386,8 @@
     },
     "trend_bull": {
       "wins": 17,
-      "losses": 8,
-      "trades": 25
+      "losses": 9,
+      "trades": 26
     },
     "rsi_divergence_bear": {
       "wins": 9,
@@ -393,8 +401,8 @@
     },
     "near_resistance": {
       "wins": 4,
-      "losses": 3,
-      "trades": 7
+      "losses": 4,
+      "trades": 8
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -428,8 +436,8 @@
     },
     "volatility_expanding_bull": {
       "wins": 2,
-      "losses": 2,
-      "trades": 4
+      "losses": 3,
+      "trades": 5
     },
     "pattern_three_white_soldiers": {
       "wins": 1,
@@ -463,22 +471,6 @@
     }
   },
   "open_trades": {
-    "CRVUSD": {
-      "entry_price": 0.257505,
-      "entry_time": "2026-03-17T03:07:34.380038",
-      "entry_hour": 3,
-      "score": 7.653249999999999,
-      "regime": "bull",
-      "rsi": 66.49,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.0962,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "near_resistance",
-        "volatility_expanding_bull"
-      ]
-    },
     "YFIUSD": {
       "entry_price": 2723.605,
       "entry_time": "2026-03-17T08:03:35.624316",
@@ -1244,6 +1236,25 @@
         "squeeze_building"
       ],
       "time": "2026-03-18T03:16:21.361153"
+    },
+    {
+      "symbol": "CRVUSD",
+      "entry": 0.257505,
+      "exit": 0.245198,
+      "pnl_pct": -4.7793246733073085,
+      "won": false,
+      "reason": "stop_loss",
+      "regime": "bull",
+      "score": 7.653249999999999,
+      "rsi": 66.49,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "near_resistance",
+        "volatility_expanding_bull"
+      ],
+      "time": "2026-03-18T12:16:38.860086"
     }
   ],
   "calibration_log": [
