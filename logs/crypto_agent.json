@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 67,
+  "total_learned": 68,
   "wins": 23,
-  "losses": 14,
+  "losses": 15,
   "win_rate_7d": 0.14285714285714285,
   "win_rate_30d": 0.35,
   "avg_pnl": -0.7932462824047859,
@@ -140,11 +140,11 @@
     },
     "SUSHIUSD": {
       "wins": 1,
-      "losses": 0,
-      "total_pnl": 1.8086203777025351,
-      "avg_pnl": 1.8086203777025351,
-      "win_rate": 1.0,
-      "trades": 1
+      "losses": 1,
+      "total_pnl": -4.674014621177133,
+      "avg_pnl": -2.3370073105885667,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "BCHUSD": {
       "wins": 2,
@@ -303,6 +303,12 @@
       "losses": 0,
       "total_pnl": 0.32677163659222513,
       "trades": 1
+    },
+    "21": {
+      "wins": 0,
+      "losses": 1,
+      "total_pnl": -6.482634998879669,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -320,7 +326,7 @@
     },
     "bull": {
       "wins": 19,
-      "losses": 11
+      "losses": 12
     }
   },
   "signal_type_performance": {
@@ -346,13 +352,13 @@
     },
     "macd_bull": {
       "wins": 3,
-      "losses": 8,
-      "trades": 11
+      "losses": 9,
+      "trades": 12
     },
     "rsi_overbought": {
       "wins": 13,
-      "losses": 13,
-      "trades": 26
+      "losses": 14,
+      "trades": 27
     },
     "vol_confirm": {
       "wins": 10,
@@ -381,13 +387,13 @@
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 7,
-      "trades": 14
+      "losses": 8,
+      "trades": 15
     },
     "trend_bull": {
       "wins": 17,
-      "losses": 10,
-      "trades": 27
+      "losses": 11,
+      "trades": 28
     },
     "rsi_divergence_bear": {
       "wins": 9,
@@ -421,8 +427,8 @@
     },
     "bb_upper": {
       "wins": 4,
-      "losses": 1,
-      "trades": 5
+      "losses": 2,
+      "trades": 6
     },
     "resistance_breakout": {
       "wins": 6,
@@ -500,23 +506,6 @@
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
-        "squeeze_building"
-      ]
-    },
-    "SUSHIUSD": {
-      "entry_price": 0.22315,
-      "entry_time": "2026-03-17T21:21:43.429646",
-      "entry_hour": 21,
-      "score": 12.201499999999998,
-      "regime": "bull",
-      "rsi": 77.71,
-      "vol_ratio": 1.0,
-      "trend_slope": 0.1954,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "macd_bull",
-        "bb_upper",
         "squeeze_building"
       ]
     }
@@ -1258,6 +1247,26 @@
         "squeeze_building"
       ],
       "time": "2026-03-18T14:01:05.416001"
+    },
+    {
+      "symbol": "SUSHIUSD",
+      "entry": 0.22315,
+      "exit": 0.208684,
+      "pnl_pct": -6.482634998879669,
+      "won": false,
+      "reason": "stop_loss",
+      "regime": "bull",
+      "score": 12.201499999999998,
+      "rsi": 77.71,
+      "vol_ratio": 1.0,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "macd_bull",
+        "bb_upper",
+        "squeeze_building"
+      ],
+      "time": "2026-03-18T14:17:55.137279"
     }
   ],
   "calibration_log": [
