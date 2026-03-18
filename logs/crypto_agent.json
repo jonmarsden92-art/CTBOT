@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "total_learned": 64,
+  "total_learned": 65,
   "wins": 23,
-  "losses": 11,
+  "losses": 12,
   "win_rate_7d": 0.42857142857142855,
-  "win_rate_30d": 0.5,
-  "avg_pnl": 0.09219402695401152,
-  "sharpe": 0.35,
+  "win_rate_30d": 0.45,
+  "avg_pnl": -0.12692457158029205,
+  "sharpe": 0.242,
   "thresholds": {
     "take_profit": 0.025,
     "stop_loss": 0.03,
@@ -22,15 +22,16 @@
     "macd_cross": 0.7,
     "bb_bounce": 1.8,
     "momentum": 1.0,
-    "bb_lower": 1.75,
+    "bb_lower": 1.9,
     "squeeze_building": 1.6,
     "trend_bull": 1.75,
-    "volume_breakout_bull": 1.75,
-    "rsi_divergence_bear": 1.6,
-    "resistance_breakout": 1.6,
+    "volume_breakout_bull": 1.9,
+    "rsi_divergence_bear": 1.75,
+    "resistance_breakout": 1.75,
     "near_resistance": 1.45,
-    "bb_upper": 1.3,
-    "momentum_down": 1.15
+    "bb_upper": 1.45,
+    "momentum_down": 1.15,
+    "macd_bull": 0.85
   },
   "symbol_memory": {
     "DOTUSD": {
@@ -83,11 +84,11 @@
     },
     "PEPEUSD": {
       "wins": 2,
-      "losses": 2,
-      "total_pnl": 4.544300508463593,
-      "avg_pnl": 1.1360751271158982,
-      "win_rate": 0.5,
-      "trades": 4
+      "losses": 3,
+      "total_pnl": 1.293325215875825,
+      "avg_pnl": 0.25866504317516503,
+      "win_rate": 0.4,
+      "trades": 5
     },
     "SOLUSD": {
       "wins": 2,
@@ -285,9 +286,9 @@
     },
     "4": {
       "wins": 0,
-      "losses": 1,
-      "total_pnl": -0.3719315645921291,
-      "trades": 1
+      "losses": 2,
+      "total_pnl": -3.622906857179897,
+      "trades": 2
     },
     "11": {
       "wins": 1,
@@ -311,29 +312,29 @@
     },
     "bull": {
       "wins": 19,
-      "losses": 8
+      "losses": 9
     }
   },
   "signal_type_performance": {
     "bb_lower": {
       "wins": 7,
-      "losses": 1,
-      "trades": 8
+      "losses": 2,
+      "trades": 9
     },
     "stabilising": {
       "wins": 8,
-      "losses": 6,
-      "trades": 14
+      "losses": 7,
+      "trades": 15
     },
     "rsi_oversold": {
       "wins": 12,
-      "losses": 11,
-      "trades": 23
+      "losses": 12,
+      "trades": 24
     },
     "trend_bear": {
       "wins": 9,
-      "losses": 12,
-      "trades": 21
+      "losses": 13,
+      "trades": 22
     },
     "macd_bull": {
       "wins": 3,
@@ -367,13 +368,13 @@
     },
     "momentum_down": {
       "wins": 4,
-      "losses": 1,
-      "trades": 5
+      "losses": 2,
+      "trades": 6
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 5,
-      "trades": 12
+      "losses": 6,
+      "trades": 13
     },
     "trend_bull": {
       "wins": 17,
@@ -437,8 +438,8 @@
     },
     "near_support_range": {
       "wins": 1,
-      "losses": 2,
-      "trades": 3
+      "losses": 3,
+      "trades": 4
     },
     "pattern_doji": {
       "wins": 1,
@@ -476,25 +477,6 @@
         "rsi_overbought",
         "near_resistance",
         "volatility_expanding_bull"
-      ]
-    },
-    "PEPEUSD": {
-      "entry_price": 3.845e-06,
-      "entry_time": "2026-03-17T04:52:55.131833",
-      "entry_hour": 4,
-      "score": 19.239499999999996,
-      "regime": "bull",
-      "rsi": 0.0,
-      "vol_ratio": 0.05,
-      "trend_slope": -0.6858,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "near_support_range",
-        "squeeze_building"
       ]
     },
     "YFIUSD": {
@@ -1224,6 +1206,28 @@
         "near_resistance"
       ],
       "time": "2026-03-17T20:01:38.919315"
+    },
+    {
+      "symbol": "PEPEUSD",
+      "entry": 3.845e-06,
+      "exit": 3.72e-06,
+      "pnl_pct": -3.2509752925877677,
+      "won": false,
+      "reason": "stop_loss",
+      "regime": "bull",
+      "score": 19.239499999999996,
+      "rsi": 0.0,
+      "vol_ratio": 0.05,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising",
+        "near_support_range",
+        "squeeze_building"
+      ],
+      "time": "2026-03-18T03:16:21.361153"
     }
   ],
   "calibration_log": [
@@ -1307,7 +1311,20 @@
       ],
       "wr20": 0.65,
       "avg_pnl": 0.535
+    },
+    {
+      "time": "2026-03-18T03:16:21.361342",
+      "changes": [
+        "bb_lower->1.9 (winning)",
+        "macd_bull->0.85 (losing)",
+        "rsi_divergence_bear->1.75 (winning)",
+        "volume_breakout_bull->1.9 (winning)",
+        "bb_upper->1.45 (winning)",
+        "resistance_breakout->1.75 (winning)"
+      ],
+      "wr20": 0.45,
+      "avg_pnl": -0.127
     }
   ],
-  "last_calibrated": "2026-03-17T15:23:17.032586"
+  "last_calibrated": "2026-03-18T03:16:21.361337"
 }
