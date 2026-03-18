@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "total_learned": 68,
+  "total_learned": 69,
   "wins": 23,
-  "losses": 15,
+  "losses": 16,
   "win_rate_7d": 0.14285714285714285,
   "win_rate_30d": 0.3,
   "avg_pnl": -1.3481892141098493,
@@ -156,11 +156,11 @@
     },
     "XTZUSD": {
       "wins": 1,
-      "losses": 0,
-      "total_pnl": 3.3845086212901596,
-      "avg_pnl": 3.3845086212901596,
-      "win_rate": 1.0,
-      "trades": 1
+      "losses": 1,
+      "total_pnl": -0.536420454570294,
+      "avg_pnl": -0.268210227285147,
+      "win_rate": 0.5,
+      "trades": 2
     },
     "YFIUSD": {
       "wins": 1,
@@ -228,9 +228,9 @@
     },
     "19": {
       "wins": 4,
-      "losses": 3,
-      "total_pnl": 1.5355589083961165,
-      "trades": 7
+      "losses": 4,
+      "total_pnl": -2.385370167464337,
+      "trades": 8
     },
     "7": {
       "wins": 1,
@@ -326,7 +326,7 @@
     },
     "bull": {
       "wins": 19,
-      "losses": 12
+      "losses": 13
     }
   },
   "signal_type_performance": {
@@ -357,8 +357,8 @@
     },
     "rsi_overbought": {
       "wins": 13,
-      "losses": 14,
-      "trades": 27
+      "losses": 15,
+      "trades": 28
     },
     "vol_confirm": {
       "wins": 10,
@@ -387,13 +387,13 @@
     },
     "squeeze_building": {
       "wins": 7,
-      "losses": 8,
-      "trades": 15
+      "losses": 9,
+      "trades": 16
     },
     "trend_bull": {
       "wins": 17,
-      "losses": 11,
-      "trades": 28
+      "losses": 12,
+      "trades": 29
     },
     "rsi_divergence_bear": {
       "wins": 9,
@@ -492,21 +492,6 @@
         "rsi_overbought",
         "rsi_divergence_bear",
         "near_resistance"
-      ]
-    },
-    "XTZUSD": {
-      "entry_price": 0.4000965,
-      "entry_time": "2026-03-17T19:24:05.990503",
-      "entry_hour": 19,
-      "score": 6.3709999999999996,
-      "regime": "bull",
-      "rsi": 70.32,
-      "vol_ratio": 1.0,
-      "trend_slope": 0.101,
-      "signals_fired": [
-        "trend_bull",
-        "rsi_overbought",
-        "squeeze_building"
       ]
     }
   },
@@ -1267,6 +1252,24 @@
         "squeeze_building"
       ],
       "time": "2026-03-18T14:17:55.137279"
+    },
+    {
+      "symbol": "XTZUSD",
+      "entry": 0.4000965,
+      "exit": 0.384409,
+      "pnl_pct": -3.9209290758604536,
+      "won": false,
+      "reason": "stop_loss",
+      "regime": "bull",
+      "score": 6.3709999999999996,
+      "rsi": 70.32,
+      "vol_ratio": 1.0,
+      "signals_fired": [
+        "trend_bull",
+        "rsi_overbought",
+        "squeeze_building"
+      ],
+      "time": "2026-03-18T14:28:37.601994"
     }
   ],
   "calibration_log": [
