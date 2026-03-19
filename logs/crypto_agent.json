@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "total_learned": 69,
-  "wins": 23,
+  "total_learned": 70,
+  "wins": 24,
   "losses": 16,
-  "win_rate_7d": 0.0,
-  "win_rate_30d": 0.25,
-  "avg_pnl": -1.581209307067542,
-  "sharpe": 0.242,
+  "win_rate_7d": 0.14285714285714285,
+  "win_rate_30d": 0.3,
+  "avg_pnl": -1.4998459838673308,
+  "sharpe": -0.15,
   "thresholds": {
-    "take_profit": 0.025,
+    "take_profit": 0.022,
     "stop_loss": 0.03,
     "trailing_stop": 0.015,
-    "signal_min": 5,
+    "signal_min": 6,
     "rsi_oversold": 35,
     "rsi_overbought": 65
   },
@@ -22,16 +22,16 @@
     "macd_cross": 0.7,
     "bb_bounce": 1.8,
     "momentum": 1.0,
-    "bb_lower": 1.9,
+    "bb_lower": 2.0,
     "squeeze_building": 1.6,
     "trend_bull": 1.75,
-    "volume_breakout_bull": 1.9,
-    "rsi_divergence_bear": 1.75,
-    "resistance_breakout": 1.75,
+    "volume_breakout_bull": 2.0,
+    "rsi_divergence_bear": 1.9,
+    "resistance_breakout": 1.9,
     "near_resistance": 1.45,
     "bb_upper": 1.45,
     "momentum_down": 1.15,
-    "macd_bull": 0.85
+    "macd_bull": 0.7
   },
   "symbol_memory": {
     "DOTUSD": {
@@ -163,12 +163,12 @@
       "trades": 2
     },
     "YFIUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 4.616223635221601,
-      "avg_pnl": 4.616223635221601,
+      "total_pnl": 5.240983833561672,
+      "avg_pnl": 2.620491916780836,
       "win_rate": 1.0,
-      "trades": 1
+      "trades": 2
     },
     "BATUSD": {
       "wins": 0,
@@ -245,10 +245,10 @@
       "trades": 3
     },
     "8": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
-      "total_pnl": 5.051438559983883,
-      "trades": 3
+      "total_pnl": 5.676198758323954,
+      "trades": 4
     },
     "20": {
       "wins": 2,
@@ -325,7 +325,7 @@
       "losses": 24
     },
     "bull": {
-      "wins": 19,
+      "wins": 20,
       "losses": 13
     }
   },
@@ -356,9 +356,9 @@
       "trades": 12
     },
     "rsi_overbought": {
-      "wins": 13,
+      "wins": 14,
       "losses": 15,
-      "trades": 28
+      "trades": 29
     },
     "vol_confirm": {
       "wins": 10,
@@ -371,9 +371,9 @@
       "trades": 20
     },
     "ma_cross_bull": {
-      "wins": 10,
+      "wins": 11,
       "losses": 9,
-      "trades": 19
+      "trades": 20
     },
     "macd_bear": {
       "wins": 1,
@@ -391,14 +391,14 @@
       "trades": 16
     },
     "trend_bull": {
-      "wins": 17,
+      "wins": 18,
       "losses": 12,
-      "trades": 29
+      "trades": 30
     },
     "rsi_divergence_bear": {
-      "wins": 9,
+      "wins": 10,
       "losses": 1,
-      "trades": 10
+      "trades": 11
     },
     "volume_breakout_bull": {
       "wins": 8,
@@ -406,9 +406,9 @@
       "trades": 11
     },
     "near_resistance": {
-      "wins": 4,
+      "wins": 5,
       "losses": 5,
-      "trades": 9
+      "trades": 10
     },
     "volume_breakout_bear": {
       "wins": 1,
@@ -476,25 +476,7 @@
       "trades": 1
     }
   },
-  "open_trades": {
-    "YFIUSD": {
-      "entry_price": 2723.605,
-      "entry_time": "2026-03-17T08:03:35.624316",
-      "entry_hour": 8,
-      "score": 9.878499999999999,
-      "regime": "bull",
-      "rsi": 67.9,
-      "vol_ratio": 0.0,
-      "trend_slope": 0.1584,
-      "signals_fired": [
-        "trend_bull",
-        "ma_cross_bull",
-        "rsi_overbought",
-        "rsi_divergence_bear",
-        "near_resistance"
-      ]
-    }
-  },
+  "open_trades": {},
   "closed_trades": [
     {
       "symbol": "SHIBUSD",
@@ -1270,6 +1252,26 @@
         "squeeze_building"
       ],
       "time": "2026-03-18T14:28:37.601994"
+    },
+    {
+      "symbol": "YFIUSD",
+      "entry": 2723.605,
+      "exit": 2740.621,
+      "pnl_pct": 0.6247601983400705,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "bull",
+      "score": 9.878499999999999,
+      "rsi": 67.9,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bull",
+        "ma_cross_bull",
+        "rsi_overbought",
+        "rsi_divergence_bear",
+        "near_resistance"
+      ],
+      "time": "2026-03-19T22:37:36.709932"
     }
   ],
   "calibration_log": [
@@ -1366,7 +1368,21 @@
       ],
       "wr20": 0.45,
       "avg_pnl": -0.127
+    },
+    {
+      "time": "2026-03-19T22:37:36.710107",
+      "changes": [
+        "TP->0.022 (bank faster)",
+        "SigMin->6",
+        "bb_lower->2.0 (winning)",
+        "macd_bull->0.7 (losing)",
+        "rsi_divergence_bear->1.9 (winning)",
+        "volume_breakout_bull->2.0 (winning)",
+        "resistance_breakout->1.9 (winning)"
+      ],
+      "wr20": 0.3,
+      "avg_pnl": -1.5
     }
   ],
-  "last_calibrated": "2026-03-18T03:16:21.361337"
+  "last_calibrated": "2026-03-19T22:37:36.710102"
 }
