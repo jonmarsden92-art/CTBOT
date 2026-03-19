@@ -780,12 +780,47 @@ def calc_qty(cash: float, price: float, confidence: float = 0.5, atr_pct: float 
     return round(qty, 2)
 
 
-def place_order(api, symbol: str, qty: float, side: str, reason: str = "") -> Optional[dict]:
+def place_order(api, symbol: str, qty: float, side: str, reason: str = "",
+                entry_price: float = 0, tp_pct: float = 0.025, sl_pct: float = 0.03) -> Optional[dict]:
     try:
-        order = api.submit_order(
-            symbol=symbol, qty=qty, side=side,
-            type="market", time_in_force="gtc",
-        )
+        if side == "sell":
+            # Simple market sell to exit
+            order = api.submit_order(
+                symbol=symbol, qty=qty, side=side,
+                type="market", time_in_force="gtc",
+            )
+        else:
+            # Buy with bracket order — stop loss and take profit live on Alpaca's servers
+            # This means they fire INSTANTLY even if bot is not running
+            if entry_price > 0:
+                tp_price = round(entry_price * (1 + tp_pct), 6)
+                sl_price = round(entry_price * (1 - sl_pct), 6)
+                sl_limit  = round(sl_price * 0.985, 6)  # slight buffer for slippage
+                try:
+                    order = api.submit_order(
+                        symbol=symbol, qty=qty, side=side,
+                        type="market", time_in_force="gtc",
+                        order_class="bracket",
+                        take_profit={"limit_price": str(tp_price)},
+                        stop_loss={
+                            "stop_price":  str(sl_price),
+                            "limit_price": str(sl_limit),
+                        }
+                    )
+                    log.info("🔒 Bracket order: TP=$" + str(tp_price) + " SL=$" + str(sl_price))
+                except Exception:
+                    # Fallback to simple market order if bracket fails
+                    order = api.submit_order(
+                        symbol=symbol, qty=qty, side=side,
+                        type="market", time_in_force="gtc",
+                    )
+                    log.info("⚠️  Bracket failed — using market order")
+            else:
+                order = api.submit_order(
+                    symbol=symbol, qty=qty, side=side,
+                    type="market", time_in_force="gtc",
+                )
+
         icon = "✅ BUY " if side == "buy" else "💰 SELL"
         log.info(icon + " " + str(qty) + " " + symbol + " | " + reason + " | id=" + order.id)
         return {
@@ -978,9 +1013,12 @@ def run_bot():
 
     # Run ML predictor — update outcomes and retrain if ready
     sentiment_score = sentiment_data.get("score", 50) if sentiment_data else 50
-    if MODULES_LOADED:
+    if MODULES_LOADED and training_data:
         try:
             training_data, ml_model = run_predictor(training_data, all_bars, ml_model)
+            labelled   = sum(1 for e in training_data if e.get("outcome") in (0, 1))
+            pending    = sum(1 for e in training_data if e.get("outcome") is None)
+            log.info("🤖 ML: " + str(labelled) + " labelled | " + str(pending) + " pending")
         except Exception as e:
             log.debug("Predictor error: " + str(e))
 
@@ -1081,9 +1119,15 @@ def run_bot():
     bearish_count  = sum(1 for a in all_analyses.values() if a.get("trend_24h", 0) < -0.05)
     market_bearish = bearish_count >= 8
     if market_bearish:
-        log.warning("📉 BROAD MARKET DOWN (" + str(bearish_count) + "/14 coins -5%+ today) — pausing buys")
-    elif regime == "crash":
+        log.warning("📉 BROAD MARKET DOWN (" + str(bearish_count) + " coins -5%+ today) — pausing buys")
+    elif regime in ("crash", "bear"):
         market_bearish = True
+        log.warning("📉 BEAR REGIME — pausing new buys, exits still active")
+    # Also pause if recent win rate is critically low
+    recent_wr = agent.get("win_rate_7d", 0.5)
+    if recent_wr < 0.25 and agent["total_learned"] >= 10:
+        market_bearish = True
+        log.warning("📉 WIN RATE CRITICALLY LOW (" + str(round(recent_wr*100)) + "%) — pausing buys")
 
     exits, peak_prices = check_exits(api, crypto_pos, peak_prices, agent, state, all_analyses)
     if exits:
@@ -1196,10 +1240,14 @@ def run_bot():
             log.info("⚠️  Skip " + pair + " — cash buffer")
             continue
 
+        thr = agent["thresholds"]
         order = place_order(api, pair, qty, "buy",
                             "score=" + str(analysis["final_score"]) +
                             " conf=" + str(conf) +
-                            " " + regime)
+                            " " + regime,
+                            entry_price=price,
+                            tp_pct=thr.get("take_profit", 0.025),
+                            sl_pct=thr.get("stop_loss", 0.03))
         if order:
             pos_sym = pair.replace("/", "")
             agent_record_open(agent, pos_sym, price, analysis)
