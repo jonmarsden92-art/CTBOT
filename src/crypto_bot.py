@@ -64,9 +64,10 @@ try:
     from correlation import get_correlation_signals
     from risk        import (load_risk_state, save_risk_state, update_risk_state,
                              check_risk, get_position_size_multiplier, record_trade_result)
-    from grid        import load_grid_state, save_grid_state, run_grid
-    from predictor   import (load_training_data, save_training_data, load_model,
-                             predict_probability, record_training_example, run_predictor)
+    from grid               import load_grid_state, save_grid_state, run_grid
+    from predictor          import (load_training_data, save_training_data, load_model,
+                                    predict_probability, record_training_example, run_predictor)
+    from market_intelligence import get_market_intelligence
     MODULES_LOADED = True
     log.info("✅ All intelligence modules loaded")
 except ImportError as e:
@@ -970,6 +971,7 @@ def run_bot():
     sentiment_mult   = 1.0
     lagging_syms     = set()
 
+    market_intel = None
     if MODULES_LOADED:
         try:
             sentiment_data = get_sentiment()
@@ -979,6 +981,16 @@ def run_bot():
                      " mult=" + str(sentiment_mult))
         except Exception as e:
             log.debug("Sentiment error: " + str(e))
+
+        try:
+            market_intel  = get_market_intelligence()
+            intel_mult    = market_intel.get("combined_mult", 1.0)
+            sentiment_mult = round(sentiment_mult * intel_mult, 3)
+            log.info("🧠 Market Intel: " + str(market_intel.get("signals", [])) +
+                     " mult=" + str(intel_mult) +
+                     " combined=" + str(sentiment_mult))
+        except Exception as e:
+            log.debug("Market intel error: " + str(e))
 
         try:
             if "BTC/USD" in all_bars:
@@ -1129,6 +1141,23 @@ def run_bot():
         market_bearish = True
         log.warning("📉 WIN RATE CRITICALLY LOW (" + str(round(recent_wr*100)) + "%) — pausing buys")
 
+    # Block bad hours from agent learning (3am, 4am UTC consistently losing)
+    current_hour = str(datetime.now().hour)
+    hour_perf    = agent.get("hour_performance", {}).get(current_hour, {})
+    if hour_perf.get("trades", 0) >= 5:
+        hour_wr = hour_perf["wins"] / hour_perf["trades"]
+        hour_pnl = hour_perf.get("total_pnl", 0)
+        if hour_wr < 0.25 and hour_pnl < -5:
+            log.warning("🕐 BAD HOUR " + current_hour + "UTC (WR=" + str(round(hour_wr*100)) + "% PnL=" + str(round(hour_pnl,2)) + "%) — skipping buys")
+            market_bearish = True
+
+    # Block coins with consistently bad performance
+    blocked_coins = set()
+    for sym, mem in agent.get("symbol_memory", {}).items():
+        if mem.get("trades", 0) >= 4 and mem.get("win_rate", 0.5) < 0.25 and mem.get("avg_pnl", 0) < -1.5:
+            blocked_coins.add(sym)
+            log.info("🚫 Blocking " + sym + " — WR=" + str(round(mem["win_rate"]*100)) + "% avg=" + str(round(mem["avg_pnl"],2)) + "%")
+
     exits, peak_prices = check_exits(api, crypto_pos, peak_prices, agent, state, all_analyses)
     if exits:
         state["trades"].extend(exits)
@@ -1146,6 +1175,8 @@ def run_bot():
     for pair, analysis in all_analyses.items():
         pos_sym = pair.replace("/", "")
         if not agent_should_trade(agent, pos_sym):
+            continue
+        if pos_sym in blocked_coins:
             continue
         if analysis["signal"] == "BUY" and pos_sym not in held:
             all_buys.append(analysis)
@@ -1298,6 +1329,7 @@ def run_bot():
         "generated_at":  datetime.now().isoformat(),
         "sentiment":     sentiment_data,
         "correlation":   correlation_data,
+        "market_intel":  market_intel,
         "account": {
             "portfolio_value": pv,
             "cash":            cash,
