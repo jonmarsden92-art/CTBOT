@@ -1090,6 +1090,10 @@ def run_bot():
 
         # Recalculate signal after ALL module adjustments
         sig_min = agent["thresholds"]["signal_min"]
+        if regime == "bear":
+            sig_min = max(sig_min, 7)
+        elif regime == "recovery":
+            sig_min = max(sig_min, 6)
         bs = analysis["buy_score"]
         ss = analysis["sell_score"]
         if bs >= sig_min and bs > ss:
@@ -1132,14 +1136,16 @@ def run_bot():
     market_bearish = bearish_count >= 8
     if market_bearish:
         log.warning("📉 BROAD MARKET DOWN (" + str(bearish_count) + " coins -5%+ today) — pausing buys")
-    elif regime in ("crash", "bear"):
+    elif regime == "crash":
         market_bearish = True
-        log.warning("📉 BEAR REGIME — pausing new buys, exits still active")
+        log.warning("🚨 CRASH REGIME — pausing all new buys")
     # Also pause if recent win rate is critically low
     recent_wr = agent.get("win_rate_7d", 0.5)
-    if recent_wr < 0.25 and agent["total_learned"] >= 10:
+    if recent_wr < 0.15 and agent["total_learned"] >= 20:
         market_bearish = True
         log.warning("📉 WIN RATE CRITICALLY LOW (" + str(round(recent_wr*100)) + "%) — pausing buys")
+    elif recent_wr < 0.30 and agent["total_learned"] >= 10:
+        log.warning("⚠️  Low win rate (" + str(round(recent_wr*100)) + "%) — requiring stronger signals")
 
     # Block bad hours from agent learning (3am, 4am UTC consistently losing)
     current_hour = str(datetime.now().hour)
@@ -1235,17 +1241,23 @@ def run_bot():
 
 
 
-    # Get risk sizing multiplier
+    # Get risk sizing multiplier — reduce in bear/recovery, not zero
     risk_size_mult = 1.0
+    if regime == "bear":
+        risk_size_mult = 0.5
+        log.info("🐻 Bear regime — 50% position size")
+    elif regime == "recovery":
+        risk_size_mult = 0.75
+        log.info("🔄 Recovery regime — 75% position size")
     if MODULES_LOADED:
         try:
-            risk_size_mult = get_position_size_multiplier(
-                risk, pv, atr_pct=0.02
-            )
-            if risk_size_mult < 1.0:
-                log.info("🛡️  Risk reducing position size to " + str(round(risk_size_mult * 100)) + "%")
+            risk_size_mult = min(risk_size_mult,
+                                 get_position_size_multiplier(risk, pv, atr_pct=0.02))
+            risk_size_mult = max(0.3, risk_size_mult)
         except Exception:
             pass
+    if risk_size_mult < 1.0:
+        log.info("🛡️  Position size: " + str(round(risk_size_mult * 100)) + "%")
 
     for analysis in all_buys[:slots]:
         pair  = analysis["symbol"]
