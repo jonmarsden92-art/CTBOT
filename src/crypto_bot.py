@@ -1131,31 +1131,28 @@ def run_bot():
         analysis["symbol"] = pair
         all_analyses[pair] = analysis
 
-    # Check broad market health using fresh analysis data
-    bearish_count  = sum(1 for a in all_analyses.values() if a.get("trend_24h", 0) < -0.05)
-    market_bearish = bearish_count >= 8
-    if market_bearish:
-        log.warning("📉 BROAD MARKET DOWN (" + str(bearish_count) + " coins -5%+ today) — pausing buys")
-    elif regime == "crash":
-        market_bearish = True
-        log.warning("🚨 CRASH REGIME — pausing all new buys")
-    # Also pause if recent win rate is critically low
-    recent_wr = agent.get("win_rate_7d", 0.5)
-    if recent_wr < 0.15 and agent["total_learned"] >= 20:
-        market_bearish = True
-        log.warning("📉 WIN RATE CRITICALLY LOW (" + str(round(recent_wr*100)) + "%) — pausing buys")
-    elif recent_wr < 0.30 and agent["total_learned"] >= 10:
-        log.warning("⚠️  Low win rate (" + str(round(recent_wr*100)) + "%) — requiring stronger signals")
+    # Simple market health check - only block in genuine crash or near-total collapse
+    bearish_count  = sum(1 for a in all_analyses.values() if a.get("trend_24h", 0) < -0.08)
+    market_bearish = False
 
-    # Block bad hours from agent learning (3am, 4am UTC consistently losing)
+    if regime == "crash":
+        market_bearish = True
+        log.warning("🚨 CRASH REGIME — pausing all buys")
+    elif bearish_count >= 16:
+        # All or nearly all coins down 8%+ today = genuine market collapse
+        market_bearish = True
+        log.warning("📉 MARKET COLLAPSE (" + str(bearish_count) + " coins -8%+) — pausing buys")
+    else:
+        log.info("✅ Market check OK — " + str(bearish_count) + " coins down 8%+ | regime=" + regime)
+
+    # Note bad hours but don't block - just log
     current_hour = str(datetime.now().hour)
     hour_perf    = agent.get("hour_performance", {}).get(current_hour, {})
     if hour_perf.get("trades", 0) >= 5:
-        hour_wr = hour_perf["wins"] / hour_perf["trades"]
+        hour_wr  = hour_perf["wins"] / hour_perf["trades"]
         hour_pnl = hour_perf.get("total_pnl", 0)
         if hour_wr < 0.25 and hour_pnl < -5:
-            log.warning("🕐 BAD HOUR " + current_hour + "UTC (WR=" + str(round(hour_wr*100)) + "% PnL=" + str(round(hour_pnl,2)) + "%) — skipping buys")
-            market_bearish = True
+            log.warning("🕐 Historically bad hour " + current_hour + "UTC — requiring stronger signals")
 
     # Block coins with consistently bad performance
     blocked_coins = set()
