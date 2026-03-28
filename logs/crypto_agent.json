@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 70,
-  "wins": 24,
+  "total_learned": 71,
+  "wins": 25,
   "losses": 16,
   "win_rate_7d": 0.14285714285714285,
   "win_rate_30d": 0.3,
@@ -91,12 +91,12 @@
       "trades": 5
     },
     "SOLUSD": {
-      "wins": 2,
+      "wins": 3,
       "losses": 1,
-      "total_pnl": 1.7658714079166107,
-      "avg_pnl": 0.5886238026388703,
-      "win_rate": 0.6666666666666666,
-      "trades": 3
+      "total_pnl": 2.6672302108828756,
+      "avg_pnl": 0.6668075527207189,
+      "win_rate": 0.75,
+      "trades": 4
     },
     "AVAXUSD": {
       "wins": 3,
@@ -257,10 +257,10 @@
       "trades": 3
     },
     "22": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 1.6201939444523805,
-      "trades": 1
+      "total_pnl": 2.5215527474186454,
+      "trades": 2
     },
     "23": {
       "wins": 1,
@@ -321,7 +321,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 13,
+      "wins": 14,
       "losses": 24
     },
     "bull": {
@@ -331,19 +331,19 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 7,
+      "wins": 8,
       "losses": 2,
-      "trades": 9
+      "trades": 10
     },
     "stabilising": {
-      "wins": 8,
+      "wins": 9,
       "losses": 7,
-      "trades": 15
+      "trades": 16
     },
     "rsi_oversold": {
-      "wins": 12,
+      "wins": 13,
       "losses": 12,
-      "trades": 24
+      "trades": 25
     },
     "trend_bear": {
       "wins": 9,
@@ -361,14 +361,14 @@
       "trades": 29
     },
     "vol_confirm": {
-      "wins": 10,
+      "wins": 11,
       "losses": 7,
-      "trades": 17
+      "trades": 18
     },
     "rsi_divergence_bull": {
-      "wins": 7,
+      "wins": 8,
       "losses": 13,
-      "trades": 20
+      "trades": 21
     },
     "ma_cross_bull": {
       "wins": 11,
@@ -381,14 +381,14 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 4,
+      "wins": 5,
       "losses": 2,
-      "trades": 6
+      "trades": 7
     },
     "squeeze_building": {
-      "wins": 7,
+      "wins": 8,
       "losses": 9,
-      "trades": 16
+      "trades": 17
     },
     "trend_bull": {
       "wins": 18,
@@ -411,9 +411,9 @@
       "trades": 10
     },
     "volume_breakout_bear": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "trades": 1
+      "trades": 2
     },
     "support_bounce": {
       "wins": 2,
@@ -451,9 +451,9 @@
       "trades": 1
     },
     "near_support_range": {
-      "wins": 1,
+      "wins": 2,
       "losses": 3,
-      "trades": 4
+      "trades": 5
     },
     "pattern_doji": {
       "wins": 1,
@@ -474,6 +474,11 @@
       "wins": 0,
       "losses": 1,
       "trades": 1
+    },
+    "ma_cross_bear": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -492,28 +497,6 @@
         "momentum_down",
         "stabilising",
         "support_bounce",
-        "squeeze_building"
-      ]
-    },
-    "SOLUSD": {
-      "entry_price": 82.0428,
-      "entry_time": "2026-03-28T22:00:31.613640",
-      "entry_hour": 22,
-      "score": 9.384,
-      "regime": "recovery",
-      "rsi": 17.07,
-      "vol_ratio": 8.146,
-      "trend_slope": -0.3215,
-      "signals_fired": [
-        "ma_cross_bear",
-        "rsi_oversold",
-        "rsi_divergence_bull",
-        "bb_lower",
-        "vol_confirm",
-        "momentum_down",
-        "stabilising",
-        "volume_breakout_bear",
-        "near_support_range",
         "squeeze_building"
       ]
     }
@@ -1313,6 +1296,31 @@
         "near_resistance"
       ],
       "time": "2026-03-19T22:37:36.709932"
+    },
+    {
+      "symbol": "SOLUSD",
+      "entry": 82.0428,
+      "exit": 82.7823,
+      "pnl_pct": 0.9013588029662648,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 9.384,
+      "rsi": 17.07,
+      "vol_ratio": 8.146,
+      "signals_fired": [
+        "ma_cross_bear",
+        "rsi_oversold",
+        "rsi_divergence_bull",
+        "bb_lower",
+        "vol_confirm",
+        "momentum_down",
+        "stabilising",
+        "volume_breakout_bear",
+        "near_support_range",
+        "squeeze_building"
+      ],
+      "time": "2026-03-28T22:26:45.967448"
     }
   ],
   "calibration_log": [
