@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 71,
-  "wins": 25,
+  "total_learned": 72,
+  "wins": 26,
   "losses": 16,
   "win_rate_7d": 0.2857142857142857,
   "win_rate_30d": 0.3,
@@ -91,12 +91,12 @@
       "trades": 5
     },
     "SOLUSD": {
-      "wins": 3,
+      "wins": 4,
       "losses": 1,
-      "total_pnl": 2.6672302108828756,
-      "avg_pnl": 0.6668075527207189,
-      "win_rate": 0.75,
-      "trades": 4
+      "total_pnl": 3.3854396855008018,
+      "avg_pnl": 0.6770879371001604,
+      "win_rate": 0.8,
+      "trades": 5
     },
     "AVAXUSD": {
       "wins": 3,
@@ -309,6 +309,12 @@
       "losses": 1,
       "total_pnl": -6.482634998879669,
       "trades": 1
+    },
+    "0": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 0.7182094746179262,
+      "trades": 1
     }
   },
   "regime_performance": {
@@ -321,7 +327,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 14,
+      "wins": 15,
       "losses": 24
     },
     "bull": {
@@ -331,24 +337,24 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 8,
+      "wins": 9,
       "losses": 2,
-      "trades": 10
+      "trades": 11
     },
     "stabilising": {
-      "wins": 9,
+      "wins": 10,
       "losses": 7,
-      "trades": 16
+      "trades": 17
     },
     "rsi_oversold": {
-      "wins": 13,
+      "wins": 14,
       "losses": 12,
-      "trades": 25
+      "trades": 26
     },
     "trend_bear": {
-      "wins": 9,
+      "wins": 10,
       "losses": 13,
-      "trades": 22
+      "trades": 23
     },
     "macd_bull": {
       "wins": 3,
@@ -381,14 +387,14 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 5,
+      "wins": 6,
       "losses": 2,
-      "trades": 7
+      "trades": 8
     },
     "squeeze_building": {
-      "wins": 8,
+      "wins": 9,
       "losses": 9,
-      "trades": 17
+      "trades": 18
     },
     "trend_bull": {
       "wins": 18,
@@ -479,6 +485,11 @@
       "wins": 1,
       "losses": 0,
       "trades": 1
+    },
+    "pattern_hammer": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
     }
   },
   "open_trades": {
@@ -538,25 +549,6 @@
         "stabilising",
         "near_resistance",
         "squeeze_building"
-      ]
-    },
-    "SOLUSD": {
-      "entry_price": 82.12785,
-      "entry_time": "2026-03-29T00:03:43.942667",
-      "entry_hour": 0,
-      "score": 6.04,
-      "regime": "recovery",
-      "rsi": 33.11,
-      "vol_ratio": 0.065,
-      "trend_slope": -0.2149,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "squeeze_building",
-        "pattern_hammer"
       ]
     },
     "SUSHIUSD": {
@@ -1400,6 +1392,28 @@
         "squeeze_building"
       ],
       "time": "2026-03-28T22:26:45.967448"
+    },
+    {
+      "symbol": "SOLUSD",
+      "entry": 82.12785,
+      "exit": 82.7177,
+      "pnl_pct": 0.7182094746179262,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 6.04,
+      "rsi": 33.11,
+      "vol_ratio": 0.065,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising",
+        "squeeze_building",
+        "pattern_hammer"
+      ],
+      "time": "2026-03-29T04:21:50.414502"
     }
   ],
   "calibration_log": [
