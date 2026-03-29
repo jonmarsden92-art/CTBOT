@@ -147,12 +147,18 @@ DEFAULT_AGENT = {
         "rsi_overbought": 65,
     },
     "weights": {
-        "trend_alignment": 1.0,
-        "rsi_divergence":  1.0,
-        "volume_confirm":  1.0,
-        "macd_cross":      1.0,
-        "bb_bounce":       1.0,
-        "momentum":        1.0,
+        "trend_alignment":      1.0,
+        "rsi_divergence":       0.5,   # rsi_div_bull 41% WR — reduce
+        "volume_confirm":       0.8,
+        "macd_cross":           0.3,   # macd_bull only 25% WR — nearly disable
+        "bb_bounce":            2.0,   # bb_lower 85% WR — boost
+        "momentum":             1.2,
+        "resistance_breakout":  1.9,   # 86% WR
+        "rsi_divergence_bear":  1.9,   # 91% WR — best signal
+        "volume_breakout_bull": 1.8,   # 73% WR
+        "momentum_down":        1.5,   # 78% WR
+        "support_bounce":       1.5,   # 80% WR
+        "trend_bull":           1.5,   # 60% WR
     },
     "symbol_memory":    {},
     "hour_performance": {},
@@ -641,24 +647,27 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
             sell_score += 3 * rw
             signals_fired.append("rsi_divergence_bear")
 
-        # 3. MACD
-        mw = wts.get("macd_cross", 1.0)
+        # 3. MACD — only 25% win rate historically, use sparingly
+        mw = wts.get("macd_cross", 0.3)
         if hist_v > 0 and histp <= 0:
-            buy_score += 3 * mw
+            buy_score += 1.5 * mw  # reduced from 3
             signals_fired.append("macd_bull")
         elif hist_v < 0 and histp >= 0:
-            sell_score += 3 * mw
+            sell_score += 2 * mw
             signals_fired.append("macd_bear")
         if macd_v > msig:
-            buy_score += 1 * mw
+            buy_score += 0.5 * mw
         else:
             sell_score += 0.5 * mw
 
-        # 4. BOLLINGER BANDS
-        bw = wts.get("bb_bounce", 1.0)
-        if bb_pct_v < 0.10:   # tighter — only deep lower band
-            buy_score += 4 * bw   # boosted — 4W/0L historically
+        # 4. BOLLINGER BANDS — bb_lower is 85% win rate, best signal
+        bw = wts.get("bb_bounce", 2.0)
+        if bb_pct_v < 0.10:
+            buy_score += 5 * bw   # highest boost — most reliable signal
             signals_fired.append("bb_lower")
+        elif bb_pct_v < 0.20:
+            buy_score += 2 * bw
+            signals_fired.append("bb_lower_zone")
         elif bb_pct_v > 0.90:
             sell_score += 3 * bw
             signals_fired.append("bb_upper")
@@ -1327,9 +1336,15 @@ def run_bot():
         except Exception:
             pass
         try:
+            # Force update outcomes before saving
+            if training_data:
+                from predictor import update_outcomes
+                training_data, n_new = update_outcomes(training_data, all_bars)
+                if n_new > 0:
+                    log.info("🤖 ML: labelled " + str(n_new) + " new outcomes")
             save_training_data(training_data)
-        except Exception:
-            pass
+        except Exception as e:
+            log.debug("ML save error: " + str(e))
 
     wins   = state.get("wins",   0)
     losses = state.get("losses", 0)
