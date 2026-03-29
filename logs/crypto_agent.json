@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 73,
-  "wins": 27,
+  "total_learned": 74,
+  "wins": 28,
   "losses": 16,
   "win_rate_7d": 0.5714285714285714,
   "win_rate_30d": 0.35,
@@ -59,12 +59,12 @@
       "trades": 5
     },
     "XRPUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 4,
-      "total_pnl": -5.085400236016474,
-      "avg_pnl": -1.0170800472032948,
-      "win_rate": 0.2,
-      "trades": 5
+      "total_pnl": -4.753858680552803,
+      "avg_pnl": -0.7923097800921338,
+      "win_rate": 0.3333333333333333,
+      "trades": 6
     },
     "ETHUSD": {
       "wins": 2,
@@ -269,10 +269,10 @@
       "trades": 2
     },
     "5": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "total_pnl": 3.683683181089264,
-      "trades": 2
+      "total_pnl": 4.015224736552935,
+      "trades": 3
     },
     "6": {
       "wins": 1,
@@ -327,7 +327,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 16,
+      "wins": 17,
       "losses": 24
     },
     "bull": {
@@ -337,9 +337,9 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 10,
+      "wins": 11,
       "losses": 2,
-      "trades": 12
+      "trades": 13
     },
     "stabilising": {
       "wins": 11,
@@ -352,9 +352,9 @@
       "trades": 27
     },
     "trend_bear": {
-      "wins": 10,
+      "wins": 11,
       "losses": 13,
-      "trades": 23
+      "trades": 24
     },
     "macd_bull": {
       "wins": 3,
@@ -372,9 +372,9 @@
       "trades": 19
     },
     "rsi_divergence_bull": {
-      "wins": 8,
+      "wins": 9,
       "losses": 13,
-      "trades": 21
+      "trades": 22
     },
     "ma_cross_bull": {
       "wins": 11,
@@ -392,9 +392,9 @@
       "trades": 9
     },
     "squeeze_building": {
-      "wins": 10,
+      "wins": 11,
       "losses": 9,
-      "trades": 19
+      "trades": 20
     },
     "trend_bull": {
       "wins": 18,
@@ -422,9 +422,9 @@
       "trades": 3
     },
     "support_bounce": {
-      "wins": 3,
+      "wins": 4,
       "losses": 1,
-      "trades": 4
+      "trades": 5
     },
     "pattern_morning_star": {
       "wins": 2,
@@ -553,23 +553,6 @@
         "support_bounce",
         "squeeze_building",
         "pattern_inverted_hammer"
-      ]
-    },
-    "XRPUSD": {
-      "entry_price": 1.33015,
-      "entry_time": "2026-03-29T05:37:02.844082",
-      "entry_hour": 5,
-      "score": 6.5280000000000005,
-      "regime": "recovery",
-      "rsi": 43.84,
-      "vol_ratio": 0.849,
-      "trend_slope": -0.0213,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_divergence_bull",
-        "bb_lower",
-        "support_bounce",
-        "squeeze_building"
       ]
     },
     "GRTUSD": {
@@ -1454,6 +1437,26 @@
         "pattern_inverted_hammer"
       ],
       "time": "2026-03-29T05:47:30.795583"
+    },
+    {
+      "symbol": "XRPUSD",
+      "entry": 1.33015,
+      "exit": 1.33456,
+      "pnl_pct": 0.3315415554636714,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 6.5280000000000005,
+      "rsi": 43.84,
+      "vol_ratio": 0.849,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_divergence_bull",
+        "bb_lower",
+        "support_bounce",
+        "squeeze_building"
+      ],
+      "time": "2026-03-29T06:06:24.012260"
     }
   ],
   "calibration_log": [
