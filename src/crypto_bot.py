@@ -63,7 +63,8 @@ try:
     from patterns    import detect_patterns
     from correlation import get_correlation_signals
     from risk        import (load_risk_state, save_risk_state, update_risk_state,
-                             check_risk, get_position_size_multiplier, record_trade_result)
+                             check_risk, get_position_size_multiplier, record_trade_result,
+                             get_position_size)
     from grid               import load_grid_state, save_grid_state, run_grid
     from predictor          import (load_training_data, save_training_data, load_model,
                                     predict_probability, record_training_example, run_predictor)
@@ -775,13 +776,26 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
 # POSITION SIZING & ORDERS
 # =============================================================================
 
-def calc_qty(cash: float, price: float, confidence: float = 0.5, atr_pct: float = 0.02) -> float:
+def calc_qty(cash: float, price: float, confidence: float = 0.5,
+            atr_pct: float = 0.02, agent: dict = None,
+            signal_score: float = 7.0) -> float:
     if cash <= 0 or price <= 0:
         return 0.0
-    base_alloc = cash * 0.90
-    conf_scale = 0.6 + (confidence * 0.4)
-    vol_scale  = max(0.5, min(1.0, 0.02 / max(atr_pct, 0.005)))
-    alloc      = base_alloc * conf_scale * vol_scale
+
+    # Use Kelly sizing if agent has enough data, else fallback
+    if MODULES_LOADED and agent and agent.get("total_learned", 0) >= 10:
+        try:
+            alloc = get_position_size(None, agent, signal_score, cash)
+        except Exception:
+            alloc = cash * 0.08
+    else:
+        # Fixed 8% before enough data
+        alloc = cash * 0.08
+
+    # Reduce for high volatility
+    vol_scale = max(0.5, min(1.0, 0.02 / max(atr_pct, 0.005)))
+    alloc     = alloc * vol_scale
+
     if alloc < MIN_ORDER_USD:
         return 0.0
     qty = alloc / price
@@ -1289,7 +1303,8 @@ def run_bot():
         conf  = analysis.get("confidence", 0.5)
         atr   = analysis.get("atr_pct",    0.02)
 
-        qty  = calc_qty(cash * risk_size_mult, price, conf, atr)
+        qty  = calc_qty(cash * risk_size_mult, price, conf, atr,
+                       agent=agent, signal_score=analysis.get("final_score", 7))
         cost = qty * price if qty > 0 else 0
 
         log.info("💡 " + pair +
