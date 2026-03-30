@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 76,
-  "wins": 29,
+  "total_learned": 77,
+  "wins": 30,
   "losses": 17,
   "win_rate_7d": 0.8571428571428571,
   "win_rate_30d": 0.45,
@@ -180,12 +180,12 @@
       "trades": 2
     },
     "GRTUSD": {
-      "wins": 0,
+      "wins": 1,
       "losses": 3,
-      "total_pnl": -4.401607751020878,
-      "avg_pnl": -1.467202583673626,
-      "win_rate": 0.0,
-      "trades": 3
+      "total_pnl": -0.43296472092234684,
+      "avg_pnl": -0.10824118023058671,
+      "win_rate": 0.25,
+      "trades": 4
     },
     "CRVUSD": {
       "wins": 0,
@@ -270,10 +270,10 @@
       "trades": 3
     },
     "5": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
-      "total_pnl": 4.015224736552935,
-      "trades": 3
+      "total_pnl": 7.983867766651466,
+      "trades": 4
     },
     "6": {
       "wins": 1,
@@ -332,20 +332,20 @@
       "losses": 25
     },
     "bull": {
-      "wins": 20,
+      "wins": 21,
       "losses": 13
     }
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 12,
+      "wins": 13,
       "losses": 3,
-      "trades": 15
+      "trades": 16
     },
     "stabilising": {
-      "wins": 12,
+      "wins": 13,
       "losses": 8,
-      "trades": 20
+      "trades": 21
     },
     "rsi_oversold": {
       "wins": 16,
@@ -353,9 +353,9 @@
       "trades": 29
     },
     "trend_bear": {
-      "wins": 12,
+      "wins": 13,
       "losses": 14,
-      "trades": 26
+      "trades": 27
     },
     "macd_bull": {
       "wins": 3,
@@ -554,21 +554,6 @@
         "support_bounce",
         "squeeze_building",
         "pattern_inverted_hammer"
-      ]
-    },
-    "GRTUSD": {
-      "entry_price": 0.02356095,
-      "entry_time": "2026-03-29T05:53:47.759114",
-      "entry_hour": 5,
-      "score": 8.256,
-      "regime": "bull",
-      "rsi": 38.89,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.0467,
-      "signals_fired": [
-        "trend_bear",
-        "bb_lower",
-        "stabilising"
       ]
     }
   },
@@ -1500,6 +1485,24 @@
         "squeeze_building"
       ],
       "time": "2026-03-30T04:08:02.348786"
+    },
+    {
+      "symbol": "GRTUSD",
+      "entry": 0.02356095,
+      "exit": 0.024496,
+      "pnl_pct": 3.968643030098531,
+      "won": true,
+      "reason": "take_profit",
+      "regime": "bull",
+      "score": 8.256,
+      "rsi": 38.89,
+      "vol_ratio": 0.0,
+      "signals_fired": [
+        "trend_bear",
+        "bb_lower",
+        "stabilising"
+      ],
+      "time": "2026-03-30T08:32:01.863546"
     }
   ],
   "calibration_log": [
