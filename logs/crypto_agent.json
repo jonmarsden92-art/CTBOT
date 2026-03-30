@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 75,
-  "wins": 28,
+  "total_learned": 76,
+  "wins": 29,
   "losses": 17,
   "win_rate_7d": 0.7142857142857143,
   "win_rate_30d": 0.4,
@@ -44,12 +44,12 @@
       "trades": 8
     },
     "BTCUSD": {
-      "wins": 2,
+      "wins": 3,
       "losses": 5,
-      "total_pnl": -0.3,
-      "avg_pnl": -0.04,
-      "win_rate": 0.29,
-      "trades": 7
+      "total_pnl": 2.0360014326883418,
+      "avg_pnl": 0.2545001790860427,
+      "win_rate": 0.375,
+      "trades": 8
     },
     "LTCUSD": {
       "wins": 2,
@@ -264,10 +264,10 @@
       "trades": 2
     },
     "23": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
-      "total_pnl": 1.8549504020454766,
-      "trades": 2
+      "total_pnl": 4.190951834733818,
+      "trades": 3
     },
     "5": {
       "wins": 3,
@@ -328,7 +328,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 17,
+      "wins": 18,
       "losses": 25
     },
     "bull": {
@@ -338,24 +338,24 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 11,
+      "wins": 12,
       "losses": 3,
-      "trades": 14
+      "trades": 15
     },
     "stabilising": {
-      "wins": 11,
+      "wins": 12,
       "losses": 8,
-      "trades": 19
+      "trades": 20
     },
     "rsi_oversold": {
-      "wins": 15,
+      "wins": 16,
       "losses": 13,
-      "trades": 28
+      "trades": 29
     },
     "trend_bear": {
-      "wins": 11,
+      "wins": 12,
       "losses": 14,
-      "trades": 25
+      "trades": 26
     },
     "macd_bull": {
       "wins": 3,
@@ -393,9 +393,9 @@
       "trades": 10
     },
     "squeeze_building": {
-      "wins": 11,
+      "wins": 12,
       "losses": 10,
-      "trades": 21
+      "trades": 22
     },
     "trend_bull": {
       "wins": 18,
@@ -569,23 +569,6 @@
         "trend_bear",
         "bb_lower",
         "stabilising"
-      ]
-    },
-    "BTCUSD": {
-      "entry_price": 65800.773,
-      "entry_time": "2026-03-29T23:38:34.090162",
-      "entry_hour": 23,
-      "score": 9.264000000000001,
-      "regime": "recovery",
-      "rsi": 28.04,
-      "vol_ratio": 0.687,
-      "trend_slope": -0.1449,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "stabilising",
-        "squeeze_building"
       ]
     }
   },
@@ -1497,6 +1480,26 @@
         "squeeze_building"
       ],
       "time": "2026-03-29T22:47:03.236571"
+    },
+    {
+      "symbol": "BTCUSD",
+      "entry": 65800.773,
+      "exit": 67337.88,
+      "pnl_pct": 2.3360014326883416,
+      "won": true,
+      "reason": "take_profit",
+      "regime": "recovery",
+      "score": 9.264000000000001,
+      "rsi": 28.04,
+      "vol_ratio": 0.687,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "stabilising",
+        "squeeze_building"
+      ],
+      "time": "2026-03-30T04:08:02.348786"
     }
   ],
   "calibration_log": [
