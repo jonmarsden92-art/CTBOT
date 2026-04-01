@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 77,
-  "wins": 30,
+  "total_learned": 78,
+  "wins": 31,
   "losses": 17,
   "win_rate_7d": 0.8571428571428571,
   "win_rate_30d": 0.5,
@@ -194,6 +194,14 @@
       "avg_pnl": -4.7793246733073085,
       "win_rate": 0.0,
       "trades": 1
+    },
+    "TRUMPUSD": {
+      "wins": 1,
+      "losses": 0,
+      "total_pnl": 3.3367329593744675,
+      "avg_pnl": 3.3367329593744675,
+      "win_rate": 1.0,
+      "trades": 1
     }
   },
   "hour_performance": {
@@ -312,10 +320,10 @@
       "trades": 1
     },
     "0": {
-      "wins": 1,
+      "wins": 2,
       "losses": 0,
-      "total_pnl": 0.7182094746179262,
-      "trades": 1
+      "total_pnl": 4.054942433992394,
+      "trades": 2
     }
   },
   "regime_performance": {
@@ -328,7 +336,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 18,
+      "wins": 19,
       "losses": 25
     },
     "bull": {
@@ -338,24 +346,24 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 13,
+      "wins": 14,
       "losses": 3,
-      "trades": 16
+      "trades": 17
     },
     "stabilising": {
-      "wins": 13,
+      "wins": 14,
       "losses": 8,
-      "trades": 21
+      "trades": 22
     },
     "rsi_oversold": {
-      "wins": 16,
+      "wins": 17,
       "losses": 13,
-      "trades": 29
+      "trades": 30
     },
     "trend_bear": {
-      "wins": 13,
+      "wins": 14,
       "losses": 14,
-      "trades": 27
+      "trades": 28
     },
     "macd_bull": {
       "wins": 3,
@@ -388,14 +396,14 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
-      "trades": 10
+      "trades": 11
     },
     "squeeze_building": {
-      "wins": 12,
+      "wins": 13,
       "losses": 10,
-      "trades": 22
+      "trades": 23
     },
     "trend_bull": {
       "wins": 18,
@@ -413,9 +421,9 @@
       "trades": 11
     },
     "near_resistance": {
-      "wins": 5,
+      "wins": 6,
       "losses": 5,
-      "trades": 10
+      "trades": 11
     },
     "volume_breakout_bear": {
       "wins": 3,
@@ -514,25 +522,6 @@
         "momentum_down",
         "stabilising",
         "support_bounce",
-        "squeeze_building"
-      ]
-    },
-    "TRUMPUSD": {
-      "entry_price": 2.9415,
-      "entry_time": "2026-03-29T00:03:43.912341",
-      "entry_hour": 0,
-      "score": 7.232000000000001,
-      "regime": "recovery",
-      "rsi": 16.93,
-      "vol_ratio": 1.0,
-      "trend_slope": -0.2208,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "near_resistance",
         "squeeze_building"
       ]
     },
@@ -1503,6 +1492,28 @@
         "stabilising"
       ],
       "time": "2026-03-30T08:32:01.863546"
+    },
+    {
+      "symbol": "TRUMPUSD",
+      "entry": 2.9415,
+      "exit": 3.03965,
+      "pnl_pct": 3.3367329593744675,
+      "won": true,
+      "reason": "signal_sell",
+      "regime": "recovery",
+      "score": 7.232000000000001,
+      "rsi": 16.93,
+      "vol_ratio": 1.0,
+      "signals_fired": [
+        "trend_bear",
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising",
+        "near_resistance",
+        "squeeze_building"
+      ],
+      "time": "2026-04-01T12:46:01.647713"
     }
   ],
   "calibration_log": [
