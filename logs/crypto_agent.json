@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_learned": 78,
-  "wins": 31,
+  "total_learned": 79,
+  "wins": 32,
   "losses": 17,
   "win_rate_7d": 0.8571428571428571,
   "win_rate_30d": 0.55,
@@ -156,12 +156,12 @@
       "trades": 2
     },
     "XTZUSD": {
-      "wins": 1,
+      "wins": 2,
       "losses": 1,
-      "total_pnl": -0.536420454570294,
-      "avg_pnl": -0.268210227285147,
-      "win_rate": 0.5,
-      "trades": 2
+      "total_pnl": 0.04596645826356083,
+      "avg_pnl": 0.015322152754520276,
+      "win_rate": 0.6666666666666666,
+      "trades": 3
     },
     "YFIUSD": {
       "wins": 2,
@@ -236,10 +236,10 @@
       "trades": 5
     },
     "19": {
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
-      "total_pnl": -2.385370167464337,
-      "trades": 8
+      "total_pnl": -1.8029832546304823,
+      "trades": 9
     },
     "7": {
       "wins": 1,
@@ -336,7 +336,7 @@
       "losses": 0
     },
     "recovery": {
-      "wins": 19,
+      "wins": 20,
       "losses": 25
     },
     "bull": {
@@ -346,19 +346,19 @@
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 14,
+      "wins": 15,
       "losses": 3,
-      "trades": 17
+      "trades": 18
     },
     "stabilising": {
-      "wins": 14,
+      "wins": 15,
       "losses": 8,
-      "trades": 22
+      "trades": 23
     },
     "rsi_oversold": {
-      "wins": 17,
+      "wins": 18,
       "losses": 13,
-      "trades": 30
+      "trades": 31
     },
     "trend_bear": {
       "wins": 14,
@@ -396,14 +396,14 @@
       "trades": 1
     },
     "momentum_down": {
-      "wins": 8,
+      "wins": 9,
       "losses": 3,
-      "trades": 11
+      "trades": 12
     },
     "squeeze_building": {
-      "wins": 13,
+      "wins": 14,
       "losses": 10,
-      "trades": 23
+      "trades": 24
     },
     "trend_bull": {
       "wins": 18,
@@ -431,9 +431,9 @@
       "trades": 3
     },
     "support_bounce": {
-      "wins": 4,
+      "wins": 5,
       "losses": 2,
-      "trades": 6
+      "trades": 7
     },
     "pattern_morning_star": {
       "wins": 2,
@@ -507,24 +507,6 @@
     }
   },
   "open_trades": {
-    "XTZUSD": {
-      "entry_price": 0.3491665,
-      "entry_time": "2026-03-28T19:14:47.236979",
-      "entry_hour": 19,
-      "score": 7.080000000000002,
-      "regime": "recovery",
-      "rsi": 3.24,
-      "vol_ratio": 1.0,
-      "trend_slope": -0.2785,
-      "signals_fired": [
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building"
-      ]
-    },
     "SUSHIUSD": {
       "entry_price": 0.1882325,
       "entry_time": "2026-03-29T00:15:04.519201",
@@ -1514,6 +1496,27 @@
         "squeeze_building"
       ],
       "time": "2026-04-01T12:46:01.647713"
+    },
+    {
+      "symbol": "XTZUSD",
+      "entry": 0.3491665,
+      "exit": 0.3512,
+      "pnl_pct": 0.5823869128338548,
+      "won": true,
+      "reason": "trailing_stop",
+      "regime": "recovery",
+      "score": 7.080000000000002,
+      "rsi": 3.24,
+      "vol_ratio": 1.0,
+      "signals_fired": [
+        "rsi_oversold",
+        "bb_lower",
+        "momentum_down",
+        "stabilising",
+        "support_bounce",
+        "squeeze_building"
+      ],
+      "time": "2026-04-01T15:42:54.740381"
     }
   ],
   "calibration_log": [
