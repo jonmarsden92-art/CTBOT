@@ -1642,50 +1642,49 @@
   ],
   "signals": {
     "BTC/USD": {
-      "price": 68054.415,
-      "rsi": 28.66,
-      "sma3": 68124.066667,
-      "sma9": 68422.944722,
-      "sma21": 68380.764576,
-      "sma50": 67685.305282,
-      "macd_hist": -96.491158,
-      "bb_pct": 0.28,
-      "vol_ratio": 0.02,
+      "price": 68035.21,
+      "rsi": 28.21,
+      "sma3": 68117.665,
+      "sma9": 68420.810833,
+      "sma21": 68379.850052,
+      "sma50": 67684.921182,
+      "macd_hist": -97.716776,
+      "bb_pct": 0.268,
+      "vol_ratio": 0.021,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1251,
+      "trend_slope": -0.1298,
       "trend_1h": 0.0,
-      "trend_4h": -0.0107,
-      "trend_24h": -0.0097,
+      "trend_4h": -0.011,
+      "trend_24h": -0.0109,
       "stabilising": true,
-      "near_support": false,
+      "near_support": true,
       "atr_pct": 0.0084,
       "dynamic_stop": 0.03,
       "dynamic_tp": 0.022,
-      "buy_score": 1.7600000000000002,
+      "buy_score": 1.36,
       "sell_score": 0.35,
-      "final_score": 1.7600000000000002,
+      "final_score": 1.36,
       "signal": "BULLISH",
       "confidence": 0.422,
       "regime": "recovery",
       "signals_fired": [
         "rsi_oversold",
         "stabilising",
-        "squeeze_building",
-        "pattern_doji"
+        "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.880735",
+      "timestamp": "2026-04-01T19:19:52.370386",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
-          "vol_ratio": 0.02,
+          "vol_ratio": 0.021,
           "vol_trending": false,
-          "price_change": -0.0028,
+          "price_change": -0.0031,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.271,
+          "range_pct": 0.262,
           "high_24h": 69466.119966,
           "low_24h": 67528.35,
           "score": 0,
@@ -1695,7 +1694,7 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -860.535,
+          "momentum": -879.74,
           "score": 0,
           "signal": "squeeze_building"
         },
@@ -1709,11 +1708,9 @@
         ]
       },
       "patterns": {
-        "score": 1,
-        "patterns": [
-          "doji"
-        ],
-        "direction": "bull",
+        "score": 0,
+        "patterns": [],
+        "direction": "neutral",
         "trend_down": "True",
         "trend_up": "False"
       },
@@ -1721,47 +1718,47 @@
       "symbol": "BTC/USD"
     },
     "ETH/USD": {
-      "price": 2128.99,
-      "rsi": 53.98,
-      "sma3": 2131.431333,
-      "sma9": 2131.317833,
-      "sma21": 2123.666857,
-      "sma50": 2085.00357,
-      "macd_hist": -2.365604,
-      "bb_pct": 0.565,
-      "vol_ratio": 0.096,
+      "price": 2127.791,
+      "rsi": 52.39,
+      "sma3": 2131.031667,
+      "sma9": 2131.184611,
+      "sma21": 2123.609762,
+      "sma50": 2084.97959,
+      "macd_hist": -2.442121,
+      "bb_pct": 0.547,
+      "vol_ratio": 0.098,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": 0.0231,
+      "trend_slope": 0.0137,
       "trend_1h": 0.0,
-      "trend_4h": -0.0076,
-      "trend_24h": 0.0458,
+      "trend_4h": -0.0081,
+      "trend_24h": 0.0434,
       "stabilising": false,
       "near_support": false,
       "atr_pct": 0.0089,
       "dynamic_stop": 0.03,
       "dynamic_tp": 0.022,
-      "buy_score": 1.568,
-      "sell_score": 0.35,
-      "final_score": 1.568,
-      "signal": "BULLISH",
-      "confidence": 0.429,
+      "buy_score": 0.52,
+      "sell_score": 3.35,
+      "final_score": 0.52,
+      "signal": "BEARISH",
+      "confidence": 0.395,
       "regime": "recovery",
       "signals_fired": [
-        "trend_bull"
+        "ma_cross_bear"
       ],
-      "timestamp": "2026-04-01T19:17:32.888586",
+      "timestamp": "2026-04-01T19:19:52.378236",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
-          "vol_ratio": 0.096,
+          "vol_ratio": 0.098,
           "vol_trending": false,
-          "price_change": -0.0038,
+          "price_change": -0.0044,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.558,
+          "range_pct": 0.544,
           "high_24h": 2166.74,
           "low_24h": 2081.371,
           "score": 0,
@@ -1771,14 +1768,14 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -5.69,
+          "momentum": -6.889,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0038,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0044,
           "score": 0,
           "signal": "none"
         },
@@ -1786,9 +1783,7 @@
       },
       "patterns": {
         "score": 0,
-        "patterns": [
-          "doji"
-        ],
+        "patterns": [],
         "direction": "neutral",
         "trend_down": "False",
         "trend_up": "False"
@@ -1797,21 +1792,21 @@
       "symbol": "ETH/USD"
     },
     "SOL/USD": {
-      "price": 84.0005,
-      "rsi": 58.86,
-      "sma3": 84.034683,
-      "sma9": 83.692911,
-      "sma21": 83.556867,
-      "sma50": 82.881746,
-      "macd_hist": 0.043656,
-      "bb_pct": 0.665,
+      "price": 83.986,
+      "rsi": 58.69,
+      "sma3": 84.02985,
+      "sma9": 83.6913,
+      "sma21": 83.556176,
+      "sma50": 82.881456,
+      "macd_hist": 0.042731,
+      "bb_pct": 0.66,
       "vol_ratio": 0.019,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": 0.1255,
+      "trend_slope": 0.1226,
       "trend_1h": 0.0,
-      "trend_4h": -0.0136,
-      "trend_24h": 0.0459,
+      "trend_4h": -0.0138,
+      "trend_24h": 0.0451,
       "stabilising": false,
       "near_support": false,
       "atr_pct": 0.0111,
@@ -1827,18 +1822,18 @@
         "trend_bull",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.896365",
+      "timestamp": "2026-04-01T19:19:52.386129",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.019,
           "vol_trending": false,
-          "price_change": -0.0047,
+          "price_change": -0.0049,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.38,
+          "range_pct": 0.376,
           "high_24h": 86.5325,
           "low_24h": 82.4513,
           "score": 0,
@@ -1848,14 +1843,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": true,
-          "momentum": 0.3905,
+          "momentum": 0.376,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0047,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0049,
           "score": 0,
           "signal": "none"
         },
@@ -1874,29 +1869,29 @@
       "symbol": "SOL/USD"
     },
     "XRP/USD": {
-      "price": 1.348045,
-      "rsi": 26.84,
-      "sma3": 1.34885,
-      "sma9": 1.352299,
-      "sma21": 1.348921,
-      "sma50": 1.335182,
-      "macd_hist": -0.001097,
-      "bb_pct": 0.457,
-      "vol_ratio": 0.037,
+      "price": 1.3485,
+      "rsi": 28.97,
+      "sma3": 1.349002,
+      "sma9": 1.352349,
+      "sma21": 1.348942,
+      "sma50": 1.335191,
+      "macd_hist": -0.001068,
+      "bb_pct": 0.471,
+      "vol_ratio": 0.042,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.0864,
+      "trend_slope": -0.0808,
       "trend_1h": 0.0,
-      "trend_4h": -0.0076,
-      "trend_24h": 0.0135,
+      "trend_4h": -0.0072,
+      "trend_24h": 0.0149,
       "stabilising": true,
       "near_support": false,
       "atr_pct": 0.0126,
       "dynamic_stop": 0.03,
       "dynamic_tp": 0.0251,
-      "buy_score": 2.5600000000000005,
+      "buy_score": 2.16,
       "sell_score": 0.35,
-      "final_score": 2.5600000000000005,
+      "final_score": 2.16,
       "signal": "BULLISH",
       "confidence": 0.422,
       "regime": "recovery",
@@ -1904,21 +1899,20 @@
         "rsi_oversold",
         "stabilising",
         "squeeze_building",
-        "pattern_inverted_hammer",
-        "pattern_doji"
+        "pattern_inverted_hammer"
       ],
-      "timestamp": "2026-04-01T19:17:32.905105",
+      "timestamp": "2026-04-01T19:19:52.394865",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
-          "vol_ratio": 0.037,
+          "vol_ratio": 0.042,
           "vol_trending": false,
-          "price_change": -0.0024,
+          "price_change": -0.0021,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.241,
+          "range_pct": 0.246,
           "high_24h": 1.420328,
           "low_24h": 1.3251,
           "score": 0,
@@ -1928,14 +1922,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.008455,
+          "momentum": -0.008,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0024,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0021,
           "score": 0,
           "signal": "none"
         },
@@ -1944,10 +1938,9 @@
         ]
       },
       "patterns": {
-        "score": 3,
+        "score": 2,
         "patterns": [
-          "inverted_hammer",
-          "doji"
+          "inverted_hammer"
         ],
         "direction": "bull",
         "trend_down": "True",
@@ -1957,21 +1950,21 @@
       "symbol": "XRP/USD"
     },
     "DOGE/USD": {
-      "price": 0.09253695,
-      "rsi": 40.09,
-      "sma3": 0.09259,
-      "sma9": 0.092719,
+      "price": 0.092552,
+      "rsi": 40.64,
+      "sma3": 0.092595,
+      "sma9": 0.092721,
       "sma21": 0.09263,
       "sma50": 0.091794,
-      "macd_hist": -5.7e-05,
-      "bb_pct": 0.451,
+      "macd_hist": -5.6e-05,
+      "bb_pct": 0.457,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.0574,
+      "trend_slope": -0.0547,
       "trend_1h": 0.0,
-      "trend_4h": -0.0094,
-      "trend_24h": -0.0022,
+      "trend_4h": -0.0092,
+      "trend_24h": -0.0015,
       "stabilising": true,
       "near_support": true,
       "atr_pct": 0.0104,
@@ -1987,18 +1980,18 @@
         "ma_cross_bear",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.912775",
+      "timestamp": "2026-04-01T19:19:52.402529",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0027,
+          "price_change": -0.0026,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.422,
+          "range_pct": 0.427,
           "high_24h": 0.09431,
           "low_24h": 0.091244,
           "score": 0,
@@ -2008,14 +2001,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.000523,
+          "momentum": -0.000508,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0027,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0026,
           "score": 0,
           "signal": "none"
         },
@@ -2034,41 +2027,42 @@
       "symbol": "DOGE/USD"
     },
     "AVAX/USD": {
-      "price": 9.12824,
-      "rsi": 23.86,
-      "sma3": 9.146688,
-      "sma9": 9.185875,
-      "sma21": 9.127246,
-      "sma50": 8.966932,
-      "macd_hist": -0.015403,
-      "bb_pct": 0.482,
-      "vol_ratio": 0.0,
+      "price": 9.12774,
+      "rsi": 23.59,
+      "sma3": 9.146522,
+      "sma9": 9.185819,
+      "sma21": 9.127222,
+      "sma50": 8.966922,
+      "macd_hist": -0.015435,
+      "bb_pct": 0.481,
+      "vol_ratio": 0.018,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1335,
+      "trend_slope": -0.1344,
       "trend_1h": 0.0,
       "trend_4h": -0.0115,
-      "trend_24h": 0.092,
+      "trend_24h": 0.0918,
       "stabilising": true,
       "near_support": false,
-      "atr_pct": 0.012,
+      "atr_pct": 0.0122,
       "dynamic_stop": 0.03,
-      "dynamic_tp": 0.0239,
-      "buy_score": 1.36,
+      "dynamic_tp": 0.0243,
+      "buy_score": 1.7600000000000002,
       "sell_score": 0.35,
-      "final_score": 1.36,
+      "final_score": 1.7600000000000002,
       "signal": "BULLISH",
       "confidence": 0.422,
       "regime": "recovery",
       "signals_fired": [
         "rsi_oversold",
-        "stabilising"
+        "stabilising",
+        "pattern_doji"
       ],
-      "timestamp": "2026-04-01T19:17:32.920274",
+      "timestamp": "2026-04-01T19:19:52.410073",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
-          "vol_ratio": 0.0,
+          "vol_ratio": 0.018,
           "vol_trending": false,
           "price_change": -0.0062,
           "score": 0,
@@ -2085,13 +2079,13 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.081965,
+          "momentum": -0.082465,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0062,
           "score": 0,
           "signal": "none"
@@ -2099,9 +2093,11 @@
         "signals_fired": []
       },
       "patterns": {
-        "score": 0,
-        "patterns": [],
-        "direction": "neutral",
+        "score": 1,
+        "patterns": [
+          "doji"
+        ],
+        "direction": "bull",
         "trend_down": "True",
         "trend_up": "False"
       },
@@ -2139,7 +2135,7 @@
         "ma_cross_bear",
         "stabilising"
       ],
-      "timestamp": "2026-04-01T19:17:32.927765",
+      "timestamp": "2026-04-01T19:19:52.417645",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
@@ -2165,8 +2161,8 @@
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0043,
           "score": 0,
           "signal": "none"
@@ -2216,7 +2212,7 @@
         "trend_bull",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.935257",
+      "timestamp": "2026-04-01T19:19:52.425199",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
@@ -2242,8 +2238,8 @@
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.003,
           "score": 0,
           "signal": "none"
@@ -2263,24 +2259,24 @@
       "symbol": "LTC/USD"
     },
     "BCH/USD": {
-      "price": 456.6785,
+      "price": 456.135,
       "rsi": 0.0,
-      "sma3": 457.425167,
-      "sma9": 458.905889,
-      "sma21": 460.700095,
-      "sma50": 464.055895,
-      "macd_hist": -0.320148,
-      "bb_pct": 0.066,
+      "sma3": 457.244,
+      "sma9": 458.8455,
+      "sma21": 460.674214,
+      "sma50": 464.045025,
+      "macd_hist": -0.354833,
+      "bb_pct": 0.018,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1101,
+      "trend_slope": -0.1298,
       "trend_1h": 0.0,
-      "trend_4h": -0.0041,
-      "trend_24h": -0.1143,
+      "trend_4h": -0.0053,
+      "trend_24h": -0.1192,
       "stabilising": true,
       "near_support": true,
-      "atr_pct": 0.0102,
+      "atr_pct": 0.0103,
       "dynamic_stop": 0.03,
       "dynamic_tp": 0.022,
       "buy_score": 0.272,
@@ -2296,18 +2292,18 @@
         "stabilising",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.942943",
+      "timestamp": "2026-04-01T19:19:52.432685",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.004,
+          "price_change": -0.0052,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.464,
+          "range_pct": 0.444,
           "high_24h": 471.5435,
           "low_24h": 443.832278,
           "score": 0,
@@ -2317,14 +2313,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -2.2115,
+          "momentum": -2.755,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.004,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0052,
           "score": 0,
           "signal": "none"
         },
@@ -2343,49 +2339,49 @@
       "symbol": "BCH/USD"
     },
     "DOT/USD": {
-      "price": 1.257305,
-      "rsi": 20.17,
-      "sma3": 1.262492,
-      "sma9": 1.270616,
-      "sma21": 1.269942,
-      "sma50": 1.258093,
-      "macd_hist": -0.002639,
-      "bb_pct": 0.232,
+      "price": 1.258165,
+      "rsi": 20.94,
+      "sma3": 1.262778,
+      "sma9": 1.270711,
+      "sma21": 1.269983,
+      "sma50": 1.25811,
+      "macd_hist": -0.002584,
+      "bb_pct": 0.248,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1841,
+      "trend_slope": -0.1728,
       "trend_1h": 0.0,
-      "trend_4h": -0.0147,
-      "trend_24h": -0.0215,
+      "trend_4h": -0.0141,
+      "trend_24h": -0.0186,
       "stabilising": true,
       "near_support": true,
       "atr_pct": 0.0132,
       "dynamic_stop": 0.03,
-      "dynamic_tp": 0.0263,
-      "buy_score": 0.68,
-      "sell_score": 2.85,
-      "final_score": 0.68,
+      "dynamic_tp": 0.0264,
+      "buy_score": 1.36,
+      "sell_score": 2.35,
+      "final_score": 1.36,
       "signal": "BEARISH",
-      "confidence": 0.4,
+      "confidence": 0.422,
       "regime": "recovery",
       "signals_fired": [
         "rsi_oversold",
         "momentum_down",
         "stabilising"
       ],
-      "timestamp": "2026-04-01T19:17:32.950380",
+      "timestamp": "2026-04-01T19:19:52.440140",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0107,
+          "price_change": -0.01,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.204,
+          "range_pct": 0.22,
           "high_24h": 1.300345,
           "low_24h": 1.2463,
           "score": 0,
@@ -2395,14 +2391,14 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.017945,
+          "momentum": -0.017085,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0107,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.01,
           "score": 0,
           "signal": "none"
         },
@@ -2419,21 +2415,21 @@
       "symbol": "DOT/USD"
     },
     "UNI/USD": {
-      "price": 3.60189,
-      "rsi": 41.44,
-      "sma3": 3.610713,
-      "sma9": 3.612423,
-      "sma21": 3.595145,
-      "sma50": 3.544242,
-      "macd_hist": -0.002676,
-      "bb_pct": 0.535,
+      "price": 3.603,
+      "rsi": 42.38,
+      "sma3": 3.611083,
+      "sma9": 3.612547,
+      "sma21": 3.595197,
+      "sma50": 3.544264,
+      "macd_hist": -0.002605,
+      "bb_pct": 0.545,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "bearish",
-      "trend_slope": -0.0535,
+      "trend_slope": -0.0484,
       "trend_1h": 0.0,
-      "trend_4h": -0.0105,
-      "trend_24h": 0.0556,
+      "trend_4h": -0.0102,
+      "trend_24h": 0.0569,
       "stabilising": true,
       "near_support": false,
       "atr_pct": 0.0098,
@@ -2449,18 +2445,18 @@
         "ma_cross_bear",
         "rsi_divergence_bear"
       ],
-      "timestamp": "2026-04-01T19:17:32.957817",
+      "timestamp": "2026-04-01T19:19:52.447462",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0077,
+          "price_change": -0.0074,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.537,
+          "range_pct": 0.545,
           "high_24h": 3.669215,
           "low_24h": 3.52365,
           "score": 0,
@@ -2470,14 +2466,14 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.02211,
+          "momentum": -0.021,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0077,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0074,
           "score": 0,
           "signal": "none"
         },
@@ -2496,24 +2492,24 @@
       "symbol": "UNI/USD"
     },
     "AAVE/USD": {
-      "price": 98.8065,
-      "rsi": 24.35,
-      "sma3": 99.051933,
-      "sma9": 99.382806,
-      "sma21": 98.986957,
-      "sma50": 97.991499,
-      "macd_hist": -0.089558,
-      "bb_pct": 0.44,
+      "price": 98.85585,
+      "rsi": 25.26,
+      "sma3": 99.068383,
+      "sma9": 99.388289,
+      "sma21": 98.989307,
+      "sma50": 97.992486,
+      "macd_hist": -0.086409,
+      "bb_pct": 0.452,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1798,
+      "trend_slope": -0.1715,
       "trend_1h": 0.0,
-      "trend_4h": -0.0158,
-      "trend_24h": -0.0041,
+      "trend_4h": -0.0153,
+      "trend_24h": -0.002,
       "stabilising": true,
       "near_support": false,
-      "atr_pct": 0.0129,
+      "atr_pct": 0.013,
       "dynamic_stop": 0.03,
       "dynamic_tp": 0.0259,
       "buy_score": 1.36,
@@ -2529,18 +2525,18 @@
         "stabilising",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.965160",
+      "timestamp": "2026-04-01T19:19:52.454913",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.007,
+          "price_change": -0.0065,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.247,
+          "range_pct": 0.25,
           "high_24h": 110.388413,
           "low_24h": 95.003315,
           "score": 0,
@@ -2550,14 +2546,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -1.134,
+          "momentum": -1.08465,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.007,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0065,
           "score": 0,
           "signal": "none"
         },
@@ -2609,7 +2605,7 @@
         "near_support_range",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.972513",
+      "timestamp": "2026-04-01T19:19:52.462321",
       "momentum": {
         "momentum_score": 0.8,
         "vol_breakout": {
@@ -2635,8 +2631,8 @@
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0074,
           "score": 0,
           "signal": "none"
@@ -2687,7 +2683,7 @@
         "ma_cross_bear",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.979872",
+      "timestamp": "2026-04-01T19:19:52.469710",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
@@ -2713,8 +2709,8 @@
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0073,
           "score": 0,
           "signal": "none"
@@ -2734,29 +2730,29 @@
       "symbol": "PEPE/USD"
     },
     "TRUMP/USD": {
-      "price": 2.9825,
-      "rsi": 12.97,
-      "sma3": 2.985068,
-      "sma9": 3.009226,
-      "sma21": 3.008666,
-      "sma50": 2.992948,
-      "macd_hist": -0.00547,
-      "bb_pct": 0.127,
+      "price": 2.98531,
+      "rsi": 17.86,
+      "sma3": 2.986005,
+      "sma9": 3.009538,
+      "sma21": 3.0088,
+      "sma50": 2.993005,
+      "macd_hist": -0.005291,
+      "bb_pct": 0.161,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1933,
+      "trend_slope": -0.1778,
       "trend_1h": 0.0,
-      "trend_4h": -0.0104,
-      "trend_24h": -0.0335,
+      "trend_4h": -0.0095,
+      "trend_24h": -0.0296,
       "stabilising": true,
       "near_support": true,
       "atr_pct": 0.02,
       "dynamic_stop": 0.03,
-      "dynamic_tp": 0.04,
-      "buy_score": 4.5680000000000005,
+      "dynamic_tp": 0.0399,
+      "buy_score": 3.7680000000000002,
       "sell_score": 2.85,
-      "final_score": 4.5680000000000005,
+      "final_score": 3.7680000000000002,
       "signal": "BULLISH",
       "confidence": 0.481,
       "regime": "recovery",
@@ -2766,21 +2762,20 @@
         "momentum_down",
         "stabilising",
         "support_bounce",
-        "squeeze_building",
-        "pattern_inverted_hammer"
+        "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:32.987269",
+      "timestamp": "2026-04-01T19:19:52.477029",
       "momentum": {
         "momentum_score": 1.6,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0028,
+          "price_change": -0.0019,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.035,
+          "range_pct": 0.043,
           "high_24h": 3.299149,
           "low_24h": 2.97115,
           "score": 2,
@@ -2789,15 +2784,15 @@
         "squeeze": {
           "squeeze_on": true,
           "squeeze_fired": false,
-          "expanding": true,
-          "momentum": -0.04046,
+          "expanding": false,
+          "momentum": -0.03765,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0028,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0019,
           "score": 0,
           "signal": "none"
         },
@@ -2807,11 +2802,9 @@
         ]
       },
       "patterns": {
-        "score": 2,
-        "patterns": [
-          "inverted_hammer"
-        ],
-        "direction": "bull",
+        "score": 0,
+        "patterns": [],
+        "direction": "neutral",
         "trend_down": "True",
         "trend_up": "False"
       },
@@ -2819,50 +2812,50 @@
       "symbol": "TRUMP/USD"
     },
     "BAT/USD": {
-      "price": 0.100168,
-      "rsi": 33.63,
-      "sma3": 0.100298,
-      "sma9": 0.101033,
-      "sma21": 0.099748,
-      "sma50": 0.096858,
-      "macd_hist": -0.000232,
-      "bb_pct": 0.529,
+      "price": 0.100075,
+      "rsi": 31.46,
+      "sma3": 0.100267,
+      "sma9": 0.101023,
+      "sma21": 0.099744,
+      "sma50": 0.096856,
+      "macd_hist": -0.000238,
+      "bb_pct": 0.518,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1585,
+      "trend_slope": -0.1738,
       "trend_1h": 0.0,
-      "trend_4h": -0.0112,
-      "trend_24h": 0.1993,
+      "trend_4h": -0.0121,
+      "trend_24h": 0.1953,
       "stabilising": true,
       "near_support": false,
       "atr_pct": 0.0227,
       "dynamic_stop": 0.0341,
       "dynamic_tp": 0.0455,
-      "buy_score": 2.5600000000000005,
+      "buy_score": 1.7600000000000002,
       "sell_score": 2.35,
-      "final_score": 2.5600000000000005,
-      "signal": "BULLISH",
+      "final_score": 1.7600000000000002,
+      "signal": "BEARISH",
       "confidence": 0.422,
       "regime": "recovery",
       "signals_fired": [
         "rsi_oversold",
         "momentum_down",
         "stabilising",
-        "pattern_hammer"
+        "pattern_doji"
       ],
-      "timestamp": "2026-04-01T19:17:32.994639",
+      "timestamp": "2026-04-01T19:19:52.484497",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0053,
+          "price_change": -0.0062,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.503,
+          "range_pct": 0.494,
           "high_24h": 0.10525,
           "low_24h": 0.095015,
           "score": 0,
@@ -2872,23 +2865,23 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.001808,
+          "momentum": -0.0019,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0053,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0062,
           "score": 0,
           "signal": "none"
         },
         "signals_fired": []
       },
       "patterns": {
-        "score": 3,
+        "score": 1,
         "patterns": [
-          "hammer"
+          "doji"
         ],
         "direction": "bull",
         "trend_down": "True",
@@ -2898,18 +2891,18 @@
       "symbol": "BAT/USD"
     },
     "CRV/USD": {
-      "price": 0.2203865,
-      "rsi": 39.81,
+      "price": 0.220385,
+      "rsi": 39.79,
       "sma3": 0.220986,
-      "sma9": 0.221564,
+      "sma9": 0.221563,
       "sma21": 0.220533,
       "sma50": 0.217366,
-      "macd_hist": -0.000286,
+      "macd_hist": -0.000287,
       "bb_pct": 0.477,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.0813,
+      "trend_slope": -0.0814,
       "trend_1h": 0.0,
       "trend_4h": -0.0124,
       "trend_24h": -0.0126,
@@ -2928,7 +2921,7 @@
         "ma_cross_bear",
         "stabilising"
       ],
-      "timestamp": "2026-04-01T19:17:33.002324",
+      "timestamp": "2026-04-01T19:19:52.491891",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
@@ -2949,13 +2942,13 @@
           "squeeze_on": false,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.003188,
+          "momentum": -0.00319,
           "score": 0,
           "signal": "none"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0075,
           "score": 0,
           "signal": "none"
@@ -3003,7 +2996,7 @@
         "stabilising",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:33.009738",
+      "timestamp": "2026-04-01T19:19:52.499229",
       "momentum": {
         "momentum_score": 0.0,
         "vol_breakout": {
@@ -3029,8 +3022,8 @@
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0053,
           "score": 0,
           "signal": "none"
@@ -3050,21 +3043,21 @@
       "symbol": "GRT/USD"
     },
     "SUSHI/USD": {
-      "price": 0.196099,
-      "rsi": 26.02,
-      "sma3": 0.196299,
-      "sma9": 0.197735,
-      "sma21": 0.197605,
+      "price": 0.1961425,
+      "rsi": 26.75,
+      "sma3": 0.196313,
+      "sma9": 0.19774,
+      "sma21": 0.197607,
       "sma50": 0.195744,
-      "macd_hist": -0.000391,
-      "bb_pct": 0.22,
+      "macd_hist": -0.000388,
+      "bb_pct": 0.227,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.1756,
+      "trend_slope": -0.1719,
       "trend_1h": 0.0,
-      "trend_4h": -0.0132,
-      "trend_24h": 0.0031,
+      "trend_4h": -0.013,
+      "trend_24h": 0.004,
       "stabilising": true,
       "near_support": true,
       "atr_pct": 0.018,
@@ -3083,18 +3076,18 @@
         "support_bounce",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:33.017162",
+      "timestamp": "2026-04-01T19:19:52.506687",
       "momentum": {
         "momentum_score": 1.6,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0061,
+          "price_change": -0.0059,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.055,
+          "range_pct": 0.057,
           "high_24h": 0.226689,
           "low_24h": 0.194305,
           "score": 2,
@@ -3104,14 +3097,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -0.002303,
+          "momentum": -0.002259,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0061,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0059,
           "score": 0,
           "signal": "none"
         },
@@ -3163,7 +3156,7 @@
         "support_bounce",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:33.024660",
+      "timestamp": "2026-04-01T19:19:52.514222",
       "momentum": {
         "momentum_score": 1.6,
         "vol_breakout": {
@@ -3189,8 +3182,8 @@
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
           "alt_move_2h": -0.0049,
           "score": 0,
           "signal": "none"
@@ -3211,52 +3204,51 @@
       "symbol": "XTZ/USD"
     },
     "YFI/USD": {
-      "price": 2440.336,
-      "rsi": 28.19,
-      "sma3": 2444.6295,
-      "sma9": 2449.0775,
-      "sma21": 2469.726262,
-      "sma50": 2462.02667,
-      "macd_hist": -3.925143,
-      "bb_pct": 0.188,
+      "price": 2441.7275,
+      "rsi": 29.63,
+      "sma3": 2445.093333,
+      "sma9": 2449.232111,
+      "sma21": 2469.792524,
+      "sma50": 2462.0545,
+      "macd_hist": -3.836341,
+      "bb_pct": 0.202,
       "vol_ratio": 0.0,
       "vol_strong": false,
       "rsi_divergence": "none",
-      "trend_slope": -0.0847,
+      "trend_slope": -0.0753,
       "trend_1h": 0.0,
-      "trend_4h": -0.0062,
-      "trend_24h": -0.0819,
+      "trend_4h": -0.0056,
+      "trend_24h": -0.0795,
       "stabilising": true,
       "near_support": true,
       "atr_pct": 0.0158,
       "dynamic_stop": 0.03,
-      "dynamic_tp": 0.0317,
-      "buy_score": 1.8880000000000003,
+      "dynamic_tp": 0.0316,
+      "buy_score": 0.9120000000000001,
       "sell_score": 2.85,
-      "final_score": 1.8880000000000003,
+      "final_score": 0.9120000000000001,
       "signal": "BEARISH",
-      "confidence": 0.419,
+      "confidence": 0.386,
       "regime": "recovery",
       "signals_fired": [
         "trend_bear",
         "rsi_oversold",
-        "bb_lower_zone",
         "stabilising",
         "support_bounce",
         "squeeze_building"
       ],
-      "timestamp": "2026-04-01T19:17:33.032066",
+      "timestamp": "2026-04-01T19:19:52.521583",
       "momentum": {
         "momentum_score": 1.6,
         "vol_breakout": {
           "vol_ratio": 0.0,
           "vol_trending": false,
-          "price_change": -0.0018,
+          "price_change": -0.0012,
           "score": 0,
           "signal": "none"
         },
         "price_breakout": {
-          "range_pct": 0.011,
+          "range_pct": 0.016,
           "high_24h": 2705.040697,
           "low_24h": 2437.51,
           "score": 2,
@@ -3266,14 +3258,14 @@
           "squeeze_on": true,
           "squeeze_fired": false,
           "expanding": false,
-          "momentum": -11.3195,
+          "momentum": -9.928,
           "score": 0,
           "signal": "squeeze_building"
         },
         "btc_leading": {
-          "btc_move_2h": -0.0028,
-          "btc_move_1h": -0.0002,
-          "alt_move_2h": -0.0018,
+          "btc_move_2h": -0.0031,
+          "btc_move_1h": -0.0005,
+          "alt_move_2h": -0.0012,
           "score": 0,
           "signal": "none"
         },
@@ -3293,7 +3285,7 @@
       "symbol": "YFI/USD"
     }
   },
-  "last_run": "2026-04-01T19:17:33.047890",
+  "last_run": "2026-04-01T19:19:52.537229",
   "daily_trades": 2,
   "trade_date": "2026-04-01",
   "peak_prices": {
