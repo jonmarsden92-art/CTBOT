@@ -39,7 +39,7 @@ TRAINING_FILE  = Path("logs/training_data.json")
 MODEL_FILE     = Path("logs/xgb_model.json")
 MIN_TRAIN_ROWS = 200    # minimum examples before training
 RETRAIN_EVERY  = 50     # retrain every N new examples
-OUTCOME_HOURS  = 4      # hours to check if trade was profitable
+OUTCOME_HOURS  = 2      # hours to check if trade was profitable
 PROFIT_TARGET  = 0.015  # 1.5% = profitable outcome
 
 
