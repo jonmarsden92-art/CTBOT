@@ -1,331 +1,41 @@
 {
   "version": 2,
-  "total_learned": 79,
+  "total_learned": 49,
   "wins": 32,
   "losses": 17,
-  "win_rate_7d": 0.8571428571428571,
+  "win_rate_7d": 0.857,
   "win_rate_30d": 0.55,
-  "avg_pnl": -0.618996869916604,
-  "sharpe": -0.299,
+  "avg_pnl": -0.619,
+  "sharpe": -0.3,
   "thresholds": {
     "take_profit": 0.022,
     "stop_loss": 0.03,
     "trailing_stop": 0.015,
-    "signal_min": 6,
+    "signal_min": 5,
     "rsi_oversold": 35,
     "rsi_overbought": 65
   },
   "weights": {
     "trend_alignment": 1.0,
     "rsi_divergence": 0.5,
-    "volume_confirm": 0.6,
-    "macd_cross": 0.7,
-    "bb_bounce": 1.8,
-    "momentum": 1.0,
+    "volume_confirm": 0.8,
+    "macd_cross": 0.3,
+    "bb_bounce": 2.0,
+    "momentum": 1.2,
+    "resistance_breakout": 2.0,
+    "rsi_divergence_bear": 2.0,
+    "volume_breakout_bull": 2.0,
+    "momentum_down": 1.15,
+    "support_bounce": 1.5,
+    "trend_bull": 1.75,
     "bb_lower": 2.0,
     "squeeze_building": 1.6,
-    "trend_bull": 1.75,
-    "volume_breakout_bull": 2.0,
-    "rsi_divergence_bear": 2.0,
-    "resistance_breakout": 2.0,
     "near_resistance": 1.45,
     "bb_upper": 1.45,
-    "momentum_down": 1.15,
-    "macd_bull": 0.55,
-    "support_bounce": 1.5
+    "macd_bull": 0.3
   },
-  "symbol_memory": {
-    "DOTUSD": {
-      "wins": 3,
-      "losses": 5,
-      "total_pnl": 0.23947278329339972,
-      "avg_pnl": 0.029934097911674964,
-      "win_rate": 0.375,
-      "trades": 8
-    },
-    "BTCUSD": {
-      "wins": 3,
-      "losses": 5,
-      "total_pnl": 2.0360014326883418,
-      "avg_pnl": 0.2545001790860427,
-      "win_rate": 0.375,
-      "trades": 8
-    },
-    "LTCUSD": {
-      "wins": 2,
-      "losses": 3,
-      "total_pnl": -0.14462789305539642,
-      "avg_pnl": -0.028925578611079285,
-      "win_rate": 0.4,
-      "trades": 5
-    },
-    "XRPUSD": {
-      "wins": 2,
-      "losses": 4,
-      "total_pnl": -4.753858680552803,
-      "avg_pnl": -0.7923097800921338,
-      "win_rate": 0.3333333333333333,
-      "trades": 6
-    },
-    "ETHUSD": {
-      "wins": 2,
-      "losses": 2,
-      "total_pnl": 2.1849434235742557,
-      "avg_pnl": 0.5462358558935639,
-      "win_rate": 0.5,
-      "trades": 4
-    },
-    "AAVEUSD": {
-      "wins": 2,
-      "losses": 2,
-      "total_pnl": -2.2596388785598576,
-      "avg_pnl": -0.5649097196399644,
-      "win_rate": 0.5,
-      "trades": 4
-    },
-    "PEPEUSD": {
-      "wins": 3,
-      "losses": 3,
-      "total_pnl": 2.056683994501785,
-      "avg_pnl": 0.3427806657502975,
-      "win_rate": 0.5,
-      "trades": 6
-    },
-    "SOLUSD": {
-      "wins": 4,
-      "losses": 1,
-      "total_pnl": 3.3854396855008018,
-      "avg_pnl": 0.6770879371001604,
-      "win_rate": 0.8,
-      "trades": 5
-    },
-    "AVAXUSD": {
-      "wins": 3,
-      "losses": 2,
-      "total_pnl": 0.9634681591983535,
-      "avg_pnl": 0.1926936318396707,
-      "win_rate": 0.6,
-      "trades": 5
-    },
-    "LINKUSD": {
-      "wins": 1,
-      "losses": 2,
-      "total_pnl": 0.026217509427849145,
-      "avg_pnl": 0.008739169809283048,
-      "win_rate": 0.3333333333333333,
-      "trades": 3
-    },
-    "UNIUSD": {
-      "wins": 2,
-      "losses": 2,
-      "total_pnl": 0.9915171042607378,
-      "avg_pnl": 0.24787927606518445,
-      "win_rate": 0.5,
-      "trades": 4
-    },
-    "SHIBUSD": {
-      "wins": 2,
-      "losses": 1,
-      "total_pnl": 2.837477766373943,
-      "avg_pnl": 0.9458259221246476,
-      "win_rate": 0.6666666666666666,
-      "trades": 3
-    },
-    "DOGEUSD": {
-      "wins": 1,
-      "losses": 0,
-      "total_pnl": 0.20531604948697402,
-      "avg_pnl": 0.20531604948697402,
-      "win_rate": 1.0,
-      "trades": 1
-    },
-    "SUSHIUSD": {
-      "wins": 1,
-      "losses": 1,
-      "total_pnl": -4.674014621177133,
-      "avg_pnl": -2.3370073105885667,
-      "win_rate": 0.5,
-      "trades": 2
-    },
-    "BCHUSD": {
-      "wins": 2,
-      "losses": 0,
-      "total_pnl": 0.19320166216453316,
-      "avg_pnl": 0.09660083108226658,
-      "win_rate": 1.0,
-      "trades": 2
-    },
-    "XTZUSD": {
-      "wins": 2,
-      "losses": 1,
-      "total_pnl": 0.04596645826356083,
-      "avg_pnl": 0.015322152754520276,
-      "win_rate": 0.6666666666666666,
-      "trades": 3
-    },
-    "YFIUSD": {
-      "wins": 2,
-      "losses": 0,
-      "total_pnl": 5.240983833561672,
-      "avg_pnl": 2.620491916780836,
-      "win_rate": 1.0,
-      "trades": 2
-    },
-    "BATUSD": {
-      "wins": 0,
-      "losses": 2,
-      "total_pnl": -1.8848185780590643,
-      "avg_pnl": -0.9424092890295321,
-      "win_rate": 0.0,
-      "trades": 2
-    },
-    "GRTUSD": {
-      "wins": 1,
-      "losses": 3,
-      "total_pnl": -0.43296472092234684,
-      "avg_pnl": -0.10824118023058671,
-      "win_rate": 0.25,
-      "trades": 4
-    },
-    "CRVUSD": {
-      "wins": 0,
-      "losses": 1,
-      "total_pnl": -4.7793246733073085,
-      "avg_pnl": -4.7793246733073085,
-      "win_rate": 0.0,
-      "trades": 1
-    },
-    "TRUMPUSD": {
-      "wins": 1,
-      "losses": 0,
-      "total_pnl": 3.3367329593744675,
-      "avg_pnl": 3.3367329593744675,
-      "win_rate": 1.0,
-      "trades": 1
-    }
-  },
-  "hour_performance": {
-    "14": {
-      "wins": 4,
-      "losses": 3,
-      "total_pnl": 1.2138101402383676,
-      "trades": 7
-    },
-    "15": {
-      "wins": 2,
-      "losses": 3,
-      "total_pnl": 1.5385864963303462,
-      "trades": 5
-    },
-    "16": {
-      "wins": 4,
-      "losses": 6,
-      "total_pnl": 0.14749528610845,
-      "trades": 10
-    },
-    "17": {
-      "wins": 2,
-      "losses": 7,
-      "total_pnl": -1.377593325458816,
-      "trades": 9
-    },
-    "18": {
-      "wins": 2,
-      "losses": 3,
-      "total_pnl": 0.5394727832933996,
-      "trades": 5
-    },
-    "19": {
-      "wins": 5,
-      "losses": 4,
-      "total_pnl": -1.8029832546304823,
-      "trades": 9
-    },
-    "7": {
-      "wins": 1,
-      "losses": 2,
-      "total_pnl": -3.3910038139274983,
-      "trades": 3
-    },
-    "9": {
-      "wins": 3,
-      "losses": 0,
-      "total_pnl": 3.9250715310431508,
-      "trades": 3
-    },
-    "8": {
-      "wins": 3,
-      "losses": 1,
-      "total_pnl": 5.676198758323954,
-      "trades": 4
-    },
-    "20": {
-      "wins": 2,
-      "losses": 1,
-      "total_pnl": 0.37517288624553347,
-      "trades": 3
-    },
-    "22": {
-      "wins": 2,
-      "losses": 0,
-      "total_pnl": 2.5215527474186454,
-      "trades": 2
-    },
-    "23": {
-      "wins": 3,
-      "losses": 0,
-      "total_pnl": 4.190951834733818,
-      "trades": 3
-    },
-    "5": {
-      "wins": 4,
-      "losses": 0,
-      "total_pnl": 7.983867766651466,
-      "trades": 4
-    },
-    "6": {
-      "wins": 1,
-      "losses": 0,
-      "total_pnl": 4.907161803713537,
-      "trades": 1
-    },
-    "2": {
-      "wins": 0,
-      "losses": 1,
-      "total_pnl": -3.372282345440964,
-      "trades": 1
-    },
-    "3": {
-      "wins": 0,
-      "losses": 4,
-      "total_pnl": -12.337476733131194,
-      "trades": 4
-    },
-    "4": {
-      "wins": 0,
-      "losses": 2,
-      "total_pnl": -3.622906857179897,
-      "trades": 2
-    },
-    "11": {
-      "wins": 1,
-      "losses": 0,
-      "total_pnl": 0.32677163659222513,
-      "trades": 1
-    },
-    "21": {
-      "wins": 0,
-      "losses": 1,
-      "total_pnl": -6.482634998879669,
-      "trades": 1
-    },
-    "0": {
-      "wins": 2,
-      "losses": 0,
-      "total_pnl": 4.054942433992394,
-      "trades": 2
-    }
-  },
+  "symbol_memory": {},
+  "hour_performance": {},
   "regime_performance": {
     "crash": {
       "wins": 0,
@@ -337,78 +47,38 @@
     },
     "recovery": {
       "wins": 20,
-      "losses": 25
+      "losses": 10
     },
     "bull": {
-      "wins": 21,
-      "losses": 13
+      "wins": 12,
+      "losses": 7
     }
   },
   "signal_type_performance": {
     "bb_lower": {
-      "wins": 15,
-      "losses": 3,
-      "trades": 18
-    },
-    "stabilising": {
-      "wins": 15,
-      "losses": 8,
-      "trades": 23
-    },
-    "rsi_oversold": {
-      "wins": 18,
-      "losses": 13,
-      "trades": 31
-    },
-    "trend_bear": {
-      "wins": 14,
-      "losses": 14,
-      "trades": 28
-    },
-    "macd_bull": {
-      "wins": 3,
-      "losses": 9,
-      "trades": 12
-    },
-    "rsi_overbought": {
-      "wins": 14,
-      "losses": 15,
-      "trades": 29
-    },
-    "vol_confirm": {
-      "wins": 12,
-      "losses": 7,
-      "trades": 19
-    },
-    "rsi_divergence_bull": {
-      "wins": 9,
-      "losses": 13,
-      "trades": 22
-    },
-    "ma_cross_bull": {
       "wins": 11,
-      "losses": 9,
-      "trades": 20
-    },
-    "macd_bear": {
-      "wins": 1,
-      "losses": 0,
-      "trades": 1
+      "losses": 3,
+      "trades": 14
     },
     "momentum_down": {
       "wins": 9,
       "losses": 3,
       "trades": 12
     },
-    "squeeze_building": {
-      "wins": 14,
-      "losses": 10,
-      "trades": 24
+    "stabilising": {
+      "wins": 9,
+      "losses": 3,
+      "trades": 12
     },
     "trend_bull": {
-      "wins": 18,
+      "wins": 17,
       "losses": 12,
-      "trades": 30
+      "trades": 29
+    },
+    "rsi_overbought": {
+      "wins": 13,
+      "losses": 7,
+      "trades": 20
     },
     "rsi_divergence_bear": {
       "wins": 10,
@@ -416,29 +86,29 @@
       "trades": 11
     },
     "volume_breakout_bull": {
-      "wins": 8,
-      "losses": 3,
-      "trades": 11
-    },
-    "near_resistance": {
       "wins": 6,
-      "losses": 5,
-      "trades": 11
+      "losses": 3,
+      "trades": 9
     },
-    "volume_breakout_bear": {
+    "rsi_oversold": {
+      "wins": 9,
+      "losses": 3,
+      "trades": 12
+    },
+    "vol_confirm": {
+      "wins": 11,
+      "losses": 2,
+      "trades": 13
+    },
+    "support_bounce": {
       "wins": 3,
       "losses": 0,
       "trades": 3
     },
-    "support_bounce": {
-      "wins": 5,
-      "losses": 2,
-      "trades": 7
-    },
-    "pattern_morning_star": {
-      "wins": 2,
-      "losses": 0,
-      "trades": 2
+    "ma_cross_bull": {
+      "wins": 10,
+      "losses": 5,
+      "trades": 15
     },
     "bb_upper": {
       "wins": 4,
@@ -450,177 +120,114 @@
       "losses": 1,
       "trades": 7
     },
-    "squeeze_bull_breakout": {
+    "near_resistance": {
       "wins": 1,
       "losses": 0,
       "trades": 1
     },
-    "volatility_expanding_bull": {
-      "wins": 2,
-      "losses": 3,
-      "trades": 5
-    },
-    "pattern_three_white_soldiers": {
-      "wins": 1,
-      "losses": 0,
-      "trades": 1
-    },
-    "near_support_range": {
-      "wins": 2,
-      "losses": 3,
-      "trades": 5
-    },
-    "pattern_doji": {
-      "wins": 1,
+    "rsi_divergence_bull": {
+      "wins": 3,
       "losses": 1,
+      "trades": 4
+    },
+    "pattern_morning_star": {
+      "wins": 1,
+      "losses": 0,
+      "trades": 1
+    },
+    "macd_bull": {
+      "wins": 0,
+      "losses": 2,
       "trades": 2
-    },
-    "pattern_shooting_star": {
-      "wins": 0,
-      "losses": 1,
-      "trades": 1
-    },
-    "volume_uptick": {
-      "wins": 0,
-      "losses": 1,
-      "trades": 1
-    },
-    "btc_lagging_boost": {
-      "wins": 0,
-      "losses": 1,
-      "trades": 1
-    },
-    "ma_cross_bear": {
-      "wins": 1,
-      "losses": 0,
-      "trades": 1
     },
     "pattern_hammer": {
       "wins": 1,
       "losses": 0,
       "trades": 1
-    },
-    "pattern_inverted_hammer": {
-      "wins": 1,
-      "losses": 0,
-      "trades": 1
     }
   },
-  "open_trades": {
-    "SUSHIUSD": {
-      "entry_price": 0.1882325,
-      "entry_time": "2026-03-29T00:15:04.519201",
-      "entry_hour": 0,
-      "score": 6.28,
-      "regime": "recovery",
-      "rsi": 4.55,
-      "vol_ratio": 0.0,
-      "trend_slope": -0.2765,
-      "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building",
-        "pattern_inverted_hammer"
-      ]
-    }
-  },
+  "open_trades": {},
   "closed_trades": [
     {
       "symbol": "SHIBUSD",
       "entry": 5.825e-06,
       "exit": 5.83e-06,
-      "pnl_pct": 0.0858369098712438,
+      "pnl_pct": 0.086,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 11.088000000000001,
+      "score": 11.09,
       "rsi": 5.26,
       "vol_ratio": 0.935,
       "signals_fired": [
-        "trend_bear",
-        "rsi_oversold",
-        "macd_bear",
         "bb_lower",
         "momentum_down",
-        "stabilising",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-03-15T07:41:23.674660"
+      "time": "2026-03-15T07:41"
     },
     {
       "symbol": "SOLUSD",
-      "entry": 88.58540832,
-      "exit": 88.75875,
-      "pnl_pct": 0.19567746346423023,
+      "entry": 88.585,
+      "exit": 88.759,
+      "pnl_pct": 0.196,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 6.064,
+      "score": 6.06,
       "rsi": 74.22,
       "vol_ratio": 4.045,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
         "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-15T09:09:27.966275"
+      "time": "2026-03-15T09:09"
     },
     {
       "symbol": "LTCUSD",
-      "entry": 55.2803,
-      "exit": 54.9975,
-      "pnl_pct": -0.5115746477497312,
+      "entry": 55.28,
+      "exit": 54.997,
+      "pnl_pct": -0.512,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 6.064,
+      "score": 6.06,
       "rsi": 69.97,
       "vol_ratio": 4.279,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-15T18:49:10.797731"
+      "time": "2026-03-15T18:49"
     },
     {
       "symbol": "DOGEUSD",
-      "entry": 0.094732,
-      "exit": 0.0949265,
-      "pnl_pct": 0.20531604948697402,
+      "entry": 0.09473,
+      "exit": 0.09493,
+      "pnl_pct": 0.205,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 6.480000000000001,
+      "score": 6.48,
       "rsi": 31.95,
       "vol_ratio": 6.045,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
         "vol_confirm",
         "momentum_down",
-        "stabilising",
-        "volume_breakout_bear",
-        "support_bounce",
-        "squeeze_building"
+        "support_bounce"
       ],
-      "time": "2026-03-15T19:14:14.930942"
+      "time": "2026-03-15T19:14"
     },
     {
       "symbol": "UNIUSD",
-      "entry": 3.995865,
-      "exit": 4.01651,
-      "pnl_pct": 0.516659096340854,
+      "entry": 3.996,
+      "exit": 4.017,
+      "pnl_pct": 0.517,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
@@ -629,21 +236,17 @@
       "vol_ratio": 5.966,
       "signals_fired": [
         "trend_bull",
-        "ma_cross_bull",
         "rsi_overbought",
         "rsi_divergence_bear",
-        "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "squeeze_building"
+        "vol_confirm"
       ],
-      "time": "2026-03-15T20:47:26.331742"
+      "time": "2026-03-15T20:47"
     },
     {
       "symbol": "AVAXUSD",
-      "entry": 9.80355,
-      "exit": 9.8661,
-      "pnl_pct": 0.6380341814954775,
+      "entry": 9.804,
+      "exit": 9.866,
+      "pnl_pct": 0.638,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
@@ -653,41 +256,37 @@
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull",
-        "rsi_overbought",
-        "squeeze_building"
+        "rsi_overbought"
       ],
-      "time": "2026-03-15T22:32:41.659481"
+      "time": "2026-03-15T22:32"
     },
     {
       "symbol": "PEPEUSD",
       "entry": 3.38e-06,
       "exit": 3.405e-06,
-      "pnl_pct": 0.7396449704142067,
+      "pnl_pct": 0.74,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 7.5920000000000005,
+      "score": 7.59,
       "rsi": 68.18,
       "vol_ratio": 0.0,
       "signals_fired": [
         "ma_cross_bull",
         "rsi_overbought",
-        "macd_bull",
-        "support_bounce",
-        "squeeze_building",
-        "pattern_morning_star"
+        "support_bounce"
       ],
-      "time": "2026-03-15T22:38:57.617660"
+      "time": "2026-03-15T22:38"
     },
     {
       "symbol": "SOLUSD",
       "entry": 91.057,
-      "exit": 92.5323,
-      "pnl_pct": 1.6201939444523805,
+      "exit": 92.532,
+      "pnl_pct": 1.62,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 8.888,
+      "score": 8.89,
       "rsi": 87.45,
       "vol_ratio": 1.364,
       "signals_fired": [
@@ -695,20 +294,19 @@
         "rsi_overbought",
         "bb_upper",
         "vol_confirm",
-        "resistance_breakout",
-        "squeeze_bull_breakout"
+        "resistance_breakout"
       ],
-      "time": "2026-03-15T23:14:26.898882"
+      "time": "2026-03-15T23:14"
     },
     {
       "symbol": "AAVEUSD",
-      "entry": 117.368811881,
+      "entry": 117.37,
       "exit": 118.65,
-      "pnl_pct": 1.0915916234195169,
+      "pnl_pct": 1.092,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 10.0408,
+      "score": 10.04,
       "rsi": 94.42,
       "vol_ratio": 5.292,
       "signals_fired": [
@@ -716,21 +314,19 @@
         "rsi_overbought",
         "bb_upper",
         "vol_confirm",
-        "volume_breakout_bull",
-        "resistance_breakout",
-        "volatility_expanding_bull"
+        "resistance_breakout"
       ],
-      "time": "2026-03-16T05:33:27.520836"
+      "time": "2026-03-16T05:33"
     },
     {
       "symbol": "SHIBUSD",
       "entry": 6.17e-06,
       "exit": 6.395e-06,
-      "pnl_pct": 3.646677471636946,
+      "pnl_pct": 3.647,
       "won": true,
       "reason": "take_profit",
       "regime": "bull",
-      "score": 16.9554,
+      "score": 16.96,
       "rsi": 80.43,
       "vol_ratio": 7.303,
       "signals_fired": [
@@ -738,61 +334,57 @@
         "rsi_overbought",
         "bb_upper",
         "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "volatility_expanding_bull"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-16T08:12:53.343473"
+      "time": "2026-03-16T08:12"
     },
     {
       "symbol": "PEPEUSD",
       "entry": 3.77e-06,
       "exit": 3.955e-06,
-      "pnl_pct": 4.907161803713537,
+      "pnl_pct": 4.907,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 15.4154,
-      "rsi": NaN,
+      "score": 15.42,
+      "rsi": 0,
       "vol_ratio": 4.626,
       "signals_fired": [
         "trend_bull",
         "bb_upper",
         "vol_confirm",
-        "volume_breakout_bull",
-        "squeeze_building"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-16T08:53:03.799622"
+      "time": "2026-03-16T08:53"
     },
     {
       "symbol": "UNIUSD",
       "entry": 4.1007,
-      "exit": 4.139525,
-      "pnl_pct": 0.9467895725120129,
+      "exit": 4.1395,
+      "pnl_pct": 0.947,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 15.323000000000002,
+      "score": 15.32,
       "rsi": 49.51,
       "vol_ratio": 0.02,
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull",
         "rsi_divergence_bear",
-        "resistance_breakout",
-        "squeeze_building"
+        "resistance_breakout"
       ],
-      "time": "2026-03-16T14:03:42.181298"
+      "time": "2026-03-16T14:03"
     },
     {
       "symbol": "SUSHIUSD",
-      "entry": 0.2127865,
-      "exit": 0.216635,
-      "pnl_pct": 1.8086203777025351,
+      "entry": 0.21279,
+      "exit": 0.21664,
+      "pnl_pct": 1.809,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 5.032,
+      "score": 5.03,
       "rsi": 63.03,
       "vol_ratio": 0.0,
       "signals_fired": [
@@ -800,17 +392,17 @@
         "ma_cross_bull",
         "resistance_breakout"
       ],
-      "time": "2026-03-16T14:31:08.731785"
+      "time": "2026-03-16T14:31"
     },
     {
       "symbol": "BCHUSD",
-      "entry": 476.010990099,
-      "exit": 476.7545,
-      "pnl_pct": 0.15619595271221526,
+      "entry": 476.01,
+      "exit": 476.75,
+      "pnl_pct": 0.156,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 10.8262,
+      "score": 10.83,
       "rsi": 74.12,
       "vol_ratio": 3.621,
       "signals_fired": [
@@ -820,17 +412,17 @@
         "vol_confirm",
         "volume_breakout_bull"
       ],
-      "time": "2026-03-16T15:08:10.253878"
+      "time": "2026-03-16T15:08"
     },
     {
       "symbol": "XRPUSD",
       "entry": 1.4871,
-      "exit": 1.503925,
-      "pnl_pct": 1.1313966780983031,
+      "exit": 1.50393,
+      "pnl_pct": 1.131,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 12.6896,
+      "score": 12.69,
       "rsi": 76.91,
       "vol_ratio": 0.002,
       "signals_fired": [
@@ -838,20 +430,19 @@
         "ma_cross_bull",
         "rsi_overbought",
         "rsi_divergence_bear",
-        "resistance_breakout",
-        "pattern_three_white_soldiers"
+        "resistance_breakout"
       ],
-      "time": "2026-03-16T16:36:48.787420"
+      "time": "2026-03-16T16:36"
     },
     {
       "symbol": "ETHUSD",
       "entry": 2284.69,
-      "exit": 2330.5705,
-      "pnl_pct": 2.0081717869820306,
+      "exit": 2330.57,
+      "pnl_pct": 2.008,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 11.7348,
+      "score": 11.73,
       "rsi": 61.11,
       "vol_ratio": 0.839,
       "signals_fired": [
@@ -859,13 +450,13 @@
         "rsi_divergence_bear",
         "near_resistance"
       ],
-      "time": "2026-03-16T18:11:58.478162"
+      "time": "2026-03-16T18:11"
     },
     {
       "symbol": "XTZUSD",
-      "entry": 0.3804245,
+      "entry": 0.38042,
       "exit": 0.3933,
-      "pnl_pct": 3.3845086212901596,
+      "pnl_pct": 3.385,
       "won": true,
       "reason": "take_profit",
       "regime": "bull",
@@ -875,20 +466,19 @@
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull",
-        "rsi_overbought",
-        "near_support_range"
+        "rsi_overbought"
       ],
-      "time": "2026-03-16T18:49:53.887881"
+      "time": "2026-03-16T18:49"
     },
     {
       "symbol": "YFIUSD",
-      "entry": 2579.9335,
-      "exit": 2699.029,
-      "pnl_pct": 4.616223635221601,
+      "entry": 2579.93,
+      "exit": 2699.03,
+      "pnl_pct": 4.616,
       "won": true,
       "reason": "take_profit",
       "regime": "bull",
-      "score": 5.744,
+      "score": 5.74,
       "rsi": 55.97,
       "vol_ratio": 5.754,
       "signals_fired": [
@@ -897,55 +487,52 @@
         "vol_confirm",
         "volume_breakout_bull"
       ],
-      "time": "2026-03-16T19:40:09.865229"
+      "time": "2026-03-16T19:40"
     },
     {
       "symbol": "DOTUSD",
       "entry": 1.60655,
       "exit": 1.61843,
-      "pnl_pct": 0.7394727832933997,
+      "pnl_pct": 0.739,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 9.1476,
+      "score": 9.15,
       "rsi": 63.11,
       "vol_ratio": 0.148,
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull"
       ],
-      "time": "2026-03-17T02:52:53.397413"
+      "time": "2026-03-17T02:52"
     },
     {
       "symbol": "PEPEUSD",
       "entry": 3.99e-06,
       "exit": 3.95e-06,
-      "pnl_pct": -1.0025062656641508,
+      "pnl_pct": -1.003,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 5.04504,
+      "score": 5.05,
       "rsi": 95.0,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull",
-        "rsi_overbought",
-        "squeeze_building",
-        "pattern_doji",
-        "pattern_shooting_star"
+        "rsi_overbought"
       ],
-      "time": "2026-03-17T02:52:53.430669"
+      "time": "2026-03-17T02:52"
     },
     {
       "symbol": "LTCUSD",
       "entry": 58.315,
-      "exit": 58.5873,
-      "pnl_pct": 0.4669467546943347,
+      "exit": 58.587,
+      "pnl_pct": 0.467,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 13.705999999999998,
+      "score": 13.71,
       "rsi": 78.61,
       "vol_ratio": 4.423,
       "signals_fired": [
@@ -956,152 +543,141 @@
         "volume_breakout_bull",
         "resistance_breakout"
       ],
-      "time": "2026-03-17T03:07:34.304329"
+      "time": "2026-03-17T03:07"
     },
     {
       "symbol": "XRPUSD",
-      "entry": 1.599955,
+      "entry": 1.59996,
       "exit": 1.546,
-      "pnl_pct": -3.372282345440964,
+      "pnl_pct": -3.372,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 10.904299999999997,
+      "score": 10.9,
       "rsi": 91.0,
       "vol_ratio": 0.767,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
         "bb_upper",
-        "resistance_breakout",
-        "volatility_expanding_bull"
+        "resistance_breakout"
       ],
-      "time": "2026-03-17T03:36:46.394602"
+      "time": "2026-03-17T03:36"
     },
     {
       "symbol": "AVAXUSD",
-      "entry": 10.25065,
-      "exit": 10.286003,
-      "pnl_pct": 0.3448854462887608,
+      "entry": 10.251,
+      "exit": 10.286,
+      "pnl_pct": 0.345,
       "won": true,
       "reason": "trailing_stop",
       "regime": "bull",
-      "score": 13.6136,
+      "score": 13.61,
       "rsi": 22.71,
       "vol_ratio": 0.011,
       "signals_fired": [
-        "trend_bull",
         "rsi_oversold",
         "rsi_divergence_bear",
-        "momentum_down",
-        "stabilising",
-        "pattern_doji"
+        "momentum_down"
       ],
-      "time": "2026-03-17T04:50:49.611096"
+      "time": "2026-03-17T04:50"
     },
     {
       "symbol": "SHIBUSD",
       "entry": 6.145e-06,
       "exit": 6.09e-06,
-      "pnl_pct": -0.8950366151342469,
+      "pnl_pct": -0.895,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 11.6578,
+      "score": 11.66,
       "rsi": 37.78,
       "vol_ratio": 0.0,
       "signals_fired": [
         "ma_cross_bull",
         "stabilising"
       ],
-      "time": "2026-03-17T04:50:49.653626"
+      "time": "2026-03-17T04:50"
     },
     {
       "symbol": "BATUSD",
       "entry": 0.10914,
       "exit": 0.10722,
-      "pnl_pct": -1.7592083562396967,
+      "pnl_pct": -1.759,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 12.66265,
+      "score": 12.66,
       "rsi": 63.7,
       "vol_ratio": 4.38,
       "signals_fired": [
         "trend_bull",
         "vol_confirm",
-        "volume_breakout_bull",
-        "squeeze_building"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-17T05:01:12.840914"
+      "time": "2026-03-17T05:01"
     },
     {
       "symbol": "UNIUSD",
       "entry": 4.033,
       "exit": 4.018,
-      "pnl_pct": -0.3719315645921291,
+      "pnl_pct": -0.372,
       "won": false,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 10.189,
+      "score": 10.19,
       "rsi": 5.6,
       "vol_ratio": 1.029,
       "signals_fired": [
         "rsi_oversold",
         "bb_lower",
-        "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building"
+        "momentum_down"
       ],
-      "time": "2026-03-17T06:44:24.470163"
+      "time": "2026-03-17T06:44"
     },
     {
       "symbol": "BATUSD",
-      "entry": 0.1086695,
-      "exit": 0.108533,
-      "pnl_pct": -0.12561022181936765,
+      "entry": 0.10867,
+      "exit": 0.10853,
+      "pnl_pct": -0.126,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 10.9825,
+      "score": 10.98,
       "rsi": 42.88,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
-        "ma_cross_bull",
-        "near_support_range",
-        "squeeze_building"
+        "ma_cross_bull"
       ],
-      "time": "2026-03-17T08:01:28.674999"
+      "time": "2026-03-17T08:01"
     },
     {
       "symbol": "XRPUSD",
-      "entry": 1.5476272275,
+      "entry": 1.54763,
       "exit": 1.5067,
-      "pnl_pct": -2.6445145686738125,
+      "pnl_pct": -2.645,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 8.992999999999999,
+      "score": 8.99,
       "rsi": 48.16,
       "vol_ratio": 0.889,
       "signals_fired": [
         "trend_bull",
-        "rsi_divergence_bear",
-        "volatility_expanding_bull"
+        "rsi_divergence_bear"
       ],
-      "time": "2026-03-17T10:08:57.916221"
+      "time": "2026-03-17T10:08"
     },
     {
       "symbol": "ETHUSD",
       "entry": 2322.57,
-      "exit": 2330.1595,
-      "pnl_pct": 0.32677163659222513,
+      "exit": 2330.16,
+      "pnl_pct": 0.327,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 7.5095,
+      "score": 7.51,
       "rsi": 60.97,
       "vol_ratio": 1.029,
       "signals_fired": [
@@ -1109,17 +685,17 @@
         "rsi_divergence_bull",
         "pattern_morning_star"
       ],
-      "time": "2026-03-17T14:08:46.464363"
+      "time": "2026-03-17T14:08"
     },
     {
       "symbol": "BCHUSD",
       "entry": 472.9,
       "exit": 473.075,
-      "pnl_pct": 0.03700570945231791,
+      "pnl_pct": 0.037,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 7.2795,
+      "score": 7.28,
       "rsi": 0.0,
       "vol_ratio": 0.0,
       "signals_fired": [
@@ -1128,207 +704,191 @@
         "momentum_down",
         "stabilising"
       ],
-      "time": "2026-03-17T15:23:17.032402"
+      "time": "2026-03-17T15:23"
     },
     {
       "symbol": "GRTUSD",
-      "entry": 0.02787615,
+      "entry": 0.02788,
       "exit": 0.027801,
-      "pnl_pct": -0.2695852906516844,
+      "pnl_pct": -0.27,
       "won": false,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 5.0255,
+      "score": 5.03,
       "rsi": 39.43,
       "vol_ratio": 13.857,
       "signals_fired": [
         "trend_bull",
         "vol_confirm",
-        "volume_breakout_bull",
-        "near_resistance",
-        "squeeze_building"
+        "volume_breakout_bull"
       ],
-      "time": "2026-03-17T16:37:01.354776"
+      "time": "2026-03-17T16:37"
     },
     {
       "symbol": "LINKUSD",
       "entry": 9.8644,
-      "exit": 9.886715,
-      "pnl_pct": 0.22621750942784916,
+      "exit": 9.8867,
+      "pnl_pct": 0.226,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 5.427999999999999,
+      "score": 5.43,
       "rsi": 73.89,
       "vol_ratio": 0.0,
       "signals_fired": [
         "ma_cross_bull",
         "rsi_overbought"
       ],
-      "time": "2026-03-17T17:55:35.652438"
+      "time": "2026-03-17T17:55"
     },
     {
       "symbol": "AVAXUSD",
       "entry": 10.282,
       "exit": 10.28,
-      "pnl_pct": -0.01945146858588473,
+      "pnl_pct": -0.019,
       "won": false,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 6.862049999999999,
+      "score": 6.86,
       "rsi": 60.79,
       "vol_ratio": 2.996,
       "signals_fired": [
         "ma_cross_bull",
-        "rsi_divergence_bull",
-        "volume_uptick",
-        "near_support_range",
-        "btc_lagging_boost"
+        "rsi_divergence_bull"
       ],
-      "time": "2026-03-17T19:21:59.960196"
+      "time": "2026-03-17T19:21"
     },
     {
       "symbol": "GRTUSD",
-      "entry": 0.0280229,
-      "exit": 0.02774895,
-      "pnl_pct": -0.9775933254588158,
+      "entry": 0.028023,
+      "exit": 0.027749,
+      "pnl_pct": -0.978,
       "won": false,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 6.2215,
+      "score": 6.22,
       "rsi": 94.51,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
-        "macd_bull",
-        "near_resistance"
+        "macd_bull"
       ],
-      "time": "2026-03-17T20:01:38.919315"
+      "time": "2026-03-17T20:01"
     },
     {
       "symbol": "PEPEUSD",
       "entry": 3.845e-06,
       "exit": 3.72e-06,
-      "pnl_pct": -3.2509752925877677,
+      "pnl_pct": -3.251,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 19.239499999999996,
+      "score": 19.24,
       "rsi": 0.0,
       "vol_ratio": 0.05,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
         "momentum_down",
-        "stabilising",
-        "near_support_range",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-03-18T03:16:21.361153"
+      "time": "2026-03-18T03:16"
     },
     {
       "symbol": "CRVUSD",
       "entry": 0.257505,
       "exit": 0.245198,
-      "pnl_pct": -4.7793246733073085,
+      "pnl_pct": -4.779,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 7.653249999999999,
+      "score": 7.65,
       "rsi": 66.49,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
-        "rsi_overbought",
-        "near_resistance",
-        "volatility_expanding_bull"
+        "rsi_overbought"
       ],
-      "time": "2026-03-18T12:16:38.860086"
+      "time": "2026-03-18T12:16"
     },
     {
       "symbol": "GRTUSD",
-      "entry": 0.0280653,
+      "entry": 0.028065,
       "exit": 0.02718,
-      "pnl_pct": -3.154429134910377,
+      "pnl_pct": -3.154,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 7.029000000000001,
+      "score": 7.03,
       "rsi": 48.29,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
-        "ma_cross_bull",
-        "near_resistance",
-        "squeeze_building"
+        "ma_cross_bull"
       ],
-      "time": "2026-03-18T14:01:05.416001"
+      "time": "2026-03-18T14:01"
     },
     {
       "symbol": "SUSHIUSD",
       "entry": 0.22315,
       "exit": 0.208684,
-      "pnl_pct": -6.482634998879669,
+      "pnl_pct": -6.483,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 12.201499999999998,
+      "score": 12.2,
       "rsi": 77.71,
       "vol_ratio": 1.0,
       "signals_fired": [
         "trend_bull",
         "rsi_overbought",
         "macd_bull",
-        "bb_upper",
-        "squeeze_building"
+        "bb_upper"
       ],
-      "time": "2026-03-18T14:17:55.137279"
+      "time": "2026-03-18T14:17"
     },
     {
       "symbol": "XTZUSD",
-      "entry": 0.4000965,
+      "entry": 0.4001,
       "exit": 0.384409,
-      "pnl_pct": -3.9209290758604536,
+      "pnl_pct": -3.921,
       "won": false,
       "reason": "stop_loss",
       "regime": "bull",
-      "score": 6.3709999999999996,
+      "score": 6.37,
       "rsi": 70.32,
       "vol_ratio": 1.0,
       "signals_fired": [
         "trend_bull",
-        "rsi_overbought",
-        "squeeze_building"
+        "rsi_overbought"
       ],
-      "time": "2026-03-18T14:28:37.601994"
+      "time": "2026-03-18T14:28"
     },
     {
       "symbol": "YFIUSD",
       "entry": 2723.605,
       "exit": 2740.621,
-      "pnl_pct": 0.6247601983400705,
+      "pnl_pct": 0.625,
       "won": true,
       "reason": "signal_sell",
       "regime": "bull",
-      "score": 9.878499999999999,
+      "score": 9.88,
       "rsi": 67.9,
       "vol_ratio": 0.0,
       "signals_fired": [
         "trend_bull",
         "ma_cross_bull",
         "rsi_overbought",
-        "rsi_divergence_bear",
-        "near_resistance"
+        "rsi_divergence_bear"
       ],
-      "time": "2026-03-19T22:37:36.709932"
+      "time": "2026-03-19T22:37"
     },
     {
       "symbol": "SOLUSD",
       "entry": 82.0428,
       "exit": 82.7823,
-      "pnl_pct": 0.9013588029662648,
+      "pnl_pct": 0.901,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
@@ -1336,24 +896,20 @@
       "rsi": 17.07,
       "vol_ratio": 8.146,
       "signals_fired": [
-        "ma_cross_bear",
         "rsi_oversold",
         "rsi_divergence_bull",
         "bb_lower",
         "vol_confirm",
         "momentum_down",
-        "stabilising",
-        "volume_breakout_bear",
-        "near_support_range",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-03-28T22:26:45.967448"
+      "time": "2026-03-28T22:26"
     },
     {
       "symbol": "SOLUSD",
       "entry": 82.12785,
       "exit": 82.7177,
-      "pnl_pct": 0.7182094746179262,
+      "pnl_pct": 0.718,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
@@ -1361,21 +917,19 @@
       "rsi": 33.11,
       "vol_ratio": 0.065,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
         "momentum_down",
         "stabilising",
-        "squeeze_building",
         "pattern_hammer"
       ],
-      "time": "2026-03-29T04:21:50.414502"
+      "time": "2026-03-29T04:21"
     },
     {
       "symbol": "PEPEUSD",
       "entry": 3.275e-06,
       "exit": 3.3e-06,
-      "pnl_pct": 0.7633587786259598,
+      "pnl_pct": 0.763,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
@@ -1387,81 +941,70 @@
         "bb_lower",
         "vol_confirm",
         "momentum_down",
-        "stabilising",
-        "volume_breakout_bear",
-        "support_bounce",
-        "squeeze_building",
-        "pattern_inverted_hammer"
+        "stabilising"
       ],
-      "time": "2026-03-29T05:47:30.795583"
+      "time": "2026-03-29T05:47"
     },
     {
       "symbol": "XRPUSD",
       "entry": 1.33015,
       "exit": 1.33456,
-      "pnl_pct": 0.3315415554636714,
+      "pnl_pct": 0.332,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 6.5280000000000005,
+      "score": 6.53,
       "rsi": 43.84,
       "vol_ratio": 0.849,
       "signals_fired": [
-        "trend_bear",
         "rsi_divergence_bull",
         "bb_lower",
-        "support_bounce",
-        "squeeze_building"
+        "support_bounce"
       ],
-      "time": "2026-03-29T06:06:24.012260"
+      "time": "2026-03-29T06:06"
     },
     {
       "symbol": "AAVEUSD",
       "entry": 96.3944,
-      "exit": 93.164001465,
-      "pnl_pct": -3.351230501979374,
+      "exit": 93.164,
+      "pnl_pct": -3.351,
       "won": false,
       "reason": "stop_loss",
       "regime": "recovery",
-      "score": 6.552,
+      "score": 6.55,
       "rsi": 21.78,
       "vol_ratio": 0.0,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
         "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-03-29T22:47:03.236571"
+      "time": "2026-03-29T22:47"
     },
     {
       "symbol": "BTCUSD",
       "entry": 65800.773,
       "exit": 67337.88,
-      "pnl_pct": 2.3360014326883416,
+      "pnl_pct": 2.336,
       "won": true,
       "reason": "take_profit",
       "regime": "recovery",
-      "score": 9.264000000000001,
+      "score": 9.264,
       "rsi": 28.04,
       "vol_ratio": 0.687,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
-        "stabilising",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-03-30T04:08:02.348786"
+      "time": "2026-03-30T04:08"
     },
     {
       "symbol": "GRTUSD",
-      "entry": 0.02356095,
+      "entry": 0.02356,
       "exit": 0.024496,
-      "pnl_pct": 3.968643030098531,
+      "pnl_pct": 3.969,
       "won": true,
       "reason": "take_profit",
       "regime": "bull",
@@ -1469,177 +1012,62 @@
       "rsi": 38.89,
       "vol_ratio": 0.0,
       "signals_fired": [
-        "trend_bear",
         "bb_lower",
         "stabilising"
       ],
-      "time": "2026-03-30T08:32:01.863546"
+      "time": "2026-03-30T08:32"
     },
     {
       "symbol": "TRUMPUSD",
       "entry": 2.9415,
       "exit": 3.03965,
-      "pnl_pct": 3.3367329593744675,
+      "pnl_pct": 3.337,
       "won": true,
       "reason": "signal_sell",
       "regime": "recovery",
-      "score": 7.232000000000001,
+      "score": 7.232,
       "rsi": 16.93,
       "vol_ratio": 1.0,
       "signals_fired": [
-        "trend_bear",
         "rsi_oversold",
         "bb_lower",
         "momentum_down",
-        "stabilising",
-        "near_resistance",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-04-01T12:46:01.647713"
+      "time": "2026-04-01T12:46"
     },
     {
       "symbol": "XTZUSD",
-      "entry": 0.3491665,
+      "entry": 0.349167,
       "exit": 0.3512,
-      "pnl_pct": 0.5823869128338548,
+      "pnl_pct": 0.582,
       "won": true,
       "reason": "trailing_stop",
       "regime": "recovery",
-      "score": 7.080000000000002,
+      "score": 7.08,
       "rsi": 3.24,
       "vol_ratio": 1.0,
       "signals_fired": [
         "rsi_oversold",
         "bb_lower",
         "momentum_down",
-        "stabilising",
-        "support_bounce",
-        "squeeze_building"
+        "stabilising"
       ],
-      "time": "2026-04-01T15:42:54.740381"
+      "time": "2026-04-01T15:42"
     }
   ],
   "calibration_log": [
     {
-      "time": "2026-03-14T20:00:00",
+      "time": "2026-04-07T00:00:00",
       "changes": [
-        "Manual reset after day 1 analysis",
-        "TP reset to 2.5%",
-        "RSI thresholds reset to sensible defaults",
-        "bb_bounce weight boosted to 1.8 (4W/0L)",
-        "signal_min raised to 5",
-        "Bad signal weights reduced"
+        "Full reset from closed_trades truth",
+        "macd_bull=0.3 (disabled)",
+        "bb_lower=2.0 (max)",
+        "signal_min=5"
       ],
-      "wr20": 0.35,
-      "avg_pnl": -0.01
-    },
-    {
-      "time": "2026-03-16T08:12:53.343659",
-      "changes": [
-        "bb_lower->1.15 (winning)",
-        "squeeze_building->1.15 (winning)",
-        "trend_bull->1.15 (winning)",
-        "volume_breakout_bull->1.15 (winning)"
-      ],
-      "wr20": 0.9,
-      "avg_pnl": 0.823
-    },
-    {
-      "time": "2026-03-16T16:36:48.787596",
-      "changes": [
-        "bb_lower->1.3 (winning)",
-        "squeeze_building->1.3 (winning)",
-        "trend_bull->1.3 (winning)",
-        "rsi_divergence_bear->1.15 (winning)",
-        "volume_breakout_bull->1.3 (winning)",
-        "resistance_breakout->1.15 (winning)"
-      ],
-      "wr20": 0.933,
-      "avg_pnl": 1.145
-    },
-    {
-      "time": "2026-03-17T02:52:53.430895",
-      "changes": [
-        "bb_lower->1.45 (winning)",
-        "squeeze_building->1.45 (winning)",
-        "trend_bull->1.45 (winning)",
-        "rsi_divergence_bear->1.3 (winning)",
-        "volume_breakout_bull->1.45 (winning)",
-        "near_resistance->1.15 (winning)",
-        "resistance_breakout->1.3 (winning)"
-      ],
-      "wr20": 0.9,
-      "avg_pnl": 1.346
-    },
-    {
-      "time": "2026-03-17T05:01:12.841144",
-      "changes": [
-        "bb_lower->1.6 (winning)",
-        "squeeze_building->1.6 (winning)",
-        "trend_bull->1.6 (winning)",
-        "rsi_divergence_bear->1.45 (winning)",
-        "volume_breakout_bull->1.6 (winning)",
-        "near_resistance->1.3 (winning)",
-        "bb_upper->1.15 (winning)",
-        "resistance_breakout->1.45 (winning)"
-      ],
-      "wr20": 0.8,
-      "avg_pnl": 1.061
-    },
-    {
-      "time": "2026-03-17T15:23:17.032591",
-      "changes": [
-        "bb_lower->1.75 (winning)",
-        "momentum_down->1.15 (winning)",
-        "trend_bull->1.75 (winning)",
-        "rsi_divergence_bear->1.6 (winning)",
-        "volume_breakout_bull->1.75 (winning)",
-        "near_resistance->1.45 (winning)",
-        "bb_upper->1.3 (winning)",
-        "resistance_breakout->1.6 (winning)"
-      ],
-      "wr20": 0.65,
-      "avg_pnl": 0.535
-    },
-    {
-      "time": "2026-03-18T03:16:21.361342",
-      "changes": [
-        "bb_lower->1.9 (winning)",
-        "macd_bull->0.85 (losing)",
-        "rsi_divergence_bear->1.75 (winning)",
-        "volume_breakout_bull->1.9 (winning)",
-        "bb_upper->1.45 (winning)",
-        "resistance_breakout->1.75 (winning)"
-      ],
-      "wr20": 0.45,
-      "avg_pnl": -0.127
-    },
-    {
-      "time": "2026-03-19T22:37:36.710107",
-      "changes": [
-        "TP->0.022 (bank faster)",
-        "SigMin->6",
-        "bb_lower->2.0 (winning)",
-        "macd_bull->0.7 (losing)",
-        "rsi_divergence_bear->1.9 (winning)",
-        "volume_breakout_bull->2.0 (winning)",
-        "resistance_breakout->1.9 (winning)"
-      ],
-      "wr20": 0.3,
-      "avg_pnl": -1.5
-    },
-    {
-      "time": "2026-03-29T22:47:03.236764",
-      "changes": [
-        "bb_lower->2.0 (winning)",
-        "macd_bull->0.55 (losing)",
-        "rsi_divergence_bear->2.0 (winning)",
-        "volume_breakout_bull->2.0 (winning)",
-        "resistance_breakout->2.0 (winning)"
-      ],
-      "wr20": 0.4,
-      "avg_pnl": -1.271
+      "wr20": 0.55,
+      "avg_pnl": -0.619
     }
   ],
-  "last_calibrated": "2026-03-29T22:47:03.236759"
+  "last_calibrated": "2026-04-07T00:00:00"
 }
