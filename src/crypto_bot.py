@@ -376,21 +376,16 @@ def agent_calibrate(agent: dict):
 
 def agent_log_summary(agent: dict):
     n = agent["total_learned"]
-    # Only calculate win rate if we have enough closed trades for it to be meaningful
+    # Always recount from closed_trades as single source of truth
     closed = agent.get("closed_trades", [])
-    if len(closed) >= 5:
+    if len(closed) >= 3:
         r7  = closed[-7:]
         r20 = closed[-20:]
+        agent["wins"]         = sum(1 for t in closed if t.get("won"))
+        agent["losses"]       = sum(1 for t in closed if not t.get("won"))
         agent["win_rate_7d"]  = sum(1 for t in r7  if t.get("won")) / len(r7)
         agent["win_rate_30d"] = sum(1 for t in r20 if t.get("won")) / len(r20)
         agent["avg_pnl"]      = sum(t.get("pnl_pct", 0) for t in r20) / len(r20)
-        agent["wins"]         = sum(1 for t in closed if t.get("won"))
-        agent["losses"]       = sum(1 for t in closed if not t.get("won"))
-    elif len(closed) > 0:
-        # Too few trades — show neutral until we have enough data
-        agent["win_rate_7d"]  = 0.5
-        agent["win_rate_30d"] = 0.5
-        log.info("🧠 Agent: only " + str(len(closed)) + " closed trades — win rate not meaningful yet")
     log.info("🧠 Agent | n=" + str(n) +
              " WR7=" + str(round(agent["win_rate_7d"] * 100)) + "%" +
              " WR30=" + str(round(agent["win_rate_30d"] * 100)) + "%" +
@@ -667,7 +662,7 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
             buy_score += 5 * bw   # highest boost — most reliable signal
             signals_fired.append("bb_lower")
         elif bb_pct_v < 0.20:
-            buy_score += 2 * bw
+            buy_score += 3 * bw   # boosted — bb_lower_zone also reliable
             signals_fired.append("bb_lower_zone")
         elif bb_pct_v > 0.90:
             sell_score += 3 * bw
@@ -1048,12 +1043,15 @@ def run_bot():
 
     # Run ML predictor — update outcomes and retrain if ready
     sentiment_score = sentiment_data.get("score", 50) if sentiment_data else 50
-    if MODULES_LOADED and training_data:
+    if MODULES_LOADED:
         try:
-            training_data, ml_model = run_predictor(training_data, all_bars, ml_model)
+            if training_data:
+                training_data, ml_model = run_predictor(training_data, all_bars, ml_model)
             labelled   = sum(1 for e in training_data if e.get("outcome") in (0, 1))
             pending    = sum(1 for e in training_data if e.get("outcome") is None)
             log.info("🤖 ML: " + str(labelled) + " labelled | " + str(pending) + " pending")
+            # Force save immediately so outcomes persist between sessions
+            save_training_data(training_data)
         except Exception as e:
             log.debug("Predictor error: " + str(e))
 
@@ -1112,12 +1110,13 @@ def run_bot():
                 analysis["signals_fired"].append("btc_lagging_boost")
 
         # Recalculate signal after ALL module adjustments
-        # Minimum score of 7 always — was letting score=0.5 trades through
-        sig_min = max(agent["thresholds"]["signal_min"], 7)
+        sig_min = agent["thresholds"]["signal_min"]  # agent calibrates this
         if regime == "bear":
-            sig_min = max(sig_min, 8)
+            sig_min = max(sig_min, 6)   # stricter in bear
         elif regime == "recovery":
-            sig_min = max(sig_min, 7)
+            sig_min = max(sig_min, 5)   # normal in recovery
+        elif regime == "bull":
+            sig_min = max(sig_min, 4)   # more relaxed in bull
         bs = analysis["buy_score"]
         ss = analysis["sell_score"]
         if bs >= sig_min and bs > ss:
