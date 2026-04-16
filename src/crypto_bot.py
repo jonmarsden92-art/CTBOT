@@ -36,7 +36,8 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Dict
 from pathlib import Path
 
-import alpaca_trade_api as tradeapi
+# Broker adapter — swap between Alpaca and Crypto.com here
+from cryptocom_api import CryptoComAPI, create_api, to_cdc, from_cdc
 import pandas as pd
 import numpy as np
 
@@ -75,9 +76,8 @@ except ImportError as e:
     log.warning("⚠️  Intelligence module not loaded: " + str(e))
     log.warning("⚠️  Running with core strategy only")
 
-ALPACA_API_KEY    = os.environ["ALPACA_API_KEY"]
-ALPACA_SECRET_KEY = os.environ["ALPACA_SECRET_KEY"]
-ALPACA_BASE_URL   = os.environ.get("ALPACA_BASE_URL", "https://api.alpaca.markets")
+CRYPTOCOM_API_KEY    = os.environ["CRYPTOCOM_API_KEY"]
+CRYPTOCOM_API_SECRET = os.environ["CRYPTOCOM_API_SECRET"]
 
 CRYPTO_UNIVERSE = [
     # Major coins
@@ -111,7 +111,7 @@ CRYPTO_UNIVERSE = [
     "MKR/USD",   # Maker
 ]
 
-MAX_POSITIONS       = 3  # quality over quantity
+MAX_POSITIONS       = 5  # more positions in bull market
 MIN_ORDER_USD       = 1.10
 MIN_CASH_BUFFER     = 0.05
 DEFAULT_TP          = 0.025
@@ -470,9 +470,9 @@ def fetch_bars(api, symbols: List[str], hours: int = 200) -> Dict[str, pd.DataFr
         try:
             bars = api.get_crypto_bars(
                 sym,
-                tradeapi.rest.TimeFrame.Hour,
+                "1h",
                 start=start.isoformat(),
-                end=end.isoformat(),
+                limit=hours + 10,
             ).df
             if bars is not None and not bars.empty and len(bars) >= 30:
                 result[sym] = bars
@@ -707,7 +707,7 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
         elif regime == "recovery":
             buy_score *= 1.1 * rm
         elif regime == "bull":
-            buy_score *= 1.3 * rm
+            buy_score *= 1.5 * rm  # more aggressive in bull
 
         # HOUR ADJUSTMENT
         buy_score *= agent_get_hour_mult(agent)
@@ -857,7 +857,8 @@ def place_order(api, symbol: str, qty: float, side: str, reason: str = "",
 # =============================================================================
 
 def check_exits(api, positions: list, peak_prices: dict,
-                agent: dict, state: dict, analyses: dict) -> tuple:
+                agent: dict, state: dict, analyses: dict,
+                regime: str = "recovery") -> tuple:
     exits = []
     thr   = agent["thresholds"]
 
@@ -891,6 +892,11 @@ def check_exits(api, positions: list, peak_prices: dict,
                 hold_mins = 999
 
         reason = None
+
+        # In bull regime, let winners run further
+        if regime == "bull":
+            dyn_tp    = max(dyn_tp, 0.04)   # minimum 4% TP in bull
+            dyn_stop  = max(dyn_stop, 0.025) # tighter stop in bull to protect gains
 
         # Stop loss always fires regardless of hold time
         if plpc <= -dyn_stop:
@@ -934,7 +940,7 @@ def run_bot():
     log.info("🪙 CryptoTrader v4 | " + datetime.now().strftime("%Y-%m-%d %H:%M UTC"))
     log.info("=" * 60)
 
-    api   = tradeapi.REST(ALPACA_API_KEY, ALPACA_SECRET_KEY, ALPACA_BASE_URL, api_version="v2")
+    api   = CryptoComAPI(CRYPTOCOM_API_KEY, CRYPTOCOM_API_SECRET)
     state      = load_state()
     agent      = load_agent()
     risk          = {}
@@ -951,19 +957,14 @@ def run_bot():
     acc          = api.get_account()
     pv           = float(acc.portfolio_value)
     buying_power = float(acc.buying_power)
-    raw_cash     = float(acc.cash)
-    try:
-        nm_bp = float(getattr(acc, "non_marginable_buying_power", buying_power))
-    except Exception:
-        nm_bp = buying_power
-    cash = min(raw_cash, buying_power, nm_bp)
+    cash         = float(acc.cash)
 
     log.info("💰 Portfolio=$" + str(round(pv, 2)) +
              " Spendable=$" + str(round(cash, 2)) +
              " BP=$" + str(round(buying_power, 2)))
 
-    if acc.status != "ACTIVE":
-        log.error("Account not active")
+    if acc.status not in ("ACTIVE", "active"):
+        log.error("Account not active: " + str(acc.status))
         return
 
     today = datetime.now().strftime("%Y-%m-%d")
@@ -1036,7 +1037,7 @@ def run_bot():
             risk_check = {"can_trade": True, "warnings": []}
 
     all_pos    = api.list_positions()
-    crypto_pos = [p for p in all_pos if "USD" in p.symbol and len(p.symbol) <= 8]
+    crypto_pos = [p for p in all_pos if "USDT" in p.symbol]
     n_pos      = len(crypto_pos)
     peak_prices = state.get("peak_prices", {})
     log.info("📊 Positions: " + str(n_pos) + "/" + str(MAX_POSITIONS))
@@ -1103,20 +1104,20 @@ def run_bot():
                 pass
 
             # Boost lagging alts (BTC leading signal)
-            pos_sym = pair.replace("/", "")
+            pos_sym = pair.replace("/", "").replace("USD", "USDT")
             if pos_sym in lagging_syms:
                 analysis["buy_score"]  *= 1.3
                 analysis["final_score"] = analysis["buy_score"]
                 analysis["signals_fired"].append("btc_lagging_boost")
 
         # Recalculate signal after ALL module adjustments
-        sig_min = agent["thresholds"]["signal_min"]  # agent calibrates this
+        sig_min = agent["thresholds"]["signal_min"]
         if regime == "bear":
-            sig_min = max(sig_min, 6)   # stricter in bear
+            sig_min = max(sig_min, 7)
         elif regime == "recovery":
-            sig_min = max(sig_min, 5)   # normal in recovery
+            sig_min = max(sig_min, 5)
         elif regime == "bull":
-            sig_min = max(sig_min, 4)   # more relaxed in bull
+            sig_min = max(sig_min, 4)   # relaxed in bull — more trades
         bs = analysis["buy_score"]
         ss = analysis["sell_score"]
         if bs >= sig_min and bs > ss:
@@ -1184,22 +1185,22 @@ def run_bot():
             blocked_coins.add(sym)
             log.info("🚫 Blocking " + sym + " — WR=" + str(round(mem["win_rate"]*100)) + "% avg=" + str(round(mem["avg_pnl"],2)) + "%")
 
-    exits, peak_prices = check_exits(api, crypto_pos, peak_prices, agent, state, all_analyses)
+    exits, peak_prices = check_exits(api, crypto_pos, peak_prices, agent, state, all_analyses, regime)
     if exits:
         state["trades"].extend(exits)
         state["daily_trades"] += len(exits)
         state["total_trades"]  = state.get("total_trades", 0) + len(exits)
-        crypto_pos  = [p for p in api.list_positions() if "USD" in p.symbol and len(p.symbol) <= 8]
+        crypto_pos  = [p for p in api.list_positions() if "USDT" in p.symbol]
         n_pos       = len(crypto_pos)
         acc2        = api.get_account()
         cash        = min(float(acc2.cash), float(acc2.buying_power))
 
-    held      = {p.symbol for p in crypto_pos}
+    held      = {p.symbol for p in crypto_pos}  # e.g. BTCUSDT
     all_buys  = []
     all_sells = []
 
     for pair, analysis in all_analyses.items():
-        pos_sym = pair.replace("/", "")
+        pos_sym = pair.replace("/", "").replace("USD", "USDT")
         if not agent_should_trade(agent, pos_sym):
             continue
         if pos_sym in blocked_coins:
@@ -1224,7 +1225,7 @@ def run_bot():
 
     for analysis in all_sells:
         pair    = analysis["symbol"]
-        pos_sym = pair.replace("/", "")
+        pos_sym = pair.replace("/", "").replace("USD", "USDT")
         pos     = next((p for p in crypto_pos if p.symbol == pos_sym), None)
         if not pos:
             continue
@@ -1245,10 +1246,12 @@ def run_bot():
         if plpc <= 0.005:
             log.info("⏳ Skip sell " + pos_sym + " — not in profit (" + str(round(plpc*100,2)) + "%)")
             continue
-        if sell_score < 8.0:
-            log.info("⏳ Skip sell " + pos_sym + " — weak signal (" + str(round(sell_score,1)) + ")")
+        # In bull regime allow selling at 7.0 (overbought exits), otherwise 8.0
+        sell_min = 7.0 if regime == "bull" else 8.0
+        if sell_score < sell_min:
+            log.info("⏳ Skip sell " + pos_sym + " — weak signal (" + str(round(sell_score,1)) + " < " + str(sell_min) + ")")
             continue
-        if hold_mins < 30:
+        if hold_mins < 20:
             log.info("⏳ Skip sell " + pos_sym + " — held only " + str(round(hold_mins,1)) + "m")
             continue
 
@@ -1330,7 +1333,7 @@ def run_bot():
                             tp_pct=thr.get("take_profit", 0.025),
                             sl_pct=thr.get("stop_loss", 0.03))
         if order:
-            pos_sym = pair.replace("/", "")
+            pos_sym = pair.replace("/", "").replace("USD", "USDT")
             agent_record_open(agent, pos_sym, price, analysis)
             state["trades"].append({**order, "symbol": pos_sym, "price": price})
             state["daily_trades"] += 1
@@ -1376,7 +1379,7 @@ def run_bot():
                 "unrealized_plpc": float(p.unrealized_plpc),
             }
             for p in api.list_positions()
-            if "USD" in p.symbol and len(p.symbol) <= 8
+            if "USDT" in p.symbol
         ]
     except Exception:
         live_pos = []
