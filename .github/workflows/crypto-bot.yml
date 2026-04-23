@@ -2,7 +2,7 @@ name: Crypto Bot
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/10 * * * *'   # safer than every minute (prevents overlap chaos)
   workflow_dispatch:
 
 permissions:
@@ -40,51 +40,73 @@ jobs:
           pip install --upgrade pip --quiet
           pip install -r requirements.txt --quiet
 
-      - name: Setup Git and Pull Latest State
+      - name: Setup Git
         run: |
           git config user.name  "CryptoBot"
           git config user.email "bot@cryptotrader"
-          git pull origin main --rebase || git pull origin main || true
-          mkdir -p logs
-          echo "State files:"
-          ls -la logs/ 2>/dev/null || echo "No logs yet"
 
+      - name: Ensure logs directory
+        run: |
+          mkdir -p logs
+
+      # ----------------------------------------
+      # MAIN LOOP (continuous execution session)
+      # ----------------------------------------
       - name: Run Crypto Bot Loop
-        env:
-          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
-          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-          ALPACA_BASE_URL:   ${{ secrets.ALPACA_BASE_URL }}
         run: |
           END=$((SECONDS + 3300))
           RUN=0
 
           while [ $SECONDS -lt $END ]; do
             RUN=$((RUN + 1))
+
             echo ""
             echo "========================================="
             echo ">>> RUN $RUN at $(date -u '+%H:%M:%S UTC')"
             echo "========================================="
 
+            # STEP 1: Generate market intelligence
+            python src/market_intelligence.py
+
+            # STEP 2: Run trading bot using fresh state
             python src/crypto_bot.py
 
-            git add logs/crypto_report.json logs/crypto_state.json logs/crypto_agent.json 2>/dev/null || true
+            # ----------------------------------------
+            # Commit updated system state
+            # ----------------------------------------
+            git pull origin main --rebase || true
+
+            git add \
+              logs/crypto_report.json \
+              logs/crypto_state.json \
+              logs/crypto_agent.json \
+              logs/crypto_trades.json \
+              2>/dev/null || true
+
             if ! git diff --staged --quiet; then
-              git commit -m "🪙 Run $RUN $(date -u '+%H:%M')" 2>/dev/null || true
-              git push 2>/dev/null || true
+              git commit -m "🪙 Run $RUN $(date -u '+%H:%M UTC')" || true
+              git push || true
             fi
 
+            # ----------------------------------------
+            # Loop control (safety buffer)
+            # ----------------------------------------
             REMAINING=$((END - SECONDS))
+
             if [ $REMAINING -lt 130 ]; then
-              echo ">>> Less than 2m remaining — ending cleanly after $RUN runs"
+              echo ">>> Ending cleanly (time buffer reached)"
               break
             fi
 
-            echo ">>> Sleeping 2 minutes (${REMAINING}s left in session)..."
+            echo ">>> Sleeping 2 minutes..."
             sleep 120
           done
 
-          echo ">>> Session complete — $RUN runs"
+          echo ">>> Session complete"
 
+      # ----------------------------------------
+      # ARTIFACTS (debug + audit trail)
+      # ----------------------------------------
       - name: Upload Logs
         uses: actions/upload-artifact@v4
         if: always()
