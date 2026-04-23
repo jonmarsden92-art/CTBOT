@@ -111,14 +111,14 @@ CRYPTO_UNIVERSE = [
     "MKR/USD",   # Maker
 ]
 
-MAX_POSITIONS       = 5  # more positions in bull market
+MAX_POSITIONS       = 10  # AGGRESSIVE: increased from 5 to 10
 MIN_ORDER_USD       = 1.10
 MIN_CASH_BUFFER     = 0.05
-DEFAULT_TP          = 0.025
-DEFAULT_SL          = 0.03
-DEFAULT_TRAIL       = 0.015
+DEFAULT_TP          = 0.015  # AGGRESSIVE: reduced from 0.025 to 0.015 (1.5%)
+DEFAULT_SL          = 0.02   # AGGRESSIVE: reduced from 0.03 to 0.02 (2%)
+DEFAULT_TRAIL       = 0.01   # AGGRESSIVE: reduced from 0.015 to 0.01
 TRAIL_ACTIVATE      = 0.008
-MIN_SIGNAL_SCORE    = 5  # raised — only trade strong setups
+MIN_SIGNAL_SCORE    = 3  # AGGRESSIVE: reduced from 5 to 3
 TREND_LOOKBACK_H    = 6
 
 STATE_FILE  = Path("logs/crypto_state.json")
@@ -698,16 +698,16 @@ def analyse_coin(df: pd.DataFrame, agent: dict, regime: str) -> Optional[dict]:
         if slope_24h < -0.10:
             buy_score *= 0.1   # almost never buy coins down 10%+ today
 
-        # REGIME ADJUSTMENT
+        # REGIME ADJUSTMENT - AGGRESSIVE SETTINGS
         rm = agent_get_regime_mult(agent, regime)
         if regime == "crash":
-            buy_score *= 0.1
+            buy_score *= 0.3   # AGGRESSIVE: changed from 0.1 to 0.3 - allow some trades in crash
         elif regime == "bear":
-            buy_score *= 0.6 * rm
+            buy_score *= 0.8 * rm  # AGGRESSIVE: changed from 0.6 to 0.8
         elif regime == "recovery":
-            buy_score *= 1.1 * rm
+            buy_score *= 1.3 * rm  # AGGRESSIVE: changed from 1.1 to 1.3
         elif regime == "bull":
-            buy_score *= 1.5 * rm  # more aggressive in bull
+            buy_score *= 2.0 * rm  # AGGRESSIVE: changed from 1.5 to 2.0
 
         # HOUR ADJUSTMENT
         buy_score *= agent_get_hour_mult(agent)
@@ -782,10 +782,10 @@ def calc_qty(cash: float, price: float, confidence: float = 0.5,
         try:
             alloc = get_position_size(None, agent, signal_score, cash)
         except Exception:
-            alloc = cash * 0.08
+            alloc = cash * 0.15  # AGGRESSIVE: increased from 0.08 to 0.15
     else:
-        # Fixed 8% before enough data
-        alloc = cash * 0.08
+        # AGGRESSIVE: increased from 0.08 to 0.15 before enough data
+        alloc = cash * 0.15
 
     # Reduce for high volatility
     vol_scale = max(0.5, min(1.0, 0.02 / max(atr_pct, 0.005)))
