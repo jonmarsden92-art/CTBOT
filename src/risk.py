@@ -19,10 +19,10 @@ log = logging.getLogger(__name__)
 
 RISK_FILE = Path("logs/risk_state.json")
 
-# Risk limits
-DAILY_LOSS_LIMIT     = 0.05   # stop trading if down 5% today
-MAX_DRAWDOWN         = 0.15   # stop trading if down 15% from peak
-MAX_CONSECUTIVE_LOSS = 5      # pause after 5 losses in a row
+# Risk limits - AGGRESSIVE SETTINGS
+DAILY_LOSS_LIMIT     = 0.10   # AGGRESSIVE: changed from 0.05 to 0.10 (allow 10% daily loss)
+MAX_DRAWDOWN         = 0.25   # AGGRESSIVE: changed from 0.15 to 0.25 (allow 25% drawdown)
+MAX_CONSECUTIVE_LOSS = 3      # AGGRESSIVE: changed from 5 to 3 (resume trading sooner)
 MIN_PORTFOLIO_USD    = 15.0   # never trade below this
 
 
