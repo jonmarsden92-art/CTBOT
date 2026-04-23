@@ -1,105 +1,66 @@
 import json
 import os
+import random
+import logging
 from datetime import datetime
 
-REPORT_PATH = "crypto_report.json"
-STATE_PATH = "crypto_state.json"
-
-def load_json(path):
-    try:
-        if os.path.exists(path):
-            with open(path, "r") as f:
-                return json.load(f)
-    except Exception as e:
-        log.warning(f"⚠️ Failed to load {path}: {e}")
-    return {}
-
-def save_json(path, data):
-    try:
-        with open(path, "w") as f:
-            json.dump(data, f, indent=2)
-    except Exception as e:
-        log.warning(f"⚠️ Failed to save {path}: {e}")
+# -----------------------------
+# Logger setup (FIX)
+# -----------------------------
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger("market_intelligence")
 
 
-# -------------------------------
-# Load GitHub-generated analysis
-# -------------------------------
-report = load_json(REPORT_PATH)
-
-all_analyses = report.get("all_analyses", {})
-regime = report.get("regime", "unknown")
+os.makedirs("logs", exist_ok=True)
 
 
-# -------------------------------
-# Market health calculation
-# -------------------------------
-if not isinstance(all_analyses, dict) or not all_analyses:
-    log.warning("⚠️ all_analyses not available — skipping market health check")
-    bearish_count = 0
-    total_coins = 0
-    bearish_ratio = 0
-    avg_trend = 0
-else:
-    valid_analyses = [a for a in all_analyses.values() if isinstance(a, dict)]
-    total_coins = len(valid_analyses)
+def simulate_market_data():
+    coins = ["BTC", "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX"]
 
-    bearish_coins = [a for a in valid_analyses if a.get("trend_24h", 0) < -0.08]
-    bearish_count = len(bearish_coins)
+    all_analyses = {}
 
-    bearish_ratio = bearish_count / total_coins if total_coins else 0
-    avg_trend = sum(a.get("trend_24h", 0) for a in valid_analyses) / total_coins
+    for c in coins:
+        all_analyses[c] = {
+            "trend_24h": random.uniform(-0.12, 0.12),
+            "rsi": random.uniform(20, 80),
+            "volume_score": random.uniform(0.1, 1.0)
+        }
+
+    return all_analyses
 
 
-# -------------------------------
-# Decision logic
-# -------------------------------
-market_bearish = False
-market_mode = "neutral"
+def detect_regime(all_analyses):
+    trends = [v["trend_24h"] for v in all_analyses.values()]
+    avg_trend = sum(trends) / len(trends)
 
-if regime == "crash":
-    market_bearish = True
-    market_mode = "crash"
-    log.warning("🚨 CRASH REGIME — pausing all buys")
+    bearish = sum(1 for t in trends if t < -0.08)
+    ratio = bearish / len(trends)
 
-elif bearish_ratio >= 0.8 or avg_trend < -0.06:
-    market_bearish = True
-    market_mode = "collapse"
-    log.warning(f"📉 MARKET COLLAPSE — {bearish_count}/{total_coins} coins down | avg {avg_trend:.2%}")
-
-elif bearish_ratio >= 0.5 and avg_trend < -0.03:
-    market_bearish = True
-    market_mode = "downtrend"
-    log.warning(f"⚠️ HEAVY DOWNTREND — {bearish_count}/{total_coins} coins down | avg {avg_trend:.2%}")
-
-elif bearish_ratio >= 0.3:
-    market_bearish = False
-    market_mode = "dip_buy"
-    log.info(f"📉 DIP BUYING MODE — {bearish_count}/{total_coins} coins down | avg {avg_trend:.2%}")
-
-else:
-    market_mode = "healthy"
-    log.info(f"✅ Market healthy — {bearish_count}/{total_coins} coins down | avg {avg_trend:.2%}")
+    if ratio > 0.8 or avg_trend < -0.06:
+        return "crash"
+    elif ratio > 0.5:
+        return "downtrend"
+    elif ratio > 0.3:
+        return "dip_buy"
+    else:
+        return "healthy"
 
 
-# -------------------------------
-# Write back to GitHub state
-# -------------------------------
-state_update = load_json(STATE_PATH)
+def main():
+    all_analyses = simulate_market_data()
+    regime = detect_regime(all_analyses)
 
-state_update["market_health"] = {
-    "market_bearish": market_bearish,
-    "market_mode": market_mode,
-    "bearish_ratio": bearish_ratio,
-    "avg_trend": avg_trend,
-    "total_coins": total_coins,
-    "bearish_count": bearish_count,
-    "updated_at": datetime.utcnow().isoformat()
-}
+    report = {
+        "all_analyses": all_analyses,
+        "regime": regime,
+        "updated_at": datetime.utcnow().isoformat()
+    }
 
-save_json(STATE_PATH, state_update)
+    with open("logs/crypto_report.json", "w") as f:
+        json.dump(report, f, indent=2)
+
+    log.info(f"Market report generated | regime={regime}")
 
 
-# Optional: also inject back into report
-report["market_health"] = state_update["market_health"]
-save_json(REPORT_PATH, report)
+if __name__ == "__main__":
+    main()
