@@ -1,468 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>CryptoTrader v4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluxForge</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
 <style>
-:root {
-  --bg:     #080d1a;
-  --panel:  #0f1629;
-  --border: #1a2540;
-  --accent: #f59e0b;
-  --green:  #10b981;
-  --red:    #ef4444;
-  --blue:   #3b82f6;
-  --purple: #8b5cf6;
-  --text:   #e2e8f0;
-  --muted:  #64748b;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
-
-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 24px; border-bottom: 1px solid var(--border);
-  background: linear-gradient(90deg, #080d1a, #0d1528);
-  position: sticky; top: 0; z-index: 10; gap: 12px; flex-wrap: wrap;
-}
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-icon {
-  width: 38px; height: 38px; border-radius: 10px;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  display: flex; align-items: center; justify-content: center; font-size: 18px;
-}
-.logo h1 { font-size: 1.2rem; font-weight: 700; }
-.logo p  { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-.header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.last-run { font-size: 0.72rem; color: var(--muted); }
-
-.pill {
-  padding: 4px 10px; border-radius: 20px; font-size: 0.68rem;
-  font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
-  display: flex; align-items: center; gap: 5px;
-}
-.pill-live   { background: rgba(16,185,129,.12); color: var(--green); border: 1px solid rgba(16,185,129,.25); }
-.pill-regime { background: rgba(245,158,11,.12);  color: var(--accent); border: 1px solid rgba(245,158,11,.25); }
-.pill-crash  { background: rgba(239,68,68,.15);   color: var(--red);    border: 1px solid rgba(239,68,68,.3); }
-.pill-bear   { background: rgba(239,68,68,.10);   color: #f87171;       border: 1px solid rgba(239,68,68,.2); }
-.pill-bull   { background: rgba(16,185,129,.12);  color: var(--green);  border: 1px solid rgba(16,185,129,.25); }
-.pill-recovery { background: rgba(59,130,246,.12); color: var(--blue);  border: 1px solid rgba(59,130,246,.25); }
-.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-.run-btn {
-  padding: 7px 16px; border-radius: 8px; border: 1px solid var(--accent);
-  background: rgba(245,158,11,.1); color: var(--accent);
-  font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all .2s;
-}
-.run-btn:hover { background: rgba(245,158,11,.2); }
-
-main { padding: 20px 24px; max-width: 1400px; margin: 0 auto; }
-
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
-@media(max-width:800px){ .stats{ grid-template-columns:repeat(2,1fr); } }
-
-.card {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 12px; padding: 18px 20px;
-}
-.card label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
-.card .val  { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; line-height: 1; }
-.card .sub  { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
-
-.green { color: var(--green); }
-.red   { color: var(--red);   }
-.amber { color: var(--accent); }
-.blue  { color: var(--blue);  }
-
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-@media(max-width:900px){ .grid2,.grid3{ grid-template-columns:1fr; } }
-
-.section-title {
-  font-size: 0.68rem; font-weight: 600; color: var(--muted);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
-}
-
-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-th { text-align: left; color: var(--muted); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.8px; padding: 0 8px 8px; }
-td { padding: 8px; border-top: 1px solid var(--border); }
-tr:hover td { background: rgba(255,255,255,.02); }
-
-.badge {
-  display: inline-block; padding: 2px 7px; border-radius: 5px;
-  font-size: 0.64rem; font-weight: 700; text-transform: uppercase;
-}
-.badge-buy      { background: rgba(16,185,129,.15); color: var(--green); }
-.badge-sell     { background: rgba(239,68,68,.15);  color: var(--red); }
-.badge-bull     { background: rgba(59,130,246,.12); color: var(--blue); }
-.badge-bear     { background: rgba(239,68,68,.10);  color: #f87171; }
-.badge-hold     { background: rgba(100,116,139,.15);color: var(--muted); }
-
-.agent-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-@media(max-width:700px){ .agent-grid{ grid-template-columns:1fr; } }
-.agent-stat { background: rgba(0,0,0,.2); border-radius: 8px; padding: 12px; }
-.agent-stat .label { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
-.agent-stat .value { font-size: 1.1rem; font-weight: 700; }
-
-.signal-tag {
-  display: inline-block; padding: 2px 6px; border-radius: 4px; margin: 1px;
-  font-size: 0.6rem; background: rgba(59,130,246,.1); color: var(--blue);
-  border: 1px solid rgba(59,130,246,.2);
-}
-.signal-tag.win  { background: rgba(16,185,129,.1);  color: var(--green); border-color: rgba(16,185,129,.2); }
-.signal-tag.loss { background: rgba(239,68,68,.1);   color: var(--red);   border-color: rgba(239,68,68,.2); }
-
-.empty { text-align: center; color: var(--muted); padding: 28px; font-size: 0.82rem; }
-
-.modal-bg {
-  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75);
-  z-index: 100; align-items: center; justify-content: center;
-}
-.modal-bg.open { display: flex; }
-.modal {
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: 14px; padding: 24px; width: 380px; max-width: 95vw;
-}
-.modal h2 { font-size: 1rem; margin-bottom: 6px; }
-.modal p  { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
-.modal input {
-  width: 100%; padding: 9px 12px; background: var(--bg);
-  border: 1px solid var(--border); border-radius: 7px; color: var(--text);
-  font-size: 0.82rem; margin-bottom: 8px;
-}
-.modal input:focus { outline: none; border-color: var(--accent); }
-.modal label { font-size: 0.74rem; color: var(--muted); display: flex; align-items: center; gap: 7px; margin-bottom: 16px; }
-.modal-btns  { display: flex; gap: 8px; }
-.btn-primary { flex: 1; padding: 9px; background: var(--accent); color: #000; border: none; border-radius: 7px; font-weight: 700; cursor: pointer; }
-.btn-cancel  { padding: 9px 16px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 7px; cursor: pointer; }
-
-.progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 2px; transition: width .3s; }
+body { font-family: system-ui; }
+.nav-btn { padding:8px; border-radius:6px; display:block; width:100%; text-align:left; }
+.nav-btn:hover { background:#374151; }
 </style>
 </head>
-<body>
 
-<header>
-  <div class="logo">
-    <div class="logo-icon">🪙</div>
-    <div>
-      <h1>CryptoTrader v4</h1>
-      <p>World-Class AI · 24/7 · Alpaca · 14 Pairs</p>
-    </div>
-  </div>
-  <div class="header-right">
-    <span class="last-run" id="lastRun">Loading...</span>
-    <span class="pill" id="regimePill">🌍 UNKNOWN</span>
-    <span class="pill pill-live" id="statusPill"><span class="dot"></span>CONNECTING</span>
-    <button class="run-btn" onclick="triggerBot()">▶ Run Now</button>
-  </div>
-</header>
+<body class="bg-gray-100">
 
-<main>
-  <!-- Stats -->
-  <div class="stats">
-    <div class="card">
-      <label>Portfolio Value</label>
-      <div class="val" id="portVal">—</div>
-      <div class="sub" id="portReturn">Loading...</div>
-    </div>
-    <div class="card">
-      <label>Available Cash</label>
-      <div class="val" id="cashVal">—</div>
-      <div class="sub" id="buyPower">—</div>
-    </div>
-    <div class="card">
-      <label>Open Positions</label>
-      <div class="val" id="posCount">—</div>
-      <div class="sub" id="posPlpc">—</div>
-    </div>
-    <div class="card">
-      <label>Win Rate</label>
-      <div class="val" id="winRate">—</div>
-      <div class="sub" id="tradeCount">—</div>
-    </div>
-  </div>
+<div class="flex min-h-screen">
 
-  <!-- Agent Intelligence Panel -->
-  <div class="card" style="margin-bottom:14px">
-    <div class="section-title">🧠 Agent Intelligence</div>
-    <div class="agent-grid" id="agentGrid">
-      <div class="agent-stat"><div class="label">Trades Learned</div><div class="value" id="agLearn">0</div></div>
-      <div class="agent-stat"><div class="label">7-Day Win Rate</div><div class="value" id="agWr7">—</div></div>
-      <div class="agent-stat"><div class="label">Avg P&L</div><div class="value" id="agPnl">—</div></div>
-      <div class="agent-stat"><div class="label">Sharpe Ratio</div><div class="value" id="agSharpe">—</div></div>
-      <div class="agent-stat"><div class="label">Take Profit</div><div class="value" id="agTp">—</div></div>
-      <div class="agent-stat"><div class="label">Stop Loss</div><div class="value" id="agSl">—</div></div>
-    </div>
-    <div style="margin-top:12px" id="agentCalib"></div>
-  </div>
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 text-white p-4 flex flex-col">
+    <h1 class="text-xl font-bold mb-6">FluxForge</h1>
 
-  <!-- Positions + Signals -->
-  <div class="grid2">
-    <div class="card">
-      <div class="section-title">Open Positions</div>
-      <div id="positionsBody"><div class="empty">No open positions</div></div>
-    </div>
-    <div class="card">
-      <div class="section-title">Top Signals</div>
-      <div id="signalsBody"><div class="empty">Waiting for scan...</div></div>
-    </div>
-  </div>
+    <nav class="space-y-2">
+      <button class="nav-btn" data-action="dashboard">Dashboard</button>
+      <button class="nav-btn" data-action="projects">Projects</button>
+      <button class="nav-btn" data-action="kanban">Kanban</button>
+    </nav>
 
-  <!-- Signal Performance + Regime -->
-  <div class="grid2" style="margin-bottom:14px">
-    <div class="card">
-      <div class="section-title">Signal Type Performance</div>
-      <div id="sigPerfBody"><div class="empty">No data yet — needs 5+ trades</div></div>
-    </div>
-    <div class="card">
-      <div class="section-title">Regime Performance</div>
-      <div id="regimePerfBody"><div class="empty">No data yet</div></div>
-    </div>
-  </div>
+    <button data-action="new-project" class="mt-auto bg-blue-500 py-2 rounded">
+      + New Project
+    </button>
 
-  <!-- Trades -->
-  <div class="card">
-    <div class="section-title">Recent Trades</div>
-    <div id="tradesBody"><div class="empty">No trades yet</div></div>
-  </div>
-</main>
+    <button data-action="export" class="mt-2 bg-gray-700 py-2 rounded">Export</button>
+    <button data-action="import" class="mt-2 bg-gray-700 py-2 rounded">Import</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6">
+    <h1 id="title" class="text-2xl font-bold mb-6"></h1>
+    <div id="content"></div>
+  </main>
+
+</div>
 
 <!-- Modal -->
-<div class="modal-bg" id="tokenModal">
-  <div class="modal">
-    <h2>GitHub Token Required</h2>
-    <p>Enter a Personal Access Token with <strong>workflow</strong> scope to trigger manual runs. Get one at github.com/settings/tokens</p>
-    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxx"/>
-    <label><input type="checkbox" id="rememberToken"/> Remember in this browser</label>
-    <div class="modal-btns">
-      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-      <button class="btn-primary" onclick="submitToken()">Trigger Run</button>
+<div id="modal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center">
+  <div class="bg-white p-6 rounded w-96">
+    <h2 class="font-bold mb-4">New Project</h2>
+
+    <input id="project-name" class="w-full border p-2 mb-3" placeholder="Name">
+    <textarea id="project-desc" class="w-full border p-2 mb-3" placeholder="Description"></textarea>
+
+    <div class="flex justify-between">
+      <button data-action="share">Share</button>
+      <div>
+        <button data-action="close-modal">Cancel</button>
+        <button data-action="save-project" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+      </div>
     </div>
+
+    <div id="share-link" class="text-xs mt-3 break-all text-blue-600"></div>
   </div>
 </div>
 
-<script>
-const REPO       = "jonmarsden92-art/CTBOT";
-const REPORT_URL = "/CTBOT/logs/crypto_report.json";
-const START_VAL  = 63.0;
-
-const COIN_EMOJI = {
-  BTC:"₿", ETH:"Ξ", SOL:"◎", DOGE:"Ð", AVAX:"🔺",
-  LINK:"⬡", XRP:"✕", LTC:"Ł", BCH:"₿", DOT:"●",
-  UNI:"🦄", AAVE:"👻", SHIB:"🐕", PEPE:"🐸",
-};
-
-function coinIcon(sym) {
-  const base = sym.replace("USD","").replace("/","");
-  return COIN_EMOJI[base] || "🪙";
-}
-function fmt(n, d=2)   { return n==null ? "—" : "$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d}); }
-function pct(n, d=2)   { return n==null ? "—" : (n>=0?"+":"")+Number(n).toFixed(d)+"%"; }
-function shortSym(s)   { return s.replace("/USD","").replace("USD",""); }
-function clr(n)        { return n >= 0 ? "green" : "red"; }
-
-async function loadReport() {
-  try {
-    const r    = await fetch(REPORT_URL + "?t=" + Date.now());
-    if (!r.ok) throw new Error("no report");
-    const data = await r.json();
-    render(data);
-  } catch(e) {
-    document.getElementById("lastRun").textContent = "No report yet — trigger a run";
-  }
-}
-
-function render(d) {
-  const acc   = d.account   || {};
-  const perf  = d.performance || {};
-  const agent = d.agent     || {};
-  const thr   = agent.thresholds || {};
-  const regime = d.market_regime || "unknown";
-
-  // Header
-  const lr = d.last_run ? new Date(d.last_run).toLocaleString("en-GB",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "—";
-  document.getElementById("lastRun").textContent = "Last run: " + lr;
-  document.getElementById("statusPill").innerHTML = "<span class='dot'></span>" + (acc.status === "ACTIVE" ? "LIVE" : "INACTIVE");
-
-  // Regime pill
-  const regimePill = document.getElementById("regimePill");
-  const regimeClass = regime === "crash" ? "pill-crash" : regime === "bear" ? "pill-bear" : regime === "bull" ? "pill-bull" : "pill-recovery";
-  regimePill.className = "pill " + regimeClass;
-  regimePill.textContent = "🌍 " + regime.toUpperCase();
-
-  // Stats
-  const pv  = acc.portfolio_value || 0;
-  const ret = ((pv - START_VAL) / START_VAL * 100).toFixed(2);
-  document.getElementById("portVal").textContent    = fmt(pv);
-  document.getElementById("portReturn").innerHTML   = "<span class='" + clr(ret) + "'>" + pct(ret) + " total return</span>";
-  document.getElementById("cashVal").textContent    = fmt(acc.cash);
-  document.getElementById("buyPower").textContent   = fmt(acc.buying_power) + " buying power";
-
-  const positions = d.positions || [];
-  const totalPl   = positions.reduce((s,p) => s + (p.unrealized_pl||0), 0);
-  document.getElementById("posCount").textContent   = positions.length + " /4";
-  document.getElementById("posPlpc").innerHTML      = "<span class='" + clr(totalPl) + "'>" + fmt(totalPl) + " unrealised</span>";
-
-  const wins   = perf.wins   || 0;
-  const losses = perf.losses || 0;
-  const total  = wins + losses;
-  const wr     = total > 0 ? (wins/total*100).toFixed(0) : "—";
-  document.getElementById("winRate").textContent  = wr + "%";
-  document.getElementById("tradeCount").textContent = wins + "W · " + losses + "L · " + (perf.total_trades||0) + " total";
-
-  // Agent panel
-  document.getElementById("agLearn").textContent  = agent.total_learned || 0;
-  document.getElementById("agWr7").innerHTML      = "<span class='" + clr((agent.win_rate_7d||0.5)-0.5) + "'>" + Math.round((agent.win_rate_7d||0.5)*100) + "%</span>";
-  document.getElementById("agPnl").innerHTML      = "<span class='" + clr(agent.avg_pnl||0) + "'>" + pct(agent.avg_pnl||0) + "</span>";
-  document.getElementById("agSharpe").textContent = (agent.sharpe||0).toFixed(2);
-  document.getElementById("agTp").innerHTML       = "<span class='green'>" + pct((thr.take_profit||0.025)*100,1) + "</span>";
-  document.getElementById("agSl").innerHTML       = "<span class='red'>" + pct((thr.stop_loss||0.03)*100,1) + "</span>";
-
-  // Calibration log
-  const calibLog = agent.calibration_log || [];
-  if (calibLog.length > 0) {
-    const last = calibLog[calibLog.length-1];
-    const el   = document.getElementById("agentCalib");
-    el.innerHTML = "<div style='font-size:.7rem;color:var(--muted);'>" +
-      "Last calibration: " + new Date(last.time).toLocaleString("en-GB") +
-      " | WR=" + Math.round(last.wr20*100) + "% avgPnL=" + (last.avg_pnl||0).toFixed(2) + "%" +
-      " | Changes: " + (last.changes||[]).map(c => "<span class='signal-tag'>" + c + "</span>").join(" ") +
-      "</div>";
-  }
-
-  // Positions
-  const posEl = document.getElementById("positionsBody");
-  if (!positions.length) {
-    posEl.innerHTML = "<div class='empty'>No open positions</div>";
-  } else {
-    posEl.innerHTML = "<table><tr><th>Coin</th><th>Value</th><th>Entry</th><th>P&L</th><th>Stop</th></tr>" +
-      positions.map(p => {
-        const plpc = (p.unrealized_plpc * 100).toFixed(2);
-        const sym  = shortSym(p.symbol);
-        return "<tr>" +
-          "<td>" + coinIcon(p.symbol) + " " + sym + "</td>" +
-          "<td>" + fmt(p.market_value) + "</td>" +
-          "<td>" + fmt(p.avg_entry, 4) + "</td>" +
-          "<td class='" + clr(p.unrealized_plpc) + "'>" + pct(plpc) + "</td>" +
-          "<td style='color:var(--red);font-size:.72rem'>" + pct(-(thr.stop_loss||0.03)*100,1) + "</td>" +
-          "</tr>";
-      }).join("") + "</table>";
-  }
-
-  // Signals
-  const signals  = d.signals || {};
-  const sigPairs = Object.entries(signals)
-    .filter(([,s]) => s.signal === "BUY" || s.signal === "BULLISH")
-    .sort((a,b) => (b[1].confidence||0) - (a[1].confidence||0))
-    .slice(0, 8);
-  const sigEl = document.getElementById("signalsBody");
-  if (!sigPairs.length) {
-    sigEl.innerHTML = "<div class='empty'>No buy signals found</div>";
-  } else {
-    sigEl.innerHTML = "<table><tr><th>Pair</th><th>Price</th><th>RSI</th><th>Conf</th><th>Signal</th></tr>" +
-      sigPairs.map(([sym,s]) => {
-        const cls = s.signal === "BUY" ? "buy" : "bull";
-        const sigs = (s.signals_fired||[]).slice(0,2).map(sf => "<span class='signal-tag'>" + sf + "</span>").join("");
-        return "<tr>" +
-          "<td>" + coinIcon(sym) + " " + shortSym(sym) + "</td>" +
-          "<td>" + fmt(s.price, s.price > 100 ? 2 : 4) + "</td>" +
-          "<td class='" + (s.rsi < 35 ? "green" : s.rsi > 65 ? "red" : "") + "'>" + (s.rsi||0).toFixed(0) + "</td>" +
-          "<td>" +
-            "<div class='progress-bar'><div class='progress-fill' style='width:" + Math.round((s.confidence||0)*100) + "%;background:var(--" + (s.confidence > 0.6 ? "green" : "amber") + ")'></div></div>" +
-            "<div style='font-size:.65rem;margin-top:2px'>" + Math.round((s.confidence||0)*100) + "%</div>" +
-          "</td>" +
-          "<td><span class='badge badge-" + cls + "'>" + (s.signal||"HOLD") + "</span></td>" +
-          "</tr>";
-      }).join("") + "</table>";
-  }
-
-  // Signal type performance
-  const sigPerf = agent.signal_performance || {};
-  const sigPerfEl = document.getElementById("sigPerfBody");
-  const sigPerfData = Object.entries(sigPerf)
-    .filter(([,sp]) => sp.trades >= 3)
-    .sort((a,b) => (b[1].wins/b[1].trades) - (a[1].wins/a[1].trades));
-  if (!sigPerfData.length) {
-    sigPerfEl.innerHTML = "<div class='empty'>Needs 5+ trades to show signal performance</div>";
-  } else {
-    sigPerfEl.innerHTML = "<table><tr><th>Signal</th><th>Trades</th><th>Win Rate</th></tr>" +
-      sigPerfData.slice(0,8).map(([name, sp]) => {
-        const wr  = sp.wins / sp.trades;
-        const cls = wr > 0.6 ? "win" : wr < 0.4 ? "loss" : "";
-        return "<tr><td><span class='signal-tag " + cls + "'>" + name + "</span></td>" +
-          "<td style='color:var(--muted)'>" + sp.trades + "</td>" +
-          "<td class='" + clr(wr - 0.5) + "'>" + Math.round(wr*100) + "%</td></tr>";
-      }).join("") + "</table>";
-  }
-
-  // Regime performance
-  const regPerf   = agent.regime_performance || {};
-  const regPerfEl = document.getElementById("regimePerfBody");
-  const regData   = Object.entries(regPerf).filter(([,r]) => (r.wins+r.losses) > 0);
-  if (!regData.length) {
-    regPerfEl.innerHTML = "<div class='empty'>No regime data yet</div>";
-  } else {
-    regPerfEl.innerHTML = "<table><tr><th>Regime</th><th>Trades</th><th>Win Rate</th></tr>" +
-      regData.map(([name, rp]) => {
-        const t  = rp.wins + rp.losses;
-        const wr = rp.wins / t;
-        return "<tr><td style='text-transform:capitalize'>" + name + "</td>" +
-          "<td style='color:var(--muted)'>" + t + "</td>" +
-          "<td class='" + clr(wr - 0.5) + "'>" + Math.round(wr*100) + "%</td></tr>";
-      }).join("") + "</table>";
-  }
-
-  // Trades
-  const trades = (d.trades||[]).filter(t => t.side).slice(-20).reverse();
-  const trEl   = document.getElementById("tradesBody");
-  if (!trades.length) {
-    trEl.innerHTML = "<div class='empty'>No trades yet</div>";
-  } else {
-    trEl.innerHTML = "<table><tr><th>Coin</th><th>Side</th><th>Qty</th><th>P&L</th><th>Reason</th><th>Time</th></tr>" +
-      trades.map(t => {
-        const plCls = t.pnl_pct != null ? clr(t.pnl_pct) : "";
-        const plStr = t.pnl_pct != null ? pct(t.pnl_pct) : "—";
-        return "<tr>" +
-          "<td>" + coinIcon(t.symbol||"") + " " + shortSym(t.symbol||"—") + "</td>" +
-          "<td><span class='badge badge-" + (t.side==="buy"?"buy":"sell") + "'>" + (t.side||"").toUpperCase() + "</span></td>" +
-          "<td style='color:var(--muted)'>" + (t.qty||"—") + "</td>" +
-          "<td class='" + plCls + "'>" + plStr + "</td>" +
-          "<td style='color:var(--muted);font-size:.7rem'>" + (t.reason||"—") + "</td>" +
-          "<td style='color:var(--muted);font-size:.7rem'>" + (t.time ? new Date(t.time).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "—") + "</td>" +
-          "</tr>";
-      }).join("") + "</table>";
-  }
-}
-
-function triggerBot() {
-  const saved = localStorage.getItem("gh_token");
-  if (saved) { doTrigger(saved); return; }
-  document.getElementById("tokenModal").classList.add("open");
-}
-function closeModal() { document.getElementById("tokenModal").classList.remove("open"); }
-function submitToken() {
-  const t = document.getElementById("tokenInput").value.trim();
-  if (!t) return;
-  if (document.getElementById("rememberToken").checked) localStorage.setItem("gh_token", t);
-  closeModal();
-  doTrigger(t);
-}
-async function doTrigger(token) {
-  try {
-    const r = await fetch("https://api.github.com/repos/" + REPO + "/actions/workflows/crypto-bot.yml/dispatches", {
-      method: "POST",
-      headers: { Authorization: "Bearer " + token, "Content-Type": "application/json", Accept: "application/vnd.github+json" },
-      body: JSON.stringify({ ref: "main" }),
-    });
-    alert(r.ok ? "✅ Bot triggered!" : "❌ Failed — check token has workflow scope.");
-  } catch(e) { alert("❌ " + e.message); }
-}
-
-loadReport();
-setInterval(loadReport, 30000);
-</script>
+<script src="app.js"></script>
 </body>
 </html>
