@@ -198,11 +198,12 @@ def main():
         return
 
     open_positions = len(agent.get("open_trades", {}))
+    log.info(f"Open positions: {open_positions}/{MAX_POSITIONS}")
+
     if open_positions < MAX_POSITIONS:
         for symbol, df in all_bars.items():
             if symbol == "BTC/USD":
                 continue
-            # Use consistent key without slash for open_trades dict
             symbol_key = symbol.replace("/", "")
             if symbol_key in agent.get("open_trades", {}):
                 continue
@@ -217,7 +218,6 @@ def main():
             buy_score = momentum.get("momentum_score", 0) * 0.6 + patterns.get("score", 0) * 0.4
             buy_score = max(0, buy_score)
 
-            # FIX: Add price to analysis dict
             analysis_for_ml = {
                 "price": price,
                 "rsi": rsi,
@@ -236,6 +236,11 @@ def main():
             final_score = buy_score * (0.5 + ml_prob * 0.5)
             final_score = min(10, final_score)
 
+            # Detailed logging for every symbol
+            log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | ml_prob={ml_prob:.2f} | "
+                     f"final={final_score:.2f} | thr={agent['thresholds']['signal_min']} | "
+                     f"signals={signals_fired}")
+
             if final_score >= agent["thresholds"]["signal_min"]:
                 if btc_regime.get("direction") == "bull":
                     final_score *= 1.2
@@ -244,7 +249,7 @@ def main():
                 final_score *= sentiment.get("multiplier", 1.0)
 
                 if final_score >= agent["thresholds"]["signal_min"]:
-                    base_size = get_position_size(agent, final_score, cash)  # api param removed
+                    base_size = get_position_size(agent, final_score, cash)
                     mult = get_position_size_multiplier(risk_state, portfolio_value, analysis_for_ml["atr_pct"])
                     size_usd = base_size * mult
                     qty = size_usd / price
@@ -254,8 +259,7 @@ def main():
                         try:
                             api.submit_order(symbol=symbol, qty=qty, side="buy",
                                              type="market", time_in_force="day")
-                            log.info(f"BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.1f}, ML={ml_prob:.2f})")
-                            # Store without slash to match historical data
+                            log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.1f}, ML={ml_prob:.2f})")
                             agent["open_trades"][symbol_key] = {
                                 "entry": price,
                                 "qty": qty,
@@ -263,13 +267,15 @@ def main():
                                 "score": final_score,
                                 "signals_fired": signals_fired
                             }
-                            cash -= qty * price  # update local cash
+                            cash -= qty * price
                             training_data = record_training_example(training_data, symbol_key, analysis_for_ml, sentiment.get("score", 50))
                         except Exception as e:
                             log.error(f"Buy order failed for {symbol}: {e}")
+    else:
+        log.info(f"Max positions reached ({MAX_POSITIONS}), not opening new trades")
 
     # Close positions
-    to_close = []  # each element: (symbol_key, reason, pnl_pct, exit_price)
+    to_close = []
     for symbol_key, trade in agent.get("open_trades", {}).items():
         symbol = f"{symbol_key[:3]}/{symbol_key[3:]}" if len(symbol_key) > 3 else symbol_key
         if symbol not in all_bars:
@@ -303,7 +309,7 @@ def main():
         try:
             api.submit_order(symbol=symbol, qty=qty, side="sell", type="market", time_in_force="day")
             won = pnl_pct > 0
-            log.info(f"SELL {symbol} @ ${exit_price:.4f} | PnL={pnl_pct*100:.2f}% | {reason}")
+            log.info(f"💰 SELL {symbol} @ ${exit_price:.4f} | PnL={pnl_pct*100:.2f}% | {reason}")
             closed_trade = {
                 "symbol": symbol_key,
                 "entry": trade["entry"],
@@ -319,11 +325,11 @@ def main():
             agent["closed_trades"].append(closed_trade)
             update_agent_with_trade(agent, closed_trade, won)
             risk_state = record_trade_result(risk_state, won, pnl_pct)
-            cash += qty * exit_price  # update local cash
+            cash += qty * exit_price
         except Exception as e:
             log.error(f"Sell order failed for {symbol}: {e}")
 
-    # Grid trading (pass remaining cash)
+    # Grid trading
     grid_state = run_grid(api, all_bars, cash, btc_regime.get("direction", "neutral"), grid_state, agent)
 
     try:
@@ -337,7 +343,7 @@ def main():
     save_training_data(training_data)
     save_risk_state(risk_state)
 
-    log.info("Crypto Bot finished successfully")
+    log.info(f"Crypto Bot finished – open positions: {len(agent.get('open_trades', {}))}")
 
 
 if __name__ == "__main__":
