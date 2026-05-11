@@ -34,7 +34,7 @@ GRID_STATE_FILE  = Path("logs/grid_state.json")
 GRID_LEVELS      = 4
 GRID_SPACING_PCT = 0.012
 GRID_BUDGET_PCT  = 0.20
-MIN_GRID_USD     = 1.50
+MIN_GRID_USD     = 1.00
 GRID_SYMBOLS     = ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD", "DOGE/USD"]
 
 
