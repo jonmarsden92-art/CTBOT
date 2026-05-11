@@ -67,12 +67,18 @@ jobs:
 
             python src/crypto_bot.py
 
-            git pull origin main --rebase || true
+            # Add and commit local changes (if any)
             git add logs/*.json 2>/dev/null || true
             if ! git diff --staged --quiet; then
-              git commit -m "🪙 Run $RUN $(date -u '+%H:%M UTC')" || true
-              git push || true
+              git commit -m "🪙 Run $RUN (pre-pull) $(date -u '+%H:%M UTC')" || true
             fi
+
+            # Now working directory is clean (no unstaged changes)
+            git pull origin main --rebase || true
+
+            # After pull, check if we need to push anything (e.g., new commits from pull)
+            # But we already committed locally; after rebase, just push
+            git push || true
 
             REMAINING=$((END - SECONDS))
             if [ $REMAINING -lt 130 ]; then
