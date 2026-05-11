@@ -48,22 +48,42 @@ jobs:
       - name: Ensure logs directory
         run: mkdir -p logs
 
-      - name: Run Crypto Bot
+      - name: Run Crypto Bot Loop
         env:
           ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
           ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           ALPACA_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
         run: |
-          python src/crypto_bot.py
+          END=$((SECONDS + 3300))
+          RUN=0
 
-      - name: Commit and push state changes
-        run: |
-          git pull origin main --rebase || true
-          git add logs/*.json 2>/dev/null || true
-          if ! git diff --staged --quiet; then
-            git commit -m "🪙 Auto update $(date -u '+%Y-%m-%d %H:%M UTC')" || true
-            git push || true
-          fi
+          while [ $SECONDS -lt $END ]; do
+            RUN=$((RUN + 1))
+
+            echo ""
+            echo "========================================="
+            echo ">>> RUN $RUN at $(date -u '+%H:%M:%S UTC')"
+            echo "========================================="
+
+            python src/crypto_bot.py
+
+            git pull origin main --rebase || true
+            git add logs/*.json 2>/dev/null || true
+            if ! git diff --staged --quiet; then
+              git commit -m "🪙 Run $RUN $(date -u '+%H:%M UTC')" || true
+              git push || true
+            fi
+
+            REMAINING=$((END - SECONDS))
+            if [ $REMAINING -lt 130 ]; then
+              echo ">>> Ending cleanly (time buffer reached)"
+              break
+            fi
+            echo ">>> Sleeping 2 minutes..."
+            sleep 120
+          done
+
+          echo ">>> Session complete"
 
       - name: Upload Logs
         uses: actions/upload-artifact@v4
