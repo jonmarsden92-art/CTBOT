@@ -28,6 +28,7 @@ import json
 import logging
 import requests
 from datetime import datetime
+from pathlib import Path
 from typing import Optional
 
 log = logging.getLogger(__name__)
@@ -170,9 +171,9 @@ def get_market_intelligence() -> dict:
     # OI context (informational, doesn't directly adjust mult)
     oi_context = "unknown"
     if oi:
-        if oi["rising"]:
+        if oi.get("rising"):
             oi_context = "rising_oi"
-        elif oi["falling"]:
+        elif oi.get("falling"):
             oi_context = "falling_oi"
 
     for w in warnings:
@@ -189,3 +190,16 @@ def get_market_intelligence() -> dict:
         "oi_context":      oi_context,
         "timestamp":       datetime.now().isoformat(),
     }
+
+
+if __name__ == "__main__":
+    # When run directly, save market intelligence to logs/
+    logging.basicConfig(level=logging.INFO)
+    intel = get_market_intelligence()
+    logs_dir = Path(__file__).parent.parent / "logs"
+    logs_dir.mkdir(exist_ok=True)
+    out_file = logs_dir / "market_intel.json"
+    with open(out_file, "w") as f:
+        json.dump(intel, f, indent=2, default=str)
+    print(f"Market intelligence saved to {out_file}")
+    print(json.dumps(intel, indent=2, default=str))
