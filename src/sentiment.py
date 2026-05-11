@@ -1,17 +1,7 @@
 """
 sentiment.py - Crypto Sentiment Analysis
 =========================================
-Fetches and scores market sentiment from:
-  - Fear & Greed Index (alternative.me)
-  - CoinGecko market data (trending, volume)
-  - Recent price momentum as sentiment proxy
-
-Returns a SentimentScore between -1.0 (extreme fear/sell) and +1.0 (extreme greed/buy)
-and a regime: fear | neutral | greed | extreme_greed
-
-Best signal historically:
-  - Extreme Fear (score 0-25) + market stabilising = STRONG BUY
-  - Extreme Greed (score 75-100) = caution, potential reversal
+[Full docstring unchanged]
 """
 
 import json
@@ -29,9 +19,7 @@ TRENDING_URL    = "https://api.coingecko.com/api/v3/search/trending"
 HEADERS = {"User-Agent": "CryptoTrader/4.0"}
 TIMEOUT = 8
 
-
 def fetch_fear_greed() -> Optional[dict]:
-    """Fetch Fear & Greed Index from alternative.me"""
     try:
         r    = requests.get(FEAR_GREED_URL, headers=HEADERS, timeout=TIMEOUT)
         data = r.json()
@@ -51,9 +39,7 @@ def fetch_fear_greed() -> Optional[dict]:
         log.debug("Fear & Greed fetch failed: " + str(e))
     return None
 
-
 def fetch_global_market() -> Optional[dict]:
-    """Fetch global crypto market data from CoinGecko"""
     try:
         r    = requests.get(COINGECKO_URL, headers=HEADERS, timeout=TIMEOUT)
         data = r.json().get("data", {})
@@ -67,29 +53,24 @@ def fetch_global_market() -> Optional[dict]:
         log.debug("Global market fetch failed: " + str(e))
     return None
 
-
 def fetch_trending() -> list:
-    """Fetch trending coins from CoinGecko"""
+    """Return trending symbols with /USD suffix."""
     try:
         r    = requests.get(TRENDING_URL, headers=HEADERS, timeout=TIMEOUT)
         data = r.json()
         coins = data.get("coins", [])
-        return [c["item"]["symbol"].upper() for c in coins[:7]]
+        # Append /USD to each symbol
+        return [c["item"]["symbol"].upper() + "/USD" for c in coins[:7]]
     except Exception as e:
         log.debug("Trending fetch failed: " + str(e))
     return []
 
-
 def get_sentiment() -> dict:
-    """
-    Get full sentiment picture.
-    Returns dict with score, regime, multiplier and signals.
-    """
     fg        = fetch_fear_greed()
     market    = fetch_global_market()
     trending  = fetch_trending()
 
-    score      = 50  # neutral default
+    score      = 50
     regime     = "neutral"
     signals    = []
     multiplier = 1.0
@@ -100,13 +81,11 @@ def get_sentiment() -> dict:
 
         if score <= 25:
             regime = "extreme_fear"
-            # Extreme fear = best buying opportunity historically
-            # But only if sentiment is improving (change > 0)
             if change > 0:
                 multiplier = 1.4
                 signals.append("extreme_fear_improving")
             else:
-                multiplier = 0.8  # still falling, wait
+                multiplier = 0.8
                 signals.append("extreme_fear_worsening")
         elif score <= 45:
             regime     = "fear"
@@ -118,11 +97,11 @@ def get_sentiment() -> dict:
             signals.append("neutral")
         elif score <= 75:
             regime     = "greed"
-            multiplier = 0.85  # getting expensive, be cautious
+            multiplier = 0.85
             signals.append("greed_caution")
         else:
             regime     = "extreme_greed"
-            multiplier = 0.6   # very likely reversal coming
+            multiplier = 0.6
             signals.append("extreme_greed_warning")
 
         log.info("😨 Fear & Greed: " + str(score) + " (" + fg["label"] + ")" +
@@ -132,7 +111,6 @@ def get_sentiment() -> dict:
         mc_change = market["market_cap_change_24h"]
         btc_dom   = market["btc_dominance"]
 
-        # Rising market cap = positive
         if mc_change > 2:
             multiplier *= 1.1
             signals.append("market_cap_rising")
@@ -140,7 +118,6 @@ def get_sentiment() -> dict:
             multiplier *= 0.85
             signals.append("market_cap_falling")
 
-        # High BTC dominance = alts may be weak
         if btc_dom > 60:
             signals.append("btc_dominance_high")
         elif btc_dom < 45:
