@@ -2,22 +2,6 @@
 grid.py - Grid Trading Strategy
 =================================
 Places a grid of buy and sell orders at regular price intervals.
-
-How it works:
-  1. Detect current price and volatility
-  2. Set buy levels below current price at regular intervals
-  3. When price drops to a level, buy
-  4. When price recovers by grid_spacing, sell for profit
-  5. Repeat continuously - profits from every oscillation
-
-Best in: sideways/ranging markets
-Avoid in: strong trending markets
-
-Example with $50 on BTC at $70,000:
-  Grid levels: $69,300 / $68,600 / $67,900 / $67,200
-  Spacing: 1% = $700 per level
-  Size per level: $12.50
-  Each bounce = ~1% profit
 """
 
 import json
@@ -34,7 +18,7 @@ GRID_STATE_FILE  = Path("logs/grid_state.json")
 GRID_LEVELS      = 4
 GRID_SPACING_PCT = 0.012
 GRID_BUDGET_PCT  = 0.20
-MIN_GRID_USD     = 1.00
+MIN_GRID_USD     = 1.0          # Lowered from 1.5
 GRID_SYMBOLS     = ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD", "DOGE/USD"]
 
 
