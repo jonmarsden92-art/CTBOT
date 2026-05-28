@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-crypto_bot.py - AGGRESSIVE TRADING MODE (FIXED)
-================================================
-Fixed indicator calculations with fallbacks.
+crypto_bot.py - AGGRESSIVE TRADING MODE (MINIMUM SIZE FIX)
+===========================================================
+Forces minimum trade size of $2.00
 """
 
 import json
@@ -50,7 +50,8 @@ GRID_FILE = Path("logs/grid_state.json")
 RISK_FILE = Path("logs/risk_state.json")
 TRAINING_FILE = Path("logs/training_data.json")
 MAX_POSITIONS = 10
-SIGNAL_MIN = 0.1  # Lowered threshold - trade on any decent signal
+SIGNAL_MIN = 0.1
+MIN_TRADE_USD = 2.0  # FORCED minimum trade size
 
 
 def load_agent() -> dict:
@@ -112,7 +113,6 @@ def fetch_bars(api, symbol: str, limit: int = 100) -> pd.DataFrame:
 
 
 def calculate_rsi(series: pd.Series, period: int = 14) -> float:
-    """Calculate RSI with fallback to 50 if insufficient data."""
     if len(series) < period + 1:
         return 50.0
     try:
@@ -128,7 +128,6 @@ def calculate_rsi(series: pd.Series, period: int = 14) -> float:
 
 
 def calculate_macd(close: pd.Series) -> dict:
-    """Calculate MACD with fallback values."""
     if len(close) < 26:
         return {"macd": 0.0, "signal": 0.0, "hist": 0.0}
     try:
@@ -147,7 +146,6 @@ def calculate_macd(close: pd.Series) -> dict:
 
 
 def calculate_bb(close: pd.Series, period: int = 20, std_dev: int = 2) -> dict:
-    """Calculate Bollinger Bands with fallback."""
     if len(close) < period:
         return {"upper": 0, "lower": 0, "pct": 0.5}
     try:
@@ -201,7 +199,7 @@ def update_agent_with_trade(agent: dict, trade: dict, won: bool):
 
 
 def main():
-    log.info("Starting Crypto Bot (AGGRESSIVE MODE - FIXED)")
+    log.info("Starting Crypto Bot (AGGRESSIVE MODE - MIN SIZE FIX)")
 
     agent = load_agent()
     training_data = load_training_data()
@@ -266,13 +264,11 @@ def main():
             if symbol_key in agent.get("open_trades", {}):
                 continue
 
-            # Calculate technical indicators
             close = df["close"].astype(float)
             rsi = calculate_rsi(close)
             macd = calculate_macd(close)
             bb = calculate_bb(close)
             
-            # Volume ratio with fallback
             avg_vol = df["volume"].astype(float).rolling(20).mean().iloc[-1]
             vol_ratio = float(df["volume"].astype(float).iloc[-1]) / avg_vol if avg_vol and avg_vol > 0 else 1.0
 
@@ -281,7 +277,7 @@ def main():
             price = float(close.iloc[-1])
             signals_fired = momentum.get("signals_fired", []) + patterns.get("patterns", [])
 
-            # Enhanced scoring with RSI, MACD, BB
+            # Scoring
             rsi_score = 0
             if rsi < 30:
                 rsi_score = 3
@@ -292,7 +288,7 @@ def main():
             elif rsi > 60:
                 rsi_score = -1
 
-            macd_score = macd["hist"] * 50  # Scale up for better weighting
+            macd_score = macd["hist"] * 50
             bb_score = 0
             if bb["pct"] < 0.1:
                 bb_score = 2
@@ -301,7 +297,6 @@ def main():
             elif bb["pct"] < 0.3:
                 bb_score = 1
 
-            # Pattern scores (boosted)
             pattern_score = patterns.get("score", 0) * 1.5
             if "morning_star" in patterns.get("patterns", []):
                 pattern_score += 3
@@ -312,7 +307,6 @@ def main():
 
             momentum_score = momentum.get("momentum_score", 0)
 
-            # Combine scores
             buy_score = (momentum_score * 0.5 +
                          pattern_score * 0.3 +
                          rsi_score * 1.0 +
@@ -320,7 +314,6 @@ def main():
                          bb_score * 0.5)
             buy_score = max(0, buy_score)
 
-            # Get ML probability
             analysis_for_ml = {
                 "price": price,
                 "rsi": rsi,
@@ -336,7 +329,6 @@ def main():
             }
             ml_prob = predict_probability(model_tuple, analysis_for_ml, sentiment.get("score", 50))
 
-            # Final score
             if model_tuple is not None:
                 final_score = buy_score * (0.3 + ml_prob * 0.7)
             else:
@@ -352,22 +344,18 @@ def main():
                 final_score *= 1.2
             final_score *= sentiment.get("multiplier", 1.0)
 
-            log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | ml={ml_prob:.2f} | "
-                     f"final={final_score:.3f} | thr={agent['thresholds']['signal_min']} | "
-                     f"rsi={rsi:.1f} | macd={macd['hist']:.3f} | bb={bb['pct']:.2f} | "
-                     f"signals={signals_fired}")
+            log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | final={final_score:.3f} | thr={agent['thresholds']['signal_min']} | signals={signals_fired}")
 
             if final_score >= agent["thresholds"]["signal_min"]:
-                # Position sizing
-                base_size = get_position_size(agent, final_score, cash)
-                mult = get_position_size_multiplier(risk_state, portfolio_value, 0.02)
-                size_usd = base_size * mult
-                size_usd = min(size_usd, cash * 0.15)
+                # FORCE minimum trade size of $2.00
+                size_usd = max(MIN_TRADE_USD, cash * 0.10)  # At least $2 or 10% of cash
+                size_usd = min(size_usd, cash * 0.25)  # Cap at 25% of cash
+                
                 qty = size_usd / price
                 qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 4)
 
-                if qty * price > 1.0:
-                    log.info(f"🔍 Attempting BUY {symbol}: size_usd=${size_usd:.2f}, qty={qty}, price=${price:.4f}")
+                if qty * price >= MIN_TRADE_USD:
+                    log.info(f"🔍 Attempting BUY {symbol}: ${size_usd:.2f} @ ${price:.4f} = {qty} shares")
                     try:
                         api.submit_order(symbol=symbol, qty=qty, side="buy",
                                          type="market", time_in_force="day")
@@ -385,7 +373,7 @@ def main():
                     except Exception as e:
                         log.error(f"Buy order failed for {symbol}: {e}")
                 else:
-                    log.info(f"❌ BUY skipped {symbol}: minimum trade size not met (${qty * price:.2f} < $1.00)")
+                    log.info(f"❌ BUY skipped {symbol}: ${qty * price:.2f} < ${MIN_TRADE_USD}")
     else:
         log.info(f"Max positions reached ({MAX_POSITIONS}), not opening new trades")
 
