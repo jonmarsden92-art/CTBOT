@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-crypto_bot.py - AGGRESSIVE TRADING MODE
-========================================
-Trades frequently, uses all available signals, larger position sizes.
+crypto_bot.py - AGGRESSIVE TRADING MODE (FIXED)
+================================================
+Fixed indicator calculations with fallbacks.
 """
 
 import json
@@ -49,15 +49,14 @@ AGENT_FILE = Path("logs/crypto_agent.json")
 GRID_FILE = Path("logs/grid_state.json")
 RISK_FILE = Path("logs/risk_state.json")
 TRAINING_FILE = Path("logs/training_data.json")
-MAX_POSITIONS = 10          # Increased from 5
-SIGNAL_MIN = 0.3            # Very low threshold – trade on any positive signal
+MAX_POSITIONS = 10
+SIGNAL_MIN = 0.1  # Lowered threshold - trade on any decent signal
 
 
 def load_agent() -> dict:
     if AGENT_FILE.exists():
         try:
             agent = json.loads(AGENT_FILE.read_text())
-            # Override threshold for aggressive trading
             agent["thresholds"]["signal_min"] = SIGNAL_MIN
             return agent
         except Exception:
@@ -72,8 +71,8 @@ def load_agent() -> dict:
         "avg_pnl": 0.0,
         "sharpe": 0.0,
         "thresholds": {
-            "take_profit": 0.03,      # Tighter TP for quick scalps
-            "stop_loss": 0.02,        # Tighter SL
+            "take_profit": 0.03,
+            "stop_loss": 0.02,
             "trailing_stop": 0.015,
             "signal_min": SIGNAL_MIN,
             "rsi_oversold": 30,
@@ -113,30 +112,57 @@ def fetch_bars(api, symbol: str, limit: int = 100) -> pd.DataFrame:
 
 
 def calculate_rsi(series: pd.Series, period: int = 14) -> float:
-    delta = series.diff()
-    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
-    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
-    rs = gain / loss
-    rsi = 100 - (100 / (1 + rs))
-    return float(rsi.iloc[-1]) if not pd.isna(rsi.iloc[-1]) else 50
+    """Calculate RSI with fallback to 50 if insufficient data."""
+    if len(series) < period + 1:
+        return 50.0
+    try:
+        delta = series.diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs))
+        val = float(rsi.iloc[-1])
+        return val if not pd.isna(val) else 50.0
+    except Exception:
+        return 50.0
 
 
 def calculate_macd(close: pd.Series) -> dict:
-    exp1 = close.ewm(span=12, adjust=False).mean()
-    exp2 = close.ewm(span=26, adjust=False).mean()
-    macd = exp1 - exp2
-    signal = macd.ewm(span=9, adjust=False).mean()
-    hist = macd - signal
-    return {"macd": float(macd.iloc[-1]), "signal": float(signal.iloc[-1]), "hist": float(hist.iloc[-1])}
+    """Calculate MACD with fallback values."""
+    if len(close) < 26:
+        return {"macd": 0.0, "signal": 0.0, "hist": 0.0}
+    try:
+        exp1 = close.ewm(span=12, adjust=False).mean()
+        exp2 = close.ewm(span=26, adjust=False).mean()
+        macd = exp1 - exp2
+        signal = macd.ewm(span=9, adjust=False).mean()
+        hist = macd - signal
+        return {
+            "macd": float(macd.iloc[-1]),
+            "signal": float(signal.iloc[-1]),
+            "hist": float(hist.iloc[-1])
+        }
+    except Exception:
+        return {"macd": 0.0, "signal": 0.0, "hist": 0.0}
 
 
 def calculate_bb(close: pd.Series, period: int = 20, std_dev: int = 2) -> dict:
-    sma = close.rolling(window=period).mean()
-    std = close.rolling(window=period).std()
-    upper = sma + (std * std_dev)
-    lower = sma - (std * std_dev)
-    pct = (close.iloc[-1] - lower.iloc[-1]) / (upper.iloc[-1] - lower.iloc[-1]) if (upper.iloc[-1] - lower.iloc[-1]) != 0 else 0.5
-    return {"upper": float(upper.iloc[-1]), "lower": float(lower.iloc[-1]), "pct": float(pct)}
+    """Calculate Bollinger Bands with fallback."""
+    if len(close) < period:
+        return {"upper": 0, "lower": 0, "pct": 0.5}
+    try:
+        sma = close.rolling(window=period).mean()
+        std = close.rolling(window=period).std()
+        upper = sma + (std * std_dev)
+        lower = sma - (std * std_dev)
+        pct = (close.iloc[-1] - lower.iloc[-1]) / (upper.iloc[-1] - lower.iloc[-1]) if (upper.iloc[-1] - lower.iloc[-1]) != 0 else 0.5
+        return {
+            "upper": float(upper.iloc[-1]),
+            "lower": float(lower.iloc[-1]),
+            "pct": float(pct) if not pd.isna(pct) else 0.5
+        }
+    except Exception:
+        return {"upper": 0, "lower": 0, "pct": 0.5}
 
 
 def update_agent_with_trade(agent: dict, trade: dict, won: bool):
@@ -175,7 +201,7 @@ def update_agent_with_trade(agent: dict, trade: dict, won: bool):
 
 
 def main():
-    log.info("Starting Crypto Bot (AGGRESSIVE MODE)")
+    log.info("Starting Crypto Bot (AGGRESSIVE MODE - FIXED)")
 
     agent = load_agent()
     training_data = load_training_data()
@@ -245,7 +271,10 @@ def main():
             rsi = calculate_rsi(close)
             macd = calculate_macd(close)
             bb = calculate_bb(close)
-            vol_ratio = df["volume"].astype(float).iloc[-1] / df["volume"].astype(float).rolling(20).mean().iloc[-1] if df["volume"].astype(float).rolling(20).mean().iloc[-1] > 0 else 1.0
+            
+            # Volume ratio with fallback
+            avg_vol = df["volume"].astype(float).rolling(20).mean().iloc[-1]
+            vol_ratio = float(df["volume"].astype(float).iloc[-1]) / avg_vol if avg_vol and avg_vol > 0 else 1.0
 
             momentum = get_momentum_score(df, btc_bars, symbol)
             patterns = detect_patterns(df)
@@ -255,43 +284,43 @@ def main():
             # Enhanced scoring with RSI, MACD, BB
             rsi_score = 0
             if rsi < 30:
-                rsi_score = 3  # oversold = buy
+                rsi_score = 3
             elif rsi < 40:
                 rsi_score = 1
             elif rsi > 70:
-                rsi_score = -2  # overbought = sell signal
+                rsi_score = -2
             elif rsi > 60:
                 rsi_score = -1
 
-            macd_score = macd["hist"] * 100  # positive hist = bullish
+            macd_score = macd["hist"] * 50  # Scale up for better weighting
             bb_score = 0
             if bb["pct"] < 0.1:
-                bb_score = 2  # at lower band = bounce
+                bb_score = 2
             elif bb["pct"] > 0.9:
                 bb_score = -1
             elif bb["pct"] < 0.3:
                 bb_score = 1
 
             # Pattern scores (boosted)
-            pattern_score = patterns.get("score", 0) * 1.5  # 1.5x multiplier
-            # Morning star and engulfing are already high, but ensure they count
+            pattern_score = patterns.get("score", 0) * 1.5
             if "morning_star" in patterns.get("patterns", []):
                 pattern_score += 3
             if "bullish_engulfing" in patterns.get("patterns", []):
                 pattern_score += 2
+            if "hammer" in patterns.get("patterns", []):
+                pattern_score += 1
 
-            # Momentum score from existing module
             momentum_score = momentum.get("momentum_score", 0)
 
             # Combine scores
             buy_score = (momentum_score * 0.5 +
                          pattern_score * 0.3 +
                          rsi_score * 1.0 +
-                         macd_score * 0.2 +
-                         bb_score * 0.8)
+                         macd_score * 0.3 +
+                         bb_score * 0.5)
             buy_score = max(0, buy_score)
 
-            # Get ML probability (if model exists)
+            # Get ML probability
             analysis_for_ml = {
                 "price": price,
                 "rsi": rsi,
@@ -307,7 +336,7 @@ def main():
             }
             ml_prob = predict_probability(model_tuple, analysis_for_ml, sentiment.get("score", 50))
 
-            # Final score with ML boost (if model exists)
+            # Final score
             if model_tuple is not None:
                 final_score = buy_score * (0.3 + ml_prob * 0.7)
             else:
@@ -319,14 +348,12 @@ def main():
                 final_score *= 1.3
             elif btc_regime.get("direction") in ["bear", "strong_bear"]:
                 final_score *= 0.5
-            # Alt season boost
             if alt_season > 0.6:
                 final_score *= 1.2
-            # Sentiment multiplier
             final_score *= sentiment.get("multiplier", 1.0)
 
             log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | ml={ml_prob:.2f} | "
-                     f"final={final_score:.2f} | thr={agent['thresholds']['signal_min']} | "
+                     f"final={final_score:.3f} | thr={agent['thresholds']['signal_min']} | "
                      f"rsi={rsi:.1f} | macd={macd['hist']:.3f} | bb={bb['pct']:.2f} | "
                      f"signals={signals_fired}")
 
@@ -335,16 +362,16 @@ def main():
                 base_size = get_position_size(agent, final_score, cash)
                 mult = get_position_size_multiplier(risk_state, portfolio_value, 0.02)
                 size_usd = base_size * mult
-                # Cap size to 15% of cash for safety
                 size_usd = min(size_usd, cash * 0.15)
                 qty = size_usd / price
-                qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 2)
+                qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 4)
 
                 if qty * price > 1.0:
+                    log.info(f"🔍 Attempting BUY {symbol}: size_usd=${size_usd:.2f}, qty={qty}, price=${price:.4f}")
                     try:
                         api.submit_order(symbol=symbol, qty=qty, side="buy",
                                          type="market", time_in_force="day")
-                        log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.1f})")
+                        log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.2f})")
                         agent["open_trades"][symbol_key] = {
                             "entry": price,
                             "qty": qty,
@@ -357,10 +384,12 @@ def main():
                         training_data = record_training_example(training_data, symbol_key, analysis_for_ml, sentiment.get("score", 50))
                     except Exception as e:
                         log.error(f"Buy order failed for {symbol}: {e}")
+                else:
+                    log.info(f"❌ BUY skipped {symbol}: minimum trade size not met (${qty * price:.2f} < $1.00)")
     else:
         log.info(f"Max positions reached ({MAX_POSITIONS}), not opening new trades")
 
-    # Close positions with tighter TP/SL
+    # Close positions
     to_close = []
     for symbol_key, trade in agent.get("open_trades", {}).items():
         symbol = f"{symbol_key[:3]}/{symbol_key[3:]}" if len(symbol_key) > 3 else symbol_key
