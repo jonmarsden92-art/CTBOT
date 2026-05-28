@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-crypto_bot.py - AGGRESSIVE TRADING MODE (MINIMUM SIZE FIX)
-===========================================================
-Forces minimum trade size of $2.00
+crypto_bot.py - AGGRESSIVE TRADING MODE (FIXED time_in_force)
+=============================================================
+Fixed: crypto orders must use "gtc" not "day"
 """
 
 import json
@@ -51,7 +51,7 @@ RISK_FILE = Path("logs/risk_state.json")
 TRAINING_FILE = Path("logs/training_data.json")
 MAX_POSITIONS = 10
 SIGNAL_MIN = 0.1
-MIN_TRADE_USD = 2.0  # FORCED minimum trade size
+MIN_TRADE_USD = 2.0
 
 
 def load_agent() -> dict:
@@ -199,7 +199,7 @@ def update_agent_with_trade(agent: dict, trade: dict, won: bool):
 
 
 def main():
-    log.info("Starting Crypto Bot (AGGRESSIVE MODE - MIN SIZE FIX)")
+    log.info("Starting Crypto Bot (AGGRESSIVE MODE - FIXED time_in_force)")
 
     agent = load_agent()
     training_data = load_training_data()
@@ -347,9 +347,9 @@ def main():
             log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | final={final_score:.3f} | thr={agent['thresholds']['signal_min']} | signals={signals_fired}")
 
             if final_score >= agent["thresholds"]["signal_min"]:
-                # FORCE minimum trade size of $2.00
-                size_usd = max(MIN_TRADE_USD, cash * 0.10)  # At least $2 or 10% of cash
-                size_usd = min(size_usd, cash * 0.25)  # Cap at 25% of cash
+                # Force minimum trade size of $2.00
+                size_usd = max(MIN_TRADE_USD, cash * 0.10)
+                size_usd = min(size_usd, cash * 0.25)
                 
                 qty = size_usd / price
                 qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 4)
@@ -357,8 +357,14 @@ def main():
                 if qty * price >= MIN_TRADE_USD:
                     log.info(f"🔍 Attempting BUY {symbol}: ${size_usd:.2f} @ ${price:.4f} = {qty} shares")
                     try:
-                        api.submit_order(symbol=symbol, qty=qty, side="buy",
-                                         type="market", time_in_force="day")
+                        # FIXED: time_in_force must be "gtc" for crypto, not "day"
+                        api.submit_order(
+                            symbol=symbol, 
+                            qty=qty, 
+                            side="buy",
+                            type="market", 
+                            time_in_force="gtc"  # Changed from "day" to "gtc"
+                        )
                         log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.2f})")
                         agent["open_trades"][symbol_key] = {
                             "entry": price,
@@ -408,7 +414,14 @@ def main():
         qty = trade["qty"]
         symbol = f"{symbol_key[:3]}/{symbol_key[3:]}" if len(symbol_key) > 3 else symbol_key
         try:
-            api.submit_order(symbol=symbol, qty=qty, side="sell", type="market", time_in_force="day")
+            # FIXED: time_in_force must be "gtc" for crypto
+            api.submit_order(
+                symbol=symbol, 
+                qty=qty, 
+                side="sell", 
+                type="market", 
+                time_in_force="gtc"  # Changed from "day" to "gtc"
+            )
             won = pnl_pct > 0
             log.info(f"💰 SELL {symbol} @ ${exit_price:.4f} | PnL={pnl_pct*100:.2f}% | {reason}")
             closed_trade = {
