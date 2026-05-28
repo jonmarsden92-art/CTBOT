@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-crypto_bot.py - Main Trading Bot
-================================
-Integrated trading bot for Alpaca.
+crypto_bot.py - AGGRESSIVE TRADING MODE
+========================================
+Trades frequently, uses all available signals, larger position sizes.
 """
 
 import json
@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import alpaca_trade_api as tradeapi
 import pandas as pd
+import numpy as np
 
 from src.correlation import get_correlation_signals
 from src.momentum import get_momentum_score
@@ -48,13 +49,17 @@ AGENT_FILE = Path("logs/crypto_agent.json")
 GRID_FILE = Path("logs/grid_state.json")
 RISK_FILE = Path("logs/risk_state.json")
 TRAINING_FILE = Path("logs/training_data.json")
-MAX_POSITIONS = 5
+MAX_POSITIONS = 10          # Increased from 5
+SIGNAL_MIN = 0.3            # Very low threshold – trade on any positive signal
 
 
 def load_agent() -> dict:
     if AGENT_FILE.exists():
         try:
-            return json.loads(AGENT_FILE.read_text())
+            agent = json.loads(AGENT_FILE.read_text())
+            # Override threshold for aggressive trading
+            agent["thresholds"]["signal_min"] = SIGNAL_MIN
+            return agent
         except Exception:
             pass
     return {
@@ -67,12 +72,12 @@ def load_agent() -> dict:
         "avg_pnl": 0.0,
         "sharpe": 0.0,
         "thresholds": {
-            "take_profit": 0.04,
-            "stop_loss": 0.025,
-            "trailing_stop": 0.02,
-            "signal_min": 5,
-            "rsi_oversold": 35,
-            "rsi_overbought": 65
+            "take_profit": 0.03,      # Tighter TP for quick scalps
+            "stop_loss": 0.02,        # Tighter SL
+            "trailing_stop": 0.015,
+            "signal_min": SIGNAL_MIN,
+            "rsi_oversold": 30,
+            "rsi_overbought": 70
         },
         "weights": {},
         "symbol_memory": {},
@@ -105,6 +110,33 @@ def fetch_bars(api, symbol: str, limit: int = 100) -> pd.DataFrame:
     except Exception as e:
         log.error(f"Failed to fetch bars for {symbol}: {e}")
         return pd.DataFrame()
+
+
+def calculate_rsi(series: pd.Series, period: int = 14) -> float:
+    delta = series.diff()
+    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+    rs = gain / loss
+    rsi = 100 - (100 / (1 + rs))
+    return float(rsi.iloc[-1]) if not pd.isna(rsi.iloc[-1]) else 50
+
+
+def calculate_macd(close: pd.Series) -> dict:
+    exp1 = close.ewm(span=12, adjust=False).mean()
+    exp2 = close.ewm(span=26, adjust=False).mean()
+    macd = exp1 - exp2
+    signal = macd.ewm(span=9, adjust=False).mean()
+    hist = macd - signal
+    return {"macd": float(macd.iloc[-1]), "signal": float(signal.iloc[-1]), "hist": float(hist.iloc[-1])}
+
+
+def calculate_bb(close: pd.Series, period: int = 20, std_dev: int = 2) -> dict:
+    sma = close.rolling(window=period).mean()
+    std = close.rolling(window=period).std()
+    upper = sma + (std * std_dev)
+    lower = sma - (std * std_dev)
+    pct = (close.iloc[-1] - lower.iloc[-1]) / (upper.iloc[-1] - lower.iloc[-1]) if (upper.iloc[-1] - lower.iloc[-1]) != 0 else 0.5
+    return {"upper": float(upper.iloc[-1]), "lower": float(lower.iloc[-1]), "pct": float(pct)}
 
 
 def update_agent_with_trade(agent: dict, trade: dict, won: bool):
@@ -143,7 +175,7 @@ def update_agent_with_trade(agent: dict, trade: dict, won: bool):
 
 
 def main():
-    log.info("Starting Crypto Bot")
+    log.info("Starting Crypto Bot (AGGRESSIVE MODE)")
 
     agent = load_agent()
     training_data = load_training_data()
@@ -208,21 +240,63 @@ def main():
             if symbol_key in agent.get("open_trades", {}):
                 continue
 
+            # Calculate technical indicators
+            close = df["close"].astype(float)
+            rsi = calculate_rsi(close)
+            macd = calculate_macd(close)
+            bb = calculate_bb(close)
+            vol_ratio = df["volume"].astype(float).iloc[-1] / df["volume"].astype(float).rolling(20).mean().iloc[-1] if df["volume"].astype(float).rolling(20).mean().iloc[-1] > 0 else 1.0
+
             momentum = get_momentum_score(df, btc_bars, symbol)
             patterns = detect_patterns(df)
-            price = float(df["close"].iloc[-1])
-            rsi = 50  # placeholder
-            vol_ratio = momentum.get("vol_breakout", {}).get("vol_ratio", 1.0)
+            price = float(close.iloc[-1])
             signals_fired = momentum.get("signals_fired", []) + patterns.get("patterns", [])
 
-            buy_score = momentum.get("momentum_score", 0) * 0.6 + patterns.get("score", 0) * 0.4
+            # Enhanced scoring with RSI, MACD, BB
+            rsi_score = 0
+            if rsi < 30:
+                rsi_score = 3  # oversold = buy
+            elif rsi < 40:
+                rsi_score = 1
+            elif rsi > 70:
+                rsi_score = -2  # overbought = sell signal
+            elif rsi > 60:
+                rsi_score = -1
+
+            macd_score = macd["hist"] * 100  # positive hist = bullish
+            bb_score = 0
+            if bb["pct"] < 0.1:
+                bb_score = 2  # at lower band = bounce
+            elif bb["pct"] > 0.9:
+                bb_score = -1
+            elif bb["pct"] < 0.3:
+                bb_score = 1
+
+            # Pattern scores (boosted)
+            pattern_score = patterns.get("score", 0) * 1.5  # 1.5x multiplier
+            # Morning star and engulfing are already high, but ensure they count
+            if "morning_star" in patterns.get("patterns", []):
+                pattern_score += 3
+            if "bullish_engulfing" in patterns.get("patterns", []):
+                pattern_score += 2
+
+            # Momentum score from existing module
+            momentum_score = momentum.get("momentum_score", 0)
+
+            # Combine scores
+            buy_score = (momentum_score * 0.5 +
+                         pattern_score * 0.3 +
+                         rsi_score * 1.0 +
+                         macd_score * 0.2 +
+                         bb_score * 0.8)
             buy_score = max(0, buy_score)
 
+            # Get ML probability (if model exists)
             analysis_for_ml = {
                 "price": price,
                 "rsi": rsi,
-                "bb_pct": 0.5,
-                "macd_hist": 0.0,
+                "bb_pct": bb["pct"],
+                "macd_hist": macd["hist"],
                 "trend_1h": momentum.get("btc_leading", {}).get("btc_move_1h", 0),
                 "vol_ratio": vol_ratio,
                 "vol_strong": vol_ratio > 1.5,
@@ -233,48 +307,60 @@ def main():
             }
             ml_prob = predict_probability(model_tuple, analysis_for_ml, sentiment.get("score", 50))
 
-            final_score = buy_score * (0.5 + ml_prob * 0.5)
+            # Final score with ML boost (if model exists)
+            if model_tuple is not None:
+                final_score = buy_score * (0.3 + ml_prob * 0.7)
+            else:
+                final_score = buy_score
             final_score = min(10, final_score)
 
-            # Detailed logging for every symbol
-            log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | ml_prob={ml_prob:.2f} | "
+            # Apply market multipliers
+            if btc_regime.get("direction") in ["bull", "strong_bull"]:
+                final_score *= 1.3
+            elif btc_regime.get("direction") in ["bear", "strong_bear"]:
+                final_score *= 0.5
+            # Alt season boost
+            if alt_season > 0.6:
+                final_score *= 1.2
+            # Sentiment multiplier
+            final_score *= sentiment.get("multiplier", 1.0)
+
+            log.info(f"📊 {symbol} | buy_score={buy_score:.2f} | ml={ml_prob:.2f} | "
                      f"final={final_score:.2f} | thr={agent['thresholds']['signal_min']} | "
+                     f"rsi={rsi:.1f} | macd={macd['hist']:.3f} | bb={bb['pct']:.2f} | "
                      f"signals={signals_fired}")
 
             if final_score >= agent["thresholds"]["signal_min"]:
-                if btc_regime.get("direction") == "bull":
-                    final_score *= 1.2
-                elif btc_regime.get("direction") == "bear":
-                    final_score *= 0.6
-                final_score *= sentiment.get("multiplier", 1.0)
+                # Position sizing
+                base_size = get_position_size(agent, final_score, cash)
+                mult = get_position_size_multiplier(risk_state, portfolio_value, 0.02)
+                size_usd = base_size * mult
+                # Cap size to 15% of cash for safety
+                size_usd = min(size_usd, cash * 0.15)
+                qty = size_usd / price
+                qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 2)
 
-                if final_score >= agent["thresholds"]["signal_min"]:
-                    base_size = get_position_size(agent, final_score, cash)
-                    mult = get_position_size_multiplier(risk_state, portfolio_value, analysis_for_ml["atr_pct"])
-                    size_usd = base_size * mult
-                    qty = size_usd / price
-                    qty = round(qty, 8) if price > 10000 else round(qty, 6) if price > 1 else round(qty, 2)
-
-                    if qty * price > 1.0:
-                        try:
-                            api.submit_order(symbol=symbol, qty=qty, side="buy",
-                                             type="market", time_in_force="day")
-                            log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.1f}, ML={ml_prob:.2f})")
-                            agent["open_trades"][symbol_key] = {
-                                "entry": price,
-                                "qty": qty,
-                                "time": datetime.now().isoformat(),
-                                "score": final_score,
-                                "signals_fired": signals_fired
-                            }
-                            cash -= qty * price
-                            training_data = record_training_example(training_data, symbol_key, analysis_for_ml, sentiment.get("score", 50))
-                        except Exception as e:
-                            log.error(f"Buy order failed for {symbol}: {e}")
+                if qty * price > 1.0:
+                    try:
+                        api.submit_order(symbol=symbol, qty=qty, side="buy",
+                                         type="market", time_in_force="day")
+                        log.info(f"✅ BUY {symbol} {qty} @ ${price:.4f} (score={final_score:.1f})")
+                        agent["open_trades"][symbol_key] = {
+                            "entry": price,
+                            "qty": qty,
+                            "time": datetime.now().isoformat(),
+                            "score": final_score,
+                            "signals_fired": signals_fired,
+                            "highest_price": price
+                        }
+                        cash -= qty * price
+                        training_data = record_training_example(training_data, symbol_key, analysis_for_ml, sentiment.get("score", 50))
+                    except Exception as e:
+                        log.error(f"Buy order failed for {symbol}: {e}")
     else:
         log.info(f"Max positions reached ({MAX_POSITIONS}), not opening new trades")
 
-    # Close positions
+    # Close positions with tighter TP/SL
     to_close = []
     for symbol_key, trade in agent.get("open_trades", {}).items():
         symbol = f"{symbol_key[:3]}/{symbol_key[3:]}" if len(symbol_key) > 3 else symbol_key
@@ -293,9 +379,7 @@ def main():
         elif pnl_pct <= -sl:
             to_close.append((symbol_key, "stop_loss", pnl_pct, current_price))
         else:
-            if "highest_price" not in trade:
-                trade["highest_price"] = entry
-            if current_price > trade["highest_price"]:
+            if current_price > trade.get("highest_price", entry):
                 trade["highest_price"] = current_price
             if (trade["highest_price"] - current_price) / trade["highest_price"] >= trail:
                 to_close.append((symbol_key, "trailing_stop", pnl_pct, current_price))
